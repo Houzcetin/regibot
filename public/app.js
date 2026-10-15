@@ -1,7 +1,7 @@
 (() => {
   const TEXT = {
     tr: {
-      sidebar: 'Ana menü', themeToDark: 'Koyu temaya geç', themeToLight: 'Açık temaya geç', hamburger: 'Menüyü aç', assistantLabel: 'Öğrenci Asistanı', menuSearch: 'Menüde Ara...', general: 'Genel', assistantNav: 'Asistan', calendarNav: 'Akademik Takvim', guideNav: 'Ders Kayıt Rehberi', registrationNav: 'Ders Kayıt', addDropNav: 'Ekle/Bırak', withdrawalNav: 'Dersten Çekilme', loadNav: 'Ders Yükü / AKTS', regulationNav: 'Yönetmelik', handbookNav: 'Öğrenci El Kitabı', sourcesNav: 'Kaynaklar', contactNav: 'İletişim', demoMode: 'Demo Modu', footer: "Bu Yaşar Üniversitesi'nin resmi sistemi değildir; resmi kaynaklara dayanan bir öğrenci projesidir.",
+      brandTitle: 'Yaşar Asistan', sidebar: 'Ana menü', themeToDark: 'Koyu temaya geç', themeToLight: 'Açık temaya geç', hamburger: 'Menüyü aç', menuSearch: 'Menüde Ara...', general: 'Genel', assistantNav: 'Asistan', calendarNav: 'Akademik Takvim', guideNav: 'Ders Kayıt Rehberi', registrationNav: 'Ders Kayıt', addDropNav: 'Ekle/Bırak', withdrawalNav: 'Dersten Çekilme', loadNav: 'Ders Yükü / AKTS', regulationNav: 'Yönetmelik', handbookNav: 'Öğrenci El Kitabı', sourcesNav: 'Kaynaklar', contactNav: 'İletişim', demoMode: 'Demo Modu', footer: "Bu Yaşar Üniversitesi'nin resmi sistemi değildir; resmi kaynaklara dayanan bir öğrenci projesidir.",
       home: 'Ana sayfa', announcement: 'Akademik takvim', localDemo: 'Yerel demo', loading: 'Yükleniyor…', heroBadge: 'AI destekli', heroTitle: 'Yaşar Öğrenci Asistanı', heroDescription: 'Ders kaydı, ekle/bırak, yönetmelik ve akademik takvim hakkında sorularını sor.', heroPlaceholder: 'Bir soru sor… örn. Ekle/bırak ne zaman bitiyor?', heroNote: 'Yanıtlar resmi kaynaklara dayanır; kararlarını danışmanınla doğrula.', askRegistration: 'Ders kaydı nasıl yapılır?', askLoad: 'Bir dönemde kaç AKTS alabilirim?', askAddDrop: 'Ekle/bırak ne zaman bitiyor?', askWithdrawal: 'Dersten nasıl çekilirim?', askCalendar: 'Akademik takvimde önemli tarihler neler?', askRepeat: 'Ders tekrarı kuralları nelerdir?', askAdvisor: 'Danışman onayı nasıl alınır?', askLate: 'Ders kaydımı geç yapabilir miyim?', askProbation: 'Sınamalı öğrenci kaç AKTS alabilir?', askUpperYear: 'Üst sınıftan ders alabilir miyim?', askFinals: 'Final sınavları ne zaman?', askTranscript: 'Dersten çekilme not dökümümü nasıl etkiler?', askInternship: 'Staj dersi AKTS limitine dahil mi?', askContact: 'Öğrenci İşleri ile nasıl iletişime geçerim?', moreQuestions: 'Diğer sorular', fewerQuestions: 'Daha az göster', newChat: 'Yeni sohbet', deadlinePrefix: 'Sıradaki tarih', typing: 'yazıyor…', questionLabel: 'Mesajınız', send: 'Gönder', charCount: n => `${n} / 500`,
       information: 'Bilgilendirme', close: 'Bildirimi kapat', upcoming: 'Yaklaşan tarih', datesTitle: 'Akademik takvimden önemli tarihler', knowledge: 'Bilgi tabanı', courseRegistration: 'Ders Kayıt', addDrop: 'Ekle-Bırak', withdrawal: 'Dersten Çekilme', lastClass: 'Son Ders Günü', finals: 'Final Sınavları', sourcesCount: 'belge', chunksCount: 'parça', apiReady: 'hazır', apiMissing: 'eksik', noUpcoming: 'Yaklaşan tarih bulunamadı.',
       calendarTitle: 'Akademik Takvim', calendarDescription: '2026–2027 ön lisans ve lisans akademik takvimindeki tarihler.', fall: 'Güz', spring: 'Bahar', summer: 'Yaz', holidays: 'Resmi tatiller', past: 'Tamamlandı', ongoing: 'Devam ediyor', next: 'Sıradaki', calendarPdf: 'Resmi akademik takvim PDF dosyasını aç', date: 'Tarih', event: 'Etkinlik', status: 'Durum',
@@ -17,7 +17,7 @@
       startsIn: n => `${n} gün sonra başlıyor`, tomorrow: 'Yarın başlıyor', startsToday: 'Bugün başlıyor', ongoingDays: n => `Devam ediyor – ${n} gün kaldı`, endsToday: 'Bugün bitiyor', dateRange: 'Tarih aralığı', semester: 'Dönem', noSource: 'Kaynak bilgisi yüklenemedi.'
     },
     en: {
-      sidebar: 'Main menu', themeToDark: 'Switch to dark theme', themeToLight: 'Switch to light theme', hamburger: 'Open menu', assistantLabel: 'Student Assistant', menuSearch: 'Search menu…', general: 'General', assistantNav: 'Assistant', calendarNav: 'Academic Calendar', guideNav: 'Course Registration Guide', registrationNav: 'Course Registration', addDropNav: 'Add/Drop', withdrawalNav: 'Course Withdrawal', loadNav: 'Course Load / ECTS', regulationNav: 'Regulation', handbookNav: 'Student Handbook', sourcesNav: 'Sources', contactNav: 'Contact', demoMode: 'Demo Mode', footer: 'This is not an official Yaşar University system; it is a student project based on official sources.',
+      brandTitle: 'Yaşar Assistant', sidebar: 'Main menu', themeToDark: 'Switch to dark theme', themeToLight: 'Switch to light theme', hamburger: 'Open menu', menuSearch: 'Search menu…', general: 'General', assistantNav: 'Assistant', calendarNav: 'Academic Calendar', guideNav: 'Course Registration Guide', registrationNav: 'Course Registration', addDropNav: 'Add/Drop', withdrawalNav: 'Course Withdrawal', loadNav: 'Course Load / ECTS', regulationNav: 'Regulation', handbookNav: 'Student Handbook', sourcesNav: 'Sources', contactNav: 'Contact', demoMode: 'Demo Mode', footer: 'This is not an official Yaşar University system; it is a student project based on official sources.',
       home: 'Home', announcement: 'Academic calendar', localDemo: 'Local demo', loading: 'Loading…', heroBadge: 'AI-powered', heroTitle: 'Yaşar Student Assistant', heroDescription: 'Ask about course registration, add/drop, regulations and the academic calendar.', heroPlaceholder: 'Ask a question… e.g. When does add/drop end?', heroNote: 'Answers are based on official sources; confirm decisions with your advisor.', askRegistration: 'How do I register for courses?', askLoad: 'How many ECTS can I take in a semester?', askAddDrop: 'When does add/drop end?', askWithdrawal: 'How do I withdraw from a course?', askCalendar: 'What are the key dates in the academic calendar?', askRepeat: 'What are the course repeat rules?', askAdvisor: 'How do I get advisor approval?', askLate: 'Can I register late?', askProbation: 'How many ECTS can a probation student take?', askUpperYear: 'Can I take courses from a higher year?', askFinals: 'When are the final exams?', askTranscript: 'How does course withdrawal affect my transcript?', askInternship: 'Does an internship count toward the ECTS limit?', askContact: 'How can I contact Student Affairs?', moreQuestions: 'More questions', fewerQuestions: 'Show fewer', newChat: 'New chat', deadlinePrefix: 'Next deadline', typing: 'typing…', questionLabel: 'Your message', send: 'Send', charCount: n => `${n} / 500`,
       information: 'Notice', close: 'Dismiss notice', upcoming: 'Upcoming date', datesTitle: 'Key dates from the academic calendar', knowledge: 'Knowledge base', courseRegistration: 'Course Registration', addDrop: 'Add/Drop', withdrawal: 'Course Withdrawal', lastClass: 'Last Day of Classes', finals: 'Final Exams', sourcesCount: 'sources', chunksCount: 'chunks', apiReady: 'ready', apiMissing: 'not set', noUpcoming: 'No upcoming date found.',
       calendarTitle: 'Academic Calendar', calendarDescription: 'Dates from the 2026–2027 associate and undergraduate academic calendar.', fall: 'Fall', spring: 'Spring', summer: 'Summer', holidays: 'Public holidays', past: 'Past', ongoing: 'Ongoing', next: 'Next', calendarPdf: 'Open the official academic calendar PDF', date: 'Date', event: 'Event', status: 'Status',
@@ -122,23 +122,26 @@
   }
   function updateHeader() {
     $('semester-badge').textContent = semesterLabel();
-    $('announcement-count').textContent = String(announcementCount());
-    $('announcement-count').setAttribute('aria-label',String(announcementCount()));
+    const announcements=String(announcementCount());
+    $('announcement-count').textContent = announcements;
+    $('announcement-count').setAttribute('aria-label',`${t('announcement')}: ${announcements}`);
     $('session-pill').textContent = `${calendarData.isDemoDate ? (lang==='tr'?'Demo tarihi: ':'Demo date: ') : (lang==='tr'?'Tarih: ':'Date: ')}${new Intl.DateTimeFormat(lang==='tr'?'tr-TR':'en-GB',{day:'2-digit',month:'2-digit',year:'numeric',timeZone:'UTC'}).format(dateObj(calendarData.today))}`;
   }
   function updateLocalizedChrome() {
     document.documentElement.lang = lang;
+    document.title=t('brandTitle');
     document.querySelectorAll('[data-i18n]').forEach(node=>{ const key=node.dataset.i18n; if(TEXT[lang][key]) node.textContent=TEXT[lang][key]; });
     $('menu-search').placeholder=t('menuSearch');
     $('sidebar').setAttribute('aria-label',t('sidebar'));
     $('sidebar-toggle').setAttribute('aria-label',t('hamburger'));
+    $('top-brand-title').textContent=t('brandTitle');
+    document.querySelector('.top-brand').setAttribute('aria-label',t('home'));
     $('home-button').setAttribute('aria-label',t('home'));
     $('home-button').title=t('home');
     $('announcements-button').setAttribute('aria-label',t('announcement'));
     $('announcements-button').title=t('announcement');
     $('footer-text').textContent=t('footer');$('footer-close').setAttribute('aria-label',t('close'));$('footer-close').title=t('close');
     $('demo-mode-label').textContent=t('demoMode');
-    $('assistant-label').textContent=t('assistantLabel');
     $('menu-caption').textContent=t('general');
     $('sidebar-status').textContent=t('localDemo');
     document.querySelectorAll('.language-switch button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.language===lang)));
@@ -184,7 +187,29 @@
   }
   function sourceCards(cards) {
     if(!cards?.length)return '';
-    return `<div class="source-cards">${cards.map(source=>{const title=source.title||'',tag=/Yönetmelik|Regulation/i.test(title)?(lang==='tr'?'Yönetmelik':'Regulation'):/El Kitab|Handbook/i.test(title)?(lang==='tr'?'El Kitabı':'Handbook'):/Takvim|Calendar/i.test(title)?(lang==='tr'?'Takvim':'Calendar'):(lang==='tr'?'Kaynak':'Source');return `<a class="chat-source-card" href="${safeUrl(source.url)}" target="_blank" rel="noopener noreferrer"><span class="source-card-icon">${icon('file')}</span><span class="source-card-copy"><small>${esc(tag)}</small><strong>${esc(title)}</strong>${source.article?`<span>${esc(source.article)}</span>`:''}</span></a>`;}).join('')}</div>`;
+    const grouped=new Map();
+    for(const source of cards){
+      const rawTitle=String(source.title||'').replace(/\s*\(\d+\/\d+\)\s*$/,'').trim();
+      const key=rawTitle.toLocaleLowerCase('tr');
+      if(!grouped.has(key))grouped.set(key,{...source,title:rawTitle,articles:[]});
+      const group=grouped.get(key),article=String(source.article||'').replace(/\s*\(\d+\/\d+\)\s*$/,'').trim();
+      if(article&&!group.articles.includes(article))group.articles.push(article);
+    }
+    return `<div class="source-cards">${[...grouped.values()].map(source=>{const title=sourceLabel(source.title,source),tag=/Yönetmelik|Regulation/i.test(source.title)?(lang==='tr'?'Yönetmelik':'Regulation'):/El Kitab|Handbook/i.test(source.title)?(lang==='tr'?'El Kitabı':'Handbook'):/Takvim|Calendar/i.test(source.title)?(lang==='tr'?'Takvim':'Calendar'):(lang==='tr'?'Kaynak':'Source');const articles=source.articles.map(article=>sourceArticleLabel(article)).join(' · ');return `<a class="chat-source-card" href="${safeUrl(source.url)}" target="_blank" rel="noopener noreferrer"><span class="source-card-icon">${icon('file')}</span><span class="source-card-copy"><small>${esc(tag)}</small><strong>${esc(title)}</strong>${articles?`<span>${esc(articles)}</span>`:''}</span></a>`;}).join('')}</div>`;
+  }
+  const SOURCE_TITLES={
+    'Yönetmelik':'Regulation','Öğrenci İşleri – Ders Kayıtları':'Student Affairs – Course Registration','OBS Ders Kaydı Kılavuzu':'OBS Course Registration Guide','Akademik Takvim 2026-2027':'Academic Calendar 2026-2027','Öğrenci El Kitabı 2025':'Student Handbook 2025','Öğrenci İşleri – İletişim':'Student Affairs – Contact','Bilgisayar Müh. – İletişim':'Computer Engineering – Contact','Bilgisayar Müh. – Müfredat':'Computer Engineering – Curriculum'
+  };
+  const ARTICLE_TITLES={'Eğitim Ücreti':'Tuition Fees','Ders Kayıt Takvimi':'Registration Calendar','Ders Kayıt Kuralları':'Registration Rules','Ders Kaydı Nasıl Yapılır?':'How to Register','Ders İşlemleri Nelerdir ?':'Course Procedures','Çap ve Yandal Ders Kaydı':'Double Major & Minor Registration','Dersten Çekilme':'Course Withdrawal','Müfredat Bilgisi':'Curriculum','Muafiyet ve İntibak İşlemleri':'Exemptions & Course Transfer','Sıkça Sorulan Sorular':'FAQ'};
+  const FULL_SOURCE_TITLES={'regulation-tr':'Yaşar University Associate and Undergraduate Education and Examination Regulation (Turkish)','oim-registration':'Student Affairs Office — Course Registration','obs-guide':'OBS Course Registration Guide','academic-calendar':'Yaşar University 2026-2027 Academic Calendar','student-handbook':'Yaşar University Student Handbook (2025, Rev. 12)','contacts-oim':'Student Affairs Office — Contact','contacts-ce':'Computer Engineering Department — Contact','ce-curriculum':'Computer Engineering — Curriculum and Prerequisites'};
+  function sourceLabel(title,source={}) {
+    if(lang!=='en')return title;
+    return SOURCE_TITLES[source.short_title]||SOURCE_TITLES[title]||title;
+  }
+  function sourceArticleLabel(article) {
+    if(lang!=='en')return article;
+    if(/^Madde (\d+)/.test(article))return article.replace(/^Madde (\d+)/,'Article $1');
+    return ARTICLE_TITLES[article]||article;
   }
   function renderChatEntries() {
     const log=$('chat-log');if(!log)return;
@@ -198,7 +223,10 @@
     }).join('');
     for(const [i,entry] of entries.entries())if(entry.role==='user')log.children[i].querySelector('.bubble').textContent=entry.content;
     if(waiting){const row=document.createElement('div');row.className='message-row assistant typing-row';row.id='typing-row';row.innerHTML=`<div class="chat-avatar" aria-hidden="true"><img src="/assets/logo.svg" alt=""></div><div class="typing-content"><span class="typing-label">${esc(t('typing'))}</span><div class="bubble typing-bubble" aria-label="${esc(t('typing'))}"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div></div>`;log.appendChild(row);}
-    log.scrollTop=log.scrollHeight;
+    const scrollToBottom=()=>{log.scrollTop=log.scrollHeight;};
+    scrollToBottom();
+    requestAnimationFrame(scrollToBottom);
+    log.querySelectorAll('.chat-avatar img').forEach(image=>image.addEventListener('load',scrollToBottom,{once:true}));
   }
   async function sendMessage(value) {
     const message=String(value||'').trim();if(!message||waiting)return;
@@ -252,7 +280,7 @@
   function authorityLabel(level) { return level===1?t('regulationAuthority'):level===2?t('officialAuthority'):t('handbookAuthority'); }
   function renderSourceCards(list) {
     if(!list.length)return `<section class="surface-card"><p class="empty-note">${esc(t('noSource'))}</p></section>`;
-    return `<div class="source-grid">${list.map(source=>`<article class="source-card"><h2 class="source-title">${esc(source.title)}</h2><p class="source-subtitle">${esc(source.short_title||'')}</p><div class="source-facts"><span class="source-fact">${esc(authorityLabel(source.authority))}</span><span class="source-fact">${source.language==='tr'?esc(t('turkish')):esc(t('english'))}</span><span class="source-fact">${source.chunks} ${esc(t('chunks'))}</span></div><a class="source-open" href="${safeUrl(source.url)}" target="_blank" rel="noopener noreferrer">${esc(t('openOfficial'))}</a></article>`).join('')}</div>`;
+    return `<div class="source-grid">${list.map(source=>{const title=lang==='en'?(FULL_SOURCE_TITLES[source.id]||source.title):source.title;return `<article class="source-card"><h2 class="source-title">${esc(title)}</h2><p class="source-subtitle">${esc(sourceLabel(source.short_title||'',source))}</p><div class="source-facts"><span class="source-fact">${esc(authorityLabel(source.authority))}</span><span class="source-fact">${source.language==='tr'?esc(t('turkish')):esc(t('english'))}</span><span class="source-fact">${source.chunks} ${esc(t('chunks'))}</span></div><a class="source-open" href="${safeUrl(source.url)}" target="_blank" rel="noopener noreferrer">${esc(t('openOfficial'))}</a></article>`;}).join('')}</div>`;
   }
   function renderSourcesPage(kind) {
     let list=sourcesData.sources;

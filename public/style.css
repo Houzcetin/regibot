@@ -84,10 +84,8 @@
   .composer-shell{padding:8px 8px 8px 13px;border-radius:20px}.composer-shell textarea{font-size:16px;min-height:40px}.send-button{width:40px;height:40px}
   .suggestion-chips{gap:7px;margin-top:16px}.suggestion-chip{min-height:35px;padding:7px 10px;font-size:12px;max-width:100%;overflow-wrap:anywhere}
   .assistant-note{max-width:330px;margin-top:14px}
-  .assistant-conversation{height:calc(100dvh - var(--top-height,68px) - var(--footer-height,36px));padding-bottom:var(--footer-height,36px)}
-  .conversation-header{height:48px}.assistant-conversation .chat-log{padding:18px 14px calc(145px + env(safe-area-inset-bottom))}
+  .conversation-header{height:48px}
   .message-row{gap:8px;margin-bottom:17px}.message-row.user .message-body{max-width:88%}.bubble{padding:11px 13px;font-size:14px}
-  .composer-dock{position:fixed;z-index:5;left:0;right:0;bottom:var(--footer-height,36px);width:auto;margin:0;padding:12px 12px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#f7f8fae8,#f7f8fa 22%)}
   .composer-dock .composer-shell{padding:7px 7px 7px 12px}.chat-source-card{flex-basis:100%;max-width:none}
   .assistant-deadline{font-size:11px}
 }
@@ -123,6 +121,28 @@
 :root.footer-hidden{--footer-height:0px}
 :root.footer-hidden .page-footer{display:none}
 :root.footer-hidden .session-pill{bottom:12px}
+
+/* Conversation shell: the fixed main-area already ends at the footer edge. */
+.main-area:has(.assistant-conversation){padding:0;overflow:hidden}
+.assistant-conversation{width:100%;height:100%;min-height:0;max-width:none;margin:0;display:flex;flex-direction:column;overflow:hidden;background:#f7f8fa}
+.conversation-header{height:54px;min-height:0;flex:none}
+.assistant-conversation .chat-log{width:100%;height:auto;min-height:0;max-height:none;flex:1 1 0;overflow-y:auto;overflow-x:hidden;margin:0;padding:26px max(20px,calc((100% - 860px)/2));scroll-behavior:auto}
+.composer-dock{position:relative;z-index:1;width:100%;height:auto;min-height:0;max-height:none;flex:none;margin:0;padding:12px max(20px,calc((100% - 860px)/2)) calc(20px + env(safe-area-inset-bottom));background:#f7f8fa}
+.composer-dock::before{position:absolute;right:0;bottom:100%;left:0;height:32px;pointer-events:none;background:linear-gradient(to bottom,transparent,#f7f8fa);content:""}
+.composer-dock .composer-shell{width:100%;min-width:0}
+.sidebar{scrollbar-width:thin;scrollbar-color:#3c4b60 transparent}
+.sidebar::-webkit-scrollbar{width:7px}
+.sidebar::-webkit-scrollbar-track{background:transparent}
+.sidebar::-webkit-scrollbar-thumb{border:2px solid transparent;border-radius:8px;background:#3c4b60;background-clip:padding-box}
+@media(max-width:620px){
+  .assistant-conversation{height:100%;min-height:0;padding:0}
+  .conversation-header{height:48px}
+  .assistant-conversation .chat-log{min-height:0;max-height:none;padding:18px max(20px,calc((100% - 860px)/2));}
+  .composer-dock{position:relative;inset:auto;width:100%;margin:0;padding:12px max(20px,calc((100% - 860px)/2)) calc(12px + env(safe-area-inset-bottom));background:#f7f8fa}
+  .composer-dock .composer-shell{padding:7px 7px 7px 12px}
+}
+:root[data-theme="dark"] .assistant-conversation,:root[data-theme="dark"] .composer-dock{background:#111923}
+:root[data-theme="dark"] .composer-dock::before{background:linear-gradient(to bottom,transparent,#111923)}
 /* "More questions" toggle chip: dashed outline so it reads as an action, not a question. */
 .more-chip{gap:6px;border-style:dashed;color:#5a6878;font-weight:700}
 .more-chip-arrow{font-size:15px;line-height:1}
