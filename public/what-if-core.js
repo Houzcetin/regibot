@@ -137,5 +137,17 @@
       return {code:c.code,count:view.count,ready:view.withoutPass.results[c.code].status==='met',related:r.direct.length,index};
     }).sort((a,b)=>Number(b.count>0)-Number(a.count>0)||Number(b.ready)-Number(a.ready)||b.count-a.count||b.related-a.related||a.index-b.index)[0]?.code||'';
   }
-  return {preview,chooseExample,storageKey,clean,read,save,reset,ruleRefs,graph,relationships,subgraph,tree,proof,scenario,compare,postpone,explanation};
+  const explorerKey='regibot-course-explorer-v1';
+  function cleanExplorer(value,d){return {version:1,dataset:d?.id||'',course:value?.version===1&&value.dataset===d?.id&&d?.courses.some(c=>c.code===value.course)?value.course:''};}
+  function readExplorer(storage,d){try{return {state:cleanExplorer(JSON.parse(storage.getItem(explorerKey)),d),unavailable:false};}catch{return {state:cleanExplorer(null,d),unavailable:true};}}
+  function saveExplorer(storage,state,d){try{storage.setItem(explorerKey,JSON.stringify(cleanExplorer(state,d)));return true;}catch{return false;}}
+  function explorer(d,baseline,code){
+    const v=preview(d,baseline,[code],{selected:code}),r=relationships(v.graph,code);
+    // Only actual missing → met transitions count, never structural descendants.
+    const changed=v.changed.filter(c=>v.withoutPass.results[c].status==='missing');
+    const directBlocked=r.direct.filter(c=>!v.withPass.baseline.has(c)&&c!==code&&v.withPass.results[c]?.status==='missing');
+    const longer=r.indirect.filter(c=>!v.withPass.baseline.has(c)&&c!==code&&!changed.includes(c)&&v.withPass.results[c]?.status!=='met');
+    return {...v,changed,count:changed.length,directBlocked,longer,connections:r.direct.filter(c=>c!==code)};
+  }
+  return {explorer,explorerKey,cleanExplorer,readExplorer,saveExplorer,preview,chooseExample,storageKey,clean,read,save,reset,ruleRefs,graph,relationships,subgraph,tree,proof,scenario,compare,postpone,explanation};
 });

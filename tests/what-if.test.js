@@ -59,10 +59,11 @@ test('scenario storage validates version, dataset, target and selections and nev
  storage.setItem(W.storageKey,'{broken');assert.equal(W.read(storage,d).state.a.length,0);
  const unavailable={getItem(){throw Error();},setItem(){throw Error();},removeItem(){throw Error();}};assert.equal(W.read(unavailable,d).unavailable,true);assert.equal(W.save(unavailable,raw,d),false);assert.equal(W.reset(unavailable),false);
 });
-function mount({lang='en',theme='light',width=1100,actual=[],data=d,storedScenario=null,storageUnavailable=false}={}){
+function mount({lang='en',theme='light',width=1100,actual=[],data=d,storedScenario=null,storedExplorer=null,storageUnavailable=false}={}){
  const vm=require('node:vm'),fs=require('node:fs'),nodes=new Map(),listeners={},windowListeners={};
  const values=new Map([['regibot-language',lang],['regibot-planning-v1',JSON.stringify({version:1,dataset:data?.id||d.id,completed:actual,steps:['curriculum']})]]);
  if(storedScenario)values.set(W.storageKey,JSON.stringify(storedScenario));
+ if(storedExplorer)values.set(W.explorerKey,JSON.stringify(storedExplorer));
  const node=id=>{if(!nodes.has(id))nodes.set(id,{innerHTML:'',textContent:'',dataset:{},style:{},scrollTop:0,focus(){},classList:{toggle(){},add(){},remove(){},contains(){return false;}},attributes:{},setAttribute(k,v){this.attributes[k]=String(v);},removeAttribute(k){delete this.attributes[k];},addEventListener(){},querySelector(){return null;},querySelectorAll(){return [];}});return nodes.get(id);};
  const storage={getItem(k){if(storageUnavailable)throw Error('denied');return values.get(k)??null;},setItem(k,v){if(storageUnavailable)throw Error('denied');values.set(k,v);},removeItem(k){if(storageUnavailable)throw Error('denied');values.delete(k);}};
  const add=(map,k,fn)=>{if(!map[k])map[k]=[];map[k].push(fn);};
@@ -76,7 +77,7 @@ function mount({lang='en',theme='light',width=1100,actual=[],data=d,storedScenar
 }
 const tick=()=>new Promise(resolve=>setImmediate(resolve));
 const click=(app,dataset)=>app.dispatch('click',{dataset});
-const choose=(app,code,plan='a')=>click(app,{wfChoose:code,wfPlan:plan});
+const choose=(app,code,plan='x')=>click(app,{wfChoose:code,wfPlan:plan});
 const saved=app=>JSON.parse(app.values.get(W.storageKey));
 test('single-course pass/postpone compare identical states, excluding assumed passes and indirect relationships',()=>{
  const pass=W.preview(fixture,[],['A 1000'],{selected:'A 1000'}),post=W.preview(fixture,[],['A 1000'],{selected:'A 1000',mode:'postpone'});
@@ -102,71 +103,87 @@ test('saved presentation validates modes and opens advanced controls for old sav
  assert.equal(W.clean(bad,fixture).presentation.b,'postpone');assert.equal(W.clean(bad,fixture).presentation.multiB,false);
  const changed=W.clean(bad,{...fixture,id:'other'});assert.deepEqual(changed.a,[]);assert.equal(changed.presentation.compare,false);
 });
-test('simple interface renders TR/EN and theme/width settings; optional controls preserve isolation',async()=>{
+test('explorer separates immediate readiness, directly incomplete requirements, and indirect chains',()=>{
+ const a=W.explorer(fixture,[],'A 1000');assert.deepEqual(a.changed,['B 2000']);assert.equal(a.count,1);assert.deepEqual(a.directBlocked,[]);assert.deepEqual(a.longer,['C 3000','D 5000']);assert.equal(a.withPass.completed.has('B 2000'),false);
+ const b=W.explorer(fixture,[],'B 2000');assert.deepEqual(b.changed,['C 3000']);assert.deepEqual(b.directBlocked,['D 5000']);assert.equal(b.conditional,true);assert.deepEqual(b.longer,[]);
+ const completed=W.explorer(fixture,['B 2000'],'B 2000');assert.equal(completed.count,0);assert.equal(completed.protectedSelection,true);assert.deepEqual(completed.withPass.assumed,[]);assert.ok(completed.connections.includes('C 3000'));
+ const orView=W.explorer(fixture,['X 4000'],'B 2000');assert.equal(orView.count,0);assert.ok(orView.alternatives.includes('C 3000'));
+ const legacy=W.explorer(d,['MATH 131'],'MATH 1131');assert.ok(!legacy.changed.includes('MATH 1132'));assert.ok(!legacy.changed.includes('MATH 2261'));
+});
+test('simple storage validates curriculum and selection independently from advanced plans',()=>{
+ const record={version:1,dataset:fixture.id,course:'B 2000',a:['A 1000'],email:'private'};
+ assert.deepEqual(W.cleanExplorer(record,fixture),{version:1,dataset:fixture.id,course:'B 2000'});
+ assert.equal(W.cleanExplorer({...record,version:2},fixture).course,'');assert.equal(W.cleanExplorer({...record,course:'bad'},fixture).course,'');assert.equal(W.cleanExplorer(record,{...fixture,id:'other'}).course,'');
+ const map=new Map([[W.storageKey,'saved plan'],['regibot-planning-v1','actual']]),storage={getItem:k=>map.get(k),setItem:(k,v)=>map.set(k,v)};
+ assert.equal(W.saveExplorer(storage,record,fixture),true);assert.equal(W.readExplorer(storage,fixture).state.course,'B 2000');assert.equal(map.get(W.storageKey),'saved plan');assert.equal(map.get('regibot-planning-v1'),'actual');
+ map.set(W.explorerKey,'{broken');assert.equal(W.readExplorer(storage,fixture).state.course,'');assert.equal(W.saveExplorer({setItem(){throw Error();}},record,fixture),false);
+});
+test('Course Explorer renders one picker and immediate results in TR/EN and theme/width settings',async()=>{
  const fs=require('node:fs'),css=fs.readFileSync(require.resolve('../public/style.css'),'utf8');
  assert.ok(css.includes('@media(max-width:620px){.wf-simple'));assert.ok(css.includes(':root[data-theme="dark"] .wf-met'));assert.ok(css.includes('@media(prefers-reduced-motion:reduce){.wf-simple'));
  for(const lang of ['tr','en'])for(const theme of ['light','dark'])for(const width of [360,1100]){
    const app=mount({lang,theme,width,actual:['MATH 131']});await tick();
-   assert.ok(app.html().includes(lang==='tr'?'Bir dersi geçersem ya da ertelersem ne değişir?':'What happens if I pass or postpone a course?'));
-   assert.ok(!app.html().includes('undefined'));assert.ok(!app.html().includes('<svg'));assert.ok(!app.html().includes('id="wf-search-b"'));assert.ok(!app.html().includes('id="wf-result-filter"'));
-   assert.ok(app.html().includes('role="combobox"'));assert.ok(app.html().includes('aria-controls="wf-options-a"'));assert.ok(app.html().includes('aria-pressed="true"'));
+   assert.ok(app.html().includes(lang==='tr'?'Bu dersi geçersem hangi derslerin önü açılır?':'What does passing this course unlock?'));
+   assert.equal(app.context.WhatIfUI.TEXT[lang].nav,lang==='tr'?'Ders Keşfi':'Course Explorer');assert.equal(app.context.WhatIfUI.TEXT[lang].explore,lang==='tr'?'Bu dersi keşfet':'Explore this course');
+   assert.ok(!app.html().includes('undefined'));assert.ok(!app.html().includes('<svg'));assert.ok(!app.html().includes('id="wf-search-a"'));assert.ok(!app.html().includes('id="wf-search-b"'));assert.ok(!app.html().includes('data-wf-mode='));assert.ok(!app.html().includes('data-unlocked-count'));
+   assert.ok(app.html().includes('role="combobox"'));assert.ok(app.html().includes('aria-controls="wf-options-x"'));assert.ok(app.html().includes('data-wf-example="x"'));
    assert.ok(app.html().includes(lang==='tr'?'Tamamladığın 0 ders':'Using your 0 completed courses'));assert.ok(app.html().includes(lang==='tr'?'Önceki müfredattan 1':'1 prior-curriculum'));
    const before=app.values.get('regibot-planning-v1');choose(app,'SE 1105');
-   assert.deepEqual(saved(app).a,['SE 1105']);assert.equal(app.values.get('regibot-planning-v1'),before);
-   const count=W.preview(d,['MATH 131'],['SE 1105']).count;assert.ok(app.html().includes(`data-unlocked-count="${count}"`));
-   click(app,{wfMode:'postpone',wfPlan:'a'});assert.deepEqual(saved(app).a,['SE 1105']);assert.equal(saved(app).presentation.a,'postpone');assert.ok(app.html().includes(lang==='tr'?'geçmene kıyasla':'compared with passing it'));
-   click(app,{wfAdd:'a'});choose(app,'COMP 2215');assert.deepEqual(saved(app).a,['SE 1105','COMP 2215']);assert.ok(app.html().includes(lang==='tr'?'Önce':'first'));
-   click(app,{wfCompare:''});choose(app,'SE 1105','b');assert.deepEqual(saved(app).b,['SE 1105']);assert.ok(app.html().includes('id="wf-search-b"'));
-   click(app,{wfPostpone:'COMP 2215',wfPlan:'a'});assert.deepEqual(saved(app).a,['SE 1105']);assert.deepEqual(saved(app).b,['SE 1105']);
-   click(app,{wfPaths:''});app.dispatch('change',{id:'wf-target',value:'COMP 4910'});assert.ok(app.html().includes('<svg'));assert.ok(app.html().includes('wf-graph-text'));assert.ok(app.html().includes(lang==='tr'?'VE':'AND'));
-   assert.equal(app.values.get('regibot-planning-v1'),before);click(app,{wfReset:''});assert.equal(app.values.get(W.storageKey),undefined);assert.equal(app.values.get('regibot-planning-v1'),before);
+   assert.equal(JSON.parse(app.values.get(W.explorerKey)).course,'SE 1105');assert.equal(app.values.get(W.storageKey),undefined);assert.equal(app.values.get('regibot-planning-v1'),before);
+   const count=W.explorer(d,['MATH 131'],'SE 1105').count;assert.ok(app.html().includes(`data-unlocked-count="${count}"`));assert.ok(!app.html().includes('data-selected-course='));assert.ok(app.html().includes('value="SE 1105 · '));
+   click(app,{wfPaths:''});assert.ok(app.html().includes('<svg'));assert.ok(app.html().includes('wf-graph-text'));assert.ok(!app.html().includes('id="wf-result-filter"'));assert.ok(!app.html().includes('wf-relations'));
+   app.dispatch('change',{id:'wf-direction',value:'dependents'});assert.ok(app.html().includes(lang==='tr'?'VEYA':'OR'));
+   click(app,{wfPaths:''});assert.ok(!app.html().includes('<svg'));click(app,{wfClear:'x'});assert.equal(app.values.get(W.explorerKey),undefined);assert.ok(!app.html().includes('data-unlocked-count'));assert.equal(app.values.get('regibot-planning-v1'),before);
  }
 });
-test('empty state, example, keyboard search and conditional warnings use evaluated data',async()=>{
- const app=mount({data:fixture});await tick();assert.ok(app.html().includes('haven’t saved any completed courses'));assert.ok(app.html().includes('data-wf-example="a"'));
- const initial=app.html(),input={id:'wf-search-a',dataset:{wfSearch:'a'},value:'B 2000'};
- app.dispatch('input',input);assert.equal(app.html(),initial);assert.ok(app.node('wf-options-a').innerHTML.includes('B 2000'));assert.ok(!app.node('wf-options-a').innerHTML.includes('C 3000'));
- app.dispatch('keydown',input,{key:'ArrowDown'});assert.ok(app.node('wf-search-a').attributes['aria-activedescendant']);
- app.dispatch('keydown',input,{key:'Escape'});assert.equal(app.node('wf-search-a').attributes['aria-expanded'],'false');
- app.dispatch('keydown',input,{key:'ArrowDown'});app.dispatch('keydown',input,{key:'Enter'});assert.deepEqual(saved(app).a,['B 2000']);
- assert.ok(app.html().includes('You would first need to satisfy'));assert.ok(app.html().includes('data-wf-details="other-a"'));assert.ok(app.html().includes('Still needs'));
- assert.ok(app.html().includes('data-wf-details="selected-a-B 2000"'));assert.ok(app.html().includes('rel="noopener noreferrer"'));assert.ok(app.html().includes('aria-live="polite"'));
- click(app,{wfClear:'a'});click(app,{wfExample:'a'});assert.deepEqual(saved(app).a,[W.chooseExample(fixture,[])]);
+test('search and keyboard controls preserve the input, announce results and explain conditional choices',async()=>{
+ const app=mount({data:fixture});await tick();assert.ok(app.html().includes('haven’t saved any completed courses'));assert.ok(app.html().includes('href="#/uygunluk"'));
+ let pointerPrevented=false;app.dispatch('pointerdown',{dataset:{wfChoose:'B 2000',wfPlan:'x'}},{preventDefault(){pointerPrevented=true;}});assert.equal(pointerPrevented,true);
+ const initial=app.html(),input={id:'wf-search-x',dataset:{wfSearch:'x'},value:'B 2000'};
+ app.dispatch('input',input);assert.equal(app.html(),initial);assert.ok(app.node('wf-options-x').innerHTML.includes('B 2000'));assert.ok(!app.node('wf-options-x').innerHTML.includes('C 3000'));
+ app.dispatch('keydown',input,{key:'ArrowDown'});assert.ok(app.node('wf-search-x').attributes['aria-activedescendant']);app.dispatch('keydown',input,{key:'Escape'});assert.equal(app.node('wf-search-x').attributes['aria-expanded'],'false');
+ app.node('main-area').scrollTop=123;app.dispatch('keydown',input,{key:'ArrowDown'});app.dispatch('keydown',input,{key:'Enter'});assert.equal(app.node('main-area').scrollTop,123);assert.equal(JSON.parse(app.values.get(W.explorerKey)).course,'B 2000');
+ assert.ok(app.html().includes('You would first need to satisfy'));assert.ok(app.html().includes('data-wf-details="direct"'));assert.ok(app.html().includes('This pass satisfies the B 2000 condition. Still needs'));assert.ok(app.html().includes('Y 6000'));
+ assert.ok(app.html().includes('data-wf-details="selected-x"'));assert.ok(app.html().includes('rel="noopener noreferrer"'));assert.ok(app.html().includes('aria-live="polite"'));assert.ok(!app.html().includes('wfs-selected-heading'));
+ click(app,{wfClear:'x'});click(app,{wfExample:'x'});assert.equal(JSON.parse(app.values.get(W.explorerKey)).course,W.chooseExample(fixture,[]));
+ app.dispatch('focusin',input);assert.equal(app.node('wf-search-x').attributes['aria-expanded'],'true');app.dispatch('focusout',input);assert.equal(app.node('wf-search-x').attributes['aria-expanded'],'false');
 });
-test('single-course no-change rendering explains satisfied OR alternatives without counting descendants',async()=>{
- const app=mount({data:fixture,actual:['X 4000']});await tick();const before=app.values.get('regibot-planning-v1');choose(app,'B 2000');
- assert.ok(app.html().includes('data-unlocked-count="0"'));assert.ok(app.html().includes('would not change other courses'));assert.ok(app.html().includes('A published alternative you already completed keeps C 3000 ready'));
- assert.ok(app.html().includes('data-result-course="D 5000"'));assert.ok(app.html().includes('Y 6000'));assert.ok(app.html().includes('wf-expression'));
- click(app,{wfMode:'postpone',wfPlan:'a'});assert.ok(app.html().includes('makes no difference'));assert.equal(app.values.get('regibot-planning-v1'),before);
- const input={id:'wf-search-a',dataset:{wfSearch:'a'},value:'C'};app.dispatch('focusin',input);assert.equal(app.node('wf-search-a').attributes['aria-expanded'],'true');app.dispatch('focusout',input);assert.equal(app.node('wf-search-a').attributes['aria-expanded'],'false');
+test('direct remaining requirements and longer-term connections render in separate collapsed sections',async()=>{
+ const app=mount({data:fixture});await tick();choose(app,'A 1000');assert.ok(app.html().includes('data-unlocked-count="1"'));assert.ok(!app.html().includes('data-wf-details="direct"'));assert.ok(app.html().includes('data-wf-details="longer"'));assert.ok(app.html().includes('Intermediate courses must also be passed'));assert.ok(!app.html().includes('data-wf-details="longer" open'));
+ const other=mount({data:fixture,actual:['X 4000']});await tick();choose(other,'B 2000');assert.ok(other.html().includes('data-unlocked-count="0"'));assert.ok(other.html().includes('may still contribute'));assert.ok(other.html().includes('A published alternative you already completed keeps C 3000 ready'));assert.ok(other.html().includes('data-wf-details="direct"'));assert.ok(other.html().includes('Y 6000'));
 });
-test('old saved multiple choices and Plan B are visible, and eligibility links stay focused without forcing graphs',async()=>{
- const record={version:1,dataset:d.id,a:['SE 1105','COMP 2215'],b:['COMP 2233'],target:'COMP 4910'};
- const app=mount({storedScenario:record});await tick();assert.ok(app.html().includes('data-selected-course="SE 1105"'));assert.ok(app.html().includes('data-selected-course="COMP 2215"'));assert.ok(app.html().includes('id="wf-search-b"'));assert.ok(!app.html().includes('<svg'));assert.deepEqual(saved(app),record);
- click(app,{whatIfCode:'COMP 3323'});assert.equal(saved(app).target,'COMP 3323');assert.ok(saved(app).a.includes('COMP 3323'));assert.ok(saved(app).a.includes('COMP 2215'));assert.ok(!app.html().includes('<svg'));
- const simple=mount();await tick();click(simple,{whatIfCode:'COMP 3323'});assert.deepEqual(saved(simple).a,['COMP 3323']);assert.equal(saved(simple).presentation.multiA,false);assert.ok(simple.html().includes('data-selected-course="COMP 3323"'));
+test('saved plans remain closed and byte-for-byte untouched while exploring or clearing a course',async()=>{
+ const record={version:1,dataset:d.id,a:['SE 1105','COMP 2215'],b:['COMP 2233'],target:'COMP 4910',presentation:{a:'pass',b:'postpone',multiA:true,multiB:false,compare:true}};
+ const app=mount({storedScenario:record});await tick();const before=app.values.get(W.storageKey),actual=app.values.get('regibot-planning-v1');
+ assert.ok(app.html().includes('Saved comparison available'));assert.ok(!app.html().includes('data-selected-course='));assert.ok(!app.html().includes('id="wf-search-b"'));assert.deepEqual(saved(app),record);
+ click(app,{whatIfCode:'COMP 3323'});assert.equal(JSON.parse(app.values.get(W.explorerKey)).course,'COMP 3323');assert.equal(app.values.get(W.storageKey),before);assert.ok(app.html().includes('value="COMP 3323 · '));
+ click(app,{wfClear:'x'});assert.equal(app.values.get(W.storageKey),before);assert.equal(app.values.get('regibot-planning-v1'),actual);
+ click(app,{wfAdvanced:''});assert.ok(app.html().includes('data-selected-course="SE 1105"'));assert.ok(app.html().includes('data-selected-course="COMP 2215"'));assert.ok(app.html().includes('id="wf-search-b"'));assert.match(app.html(),/id="wf-mode-b-postpone"[^>]*aria-pressed="true"/);assert.equal(app.values.get(W.storageKey),before);
+ choose(app,'SE 1105');const simple=app.values.get(W.explorerKey);click(app,{wfReset:''});assert.equal(app.values.get(W.storageKey),undefined);assert.equal(app.values.get(W.explorerKey),simple);assert.equal(app.values.get('regibot-planning-v1'),actual);
 });
-test('actual completions stay protected on picker, external focus and cross-tab updates',async()=>{
- const app=mount({actual:['SE 1105']});await tick();const before=app.values.get('regibot-planning-v1');
- assert.match(app.html(),/data-wf-choose="SE 1105"[^>]*disabled/);choose(app,'SE 1105');assert.equal(app.values.get(W.storageKey),undefined);
- click(app,{whatIfCode:'SE 1105'});assert.deepEqual(saved(app).a,[]);assert.ok(app.html().includes('already completed'));assert.match(app.html(),/id="wf-mode-a-postpone"[^>]*disabled/);
- click(app,{wfMode:'postpone',wfPlan:'a'});assert.equal(app.values.get('regibot-planning-v1'),before);
- choose(app,'COMP 2215');app.storage.setItem('regibot-planning-v1',JSON.stringify({version:1,dataset:d.id,completed:['SE 1105','COMP 2215'],steps:['curriculum']}));app.storageEvent('regibot-planning-v1');
- assert.ok(app.html().includes('already completed'));assert.ok(app.html().includes('data-unlocked-count="0"'));const changed=app.values.get('regibot-planning-v1');click(app,{wfReset:''});assert.equal(app.values.get('regibot-planning-v1'),changed);
+test('advanced choices retain sequencing, A/B comparison and individual postponement',async()=>{
+ const app=mount();await tick();choose(app,'MATH 1131');const simple=app.values.get(W.explorerKey),actual=app.values.get('regibot-planning-v1');click(app,{wfAdvanced:''});
+ choose(app,'SE 1105','a');click(app,{wfAdd:'a'});choose(app,'COMP 2215','a');assert.deepEqual(saved(app).a,['SE 1105','COMP 2215']);assert.ok(app.html().includes('Pass SE 1105 first'));
+ click(app,{wfCompare:''});choose(app,'SE 1105','b');assert.deepEqual(saved(app).b,['SE 1105']);click(app,{wfPostpone:'COMP 2215',wfPlan:'a'});assert.deepEqual(saved(app).a,['SE 1105']);assert.deepEqual(saved(app).b,['SE 1105']);
+ assert.equal(app.values.get(W.explorerKey),simple);assert.equal(app.values.get('regibot-planning-v1'),actual);click(app,{wfAdvanced:''});assert.ok(!app.html().includes('id="wf-search-a"'));assert.ok(app.html().includes('Saved comparison available'));
 });
-test('unavailable/malformed storage and missing curriculum render useful fallbacks',async()=>{
- for(const settings of [{storageUnavailable:true},{data:null},{storedScenario:{version:1,dataset:'different',a:['SE 1105'],b:[],target:'COMP 4910'}}]){
-   const app=mount(settings);await tick();assert.ok(!app.html().includes('undefined'));
-   if(settings.data===null)assert.ok(app.html().includes('validated curriculum is unavailable'));
-   if(settings.storageUnavailable){assert.ok(/Browser storage is unavailable|Tarayıcı depolaması kullanılamıyor/.test(app.html()));choose(app,'SE 1105');assert.ok(app.html().includes('data-selected-course="SE 1105"'));}
-   if(settings.storedScenario){assert.ok(!app.html().includes('data-selected-course="'));assert.ok(!app.html().includes('<svg'));}
- }
- const app=mount();await tick();app.storage.setItem(W.storageKey,'{broken');app.storageEvent(W.storageKey);assert.ok(app.html().includes('data-wf-example="a"'));
+test('completed courses are protected, but eligibility links allow inspecting existing connections',async()=>{
+ const app=mount({actual:['SE 1105']});await tick();const before=app.values.get('regibot-planning-v1');assert.match(app.html(),/data-wf-choose="SE 1105"[^>]*disabled/);choose(app,'SE 1105');assert.equal(app.values.get(W.explorerKey),undefined);
+ click(app,{whatIfCode:'SE 1105'});assert.ok(app.html().includes('already completed'));assert.ok(app.html().includes('data-unlocked-count="0"'));assert.ok(app.html().includes('Published course connections'));assert.equal(app.values.get(W.storageKey),undefined);assert.equal(app.values.get('regibot-planning-v1'),before);
+ choose(app,'COMP 2215');app.storage.setItem('regibot-planning-v1',JSON.stringify({version:1,dataset:d.id,completed:['SE 1105','COMP 2215'],steps:['curriculum']}));app.storageEvent('regibot-planning-v1');assert.ok(app.html().includes('already completed'));assert.ok(app.html().includes('data-unlocked-count="0"'));
+ click(app,{wfPaths:''});assert.ok(app.html().includes('<svg'));const changed=app.values.get('regibot-planning-v1');click(app,{wfClear:'x'});assert.equal(app.values.get('regibot-planning-v1'),changed);
 });
-test('unknown/cyclic rules remain explicit, and global versus scenario-only resets stay separate',async()=>{
- const unknown={...fixture,courses:[{...course('A 1000'),verification:'unverified'}]};
- const missing=mount({data:unknown});await tick();assert.ok(missing.html().includes('Some course rules are unknown or malformed: A 1000'));choose(missing,'A 1000');assert.ok(missing.html().includes('requirements can’t be verified'));
- const cycle={...fixture,courses:[course('A 1000',leaf('B 2000')),course('B 2000',leaf('A 1000'))]};
- const circular=mount({data:cycle,storedScenario:{version:1,dataset:cycle.id,a:['A 1000','B 2000'],b:[],target:'A 1000'}});await tick();assert.ok(circular.html().includes('Possible cycle in published dependencies'));assert.ok(circular.html().includes('A valid order for these choices'));assert.ok(!circular.html().includes('<svg'));click(circular,{wfPaths:''});assert.ok(circular.html().includes('<svg'));
- const app=mount({actual:['MATH 131']});await tick();choose(app,'SE 1105');click(app,{resetPlanning:''});assert.equal(app.values.get(W.storageKey),undefined);assert.equal(app.values.get('regibot-planning-v1'),undefined);
+test('simple selection restores independently and rejects mismatched curricula and malformed storage',async()=>{
+ const record={version:1,dataset:d.id,course:'SE 1105'},app=mount({storedExplorer:record});await tick();assert.ok(app.html().includes('value="SE 1105 · '));assert.ok(app.html().includes('data-unlocked-count='));assert.equal(app.values.get(W.storageKey),undefined);
+ app.storage.setItem(W.explorerKey,'{broken');app.storageEvent(W.explorerKey);assert.ok(app.html().includes('data-wf-example="x"'));assert.ok(!app.html().includes('data-unlocked-count='));
+ const mismatch=mount({storedExplorer:{...record,dataset:'other'},storedScenario:{version:1,dataset:'other',a:['SE 1105'],b:[]}});await tick();assert.ok(!mismatch.html().includes('data-unlocked-count='));assert.ok(!mismatch.html().includes('Saved comparison available'));
+});
+test('unavailable storage and missing data have useful fallbacks without modifying real records',async()=>{
+ const empty=mount({data:null});await tick();assert.ok(empty.html().includes('validated curriculum is unavailable'));assert.ok(!empty.html().includes('undefined'));
+ const denied=mount({storageUnavailable:true});await tick();assert.ok(/Browser storage is unavailable|Tarayıcı depolaması kullanılamıyor/.test(denied.html()));choose(denied,'SE 1105');assert.ok(denied.html().includes('value="SE 1105 · '));assert.ok(!denied.html().includes('undefined'));
+});
+test('unknown/cyclic rules stay explicit; global reset clears hypotheticals as well as actual planning',async()=>{
+ const unknown={...fixture,courses:[{...course('A 1000'),verification:'unverified'}]},missing=mount({data:unknown});await tick();choose(missing,'A 1000');assert.ok(missing.html().includes('requirements can’t be verified'));assert.ok(missing.html().includes('data-unlocked-count="0"'));
+ const cycle={...fixture,courses:[course('A 1000',leaf('B 2000')),course('B 2000',leaf('A 1000'))]},circular=mount({data:cycle,storedScenario:{version:1,dataset:cycle.id,a:['A 1000','B 2000'],b:[],target:'A 1000'}});await tick();assert.ok(circular.html().includes('Possible cycle in published dependencies'));assert.ok(!circular.html().includes('A valid order for these choices'));click(circular,{wfAdvanced:''});assert.ok(circular.html().includes('A valid order for these choices'));choose(circular,'A 1000');click(circular,{wfPaths:''});assert.ok(circular.html().includes('<svg'));
+ const app=mount({actual:['MATH 131']});await tick();choose(app,'SE 1105');click(app,{wfAdvanced:''});choose(app,'COMP 2215','a');click(app,{resetPlanning:''});assert.equal(app.values.get(W.storageKey),undefined);assert.equal(app.values.get(W.explorerKey),undefined);assert.equal(app.values.get('regibot-planning-v1'),undefined);
 });

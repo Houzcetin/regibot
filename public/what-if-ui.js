@@ -1,10 +1,10 @@
-/* Student-first What-if UI. Rule evaluation remains in the existing deterministic engine. */
+/* Course Explorer and optional comparisons; all calculations use the deterministic engine. */
 (function(root){
   'use strict';
   const TEXT={
   "en": {
-    "nav": "What if? Planner",
-    "explore": "Explore what if",
+    "nav": "Course Explorer",
+    "explore": "Explore this course",
     "actual": "Actually completed",
     "ready": "Requirements met",
     "blocked": "Still blocked",
@@ -46,9 +46,9 @@
     "loading": "Loading the selected curriculum…",
     "unavailable": "A validated curriculum is unavailable. Open course eligibility to check your selection, or try again later.",
     "resetDone": "Hypothetical scenarios reset. Actual completions are unchanged.",
-    "updated": "Comparison recalculated.",
-    "question": "What happens if I pass or postpone a course?",
-    "intro": "Choose one course. See which other courses it could help you take next.",
+    "updated": "Results updated.",
+    "question": "What does passing this course unlock?",
+    "intro": "Choose a course to see which published prerequisite requirements it would satisfy.",
     "using": "Using your {count} completed courses",
     "edit": "Edit",
     "legacy": "{count} prior-curriculum selection(s) are included separately.",
@@ -64,15 +64,15 @@
     "example": "Try an example",
     "noExample": "No uncompleted course with a verified rule is available to try.",
     "noMatches": "No matching courses.",
-    "protected": "{code} is already completed. It can’t be passed again or hypothetically postponed here; your actual completions are unchanged.",
+    "protected": "{code} is already completed. No additional pass is assumed; you can still explore its published connections.",
     "conditional": "You would first need to satisfy this course’s prerequisites. These results assume you eventually pass it.",
     "unknownSelected": "This course’s requirements can’t be verified. You can explore the assumption, but passing it is conditional.",
     "sequence": "Pass {codes} first. These choices need to happen in that order, not necessarily in one semester.",
     "order": "A valid order for these choices couldn’t be confirmed. Check the missing conditions and prerequisite paths.",
     "stillNeeds": "Still needs",
-    "passHeadline": "Passing {course} would satisfy the prerequisites for {count} additional courses.",
+    "passHeadline": "Passing {course} satisfies prerequisites for {count} additional courses.",
     "postponeHeadline": "Postponing {course} leaves {count} additional course options blocked compared with passing it.",
-    "noPassChange": "Passing {course} would not change other courses’ prerequisite readiness.",
+    "noPassChange": "Passing this course alone doesn’t make another course ready. It may still contribute toward requirements or your degree.",
     "noPostponeChange": "Postponing {course} makes no difference to other courses’ prerequisite readiness compared with passing it.",
     "multiHeadline": "Passing all selected courses would satisfy the prerequisites for {count} additional courses.",
     "multiNoChange": "These assumed passes do not make any additional course ready.",
@@ -81,7 +81,7 @@
     "passReason": "Its published requirements would be satisfied by passing {codes}.",
     "postponeReason": "Without this pass, it still needs",
     "indirectReason": "Related through a prerequisite chain; it does not become ready just from these choices.",
-    "other": "Other courses this may help with",
+    "other": "Other courses this helps with",
     "relatedDirect": "Even with these passes, it still needs",
     "alternatives": "A published alternative you already completed keeps {codes} ready.",
     "why": "Why?",
@@ -99,7 +99,7 @@
     "postponed": "Removed {code} from {plan}.",
     "removedLoss": "Compared with the previous choice, {count} course options no longer have their requirements satisfied.",
     "removedNoLoss": "No other course loses prerequisite readiness after removing it.",
-    "pathsButton": "Show prerequisite paths",
+    "pathsButton": "View prerequisite map",
     "pathsCourse": "Course to inspect",
     "filter": "Detailed course view",
     "relatedFilter": "Related courses",
@@ -109,17 +109,34 @@
     "how": "How this works",
     "howBody": "Only courses you marked completed or explicitly assume passed count as completed. A newly ready course is not automatically passed. AND means every condition; OR means one published alternative is enough.",
     "multipleLimit": "Several assumed passes do not prove that those courses can be taken together or within one semester.",
-    "scope": "Checks prerequisite requirements only. Course availability, timetable, quotas, and advisor approval are separate.",
+    "scope": "Checks prerequisites only; course offerings, quotas, timetable, and advisor approval are separate.",
     "reset": "Reset hypothetical choices",
     "resetHint": "Actual completions and registration checklist progress stay unchanged.",
     "saved": "Hypothetical choices are saved separately on this browser.",
     "announcement": "{count} additional courses have their prerequisite requirements satisfied.",
     "unknownEffects": "Only verified changes are counted; some requirements are unavailable.",
-    "curriculum": "Curriculum"
+    "curriculum": "Curriculum",
+    "usingOne": "Using your 1 completed course",
+    "legacyOne": "1 prior-curriculum course is included separately.",
+    "passHeadlineOne": "Passing {course} satisfies prerequisites for 1 additional course.",
+    "postponeHeadlineOne": "Postponing {course} leaves 1 additional course option blocked compared with passing it.",
+    "multiHeadlineOne": "Passing all selected courses would satisfy the prerequisites for 1 additional course.",
+    "longer": "Longer-term connections",
+    "longerHint": "These are published prerequisite chains. Intermediate courses must also be passed; these connections are not additional unlocked courses.",
+    "contribution": "This pass satisfies the {code} condition. Still needs",
+    "completedConnections": "Published course connections",
+    "advanced": "Compare multiple courses — advanced",
+    "savedComparison": "Saved comparison available",
+    "advancedIntro": "These separate hypothetical choices never change your completed courses. Pass/postpone modes and sequencing apply within each plan.",
+    "simpleColor": "With this course passed",
+    "simpleSaved": "Your explorer choice is saved separately from advanced comparisons.",
+    "clearShort": "Clear",
+    "noChangeAnnouncement": "No additional courses become ready.",
+    "completedAnnouncement": "This course is already completed."
   },
   "tr": {
-    "nav": "Ya şöyle olursa?",
-    "explore": "Olasılıkları incele",
+    "nav": "Ders Keşfi",
+    "explore": "Bu dersi keşfet",
     "actual": "Gerçekte tamamlandı",
     "ready": "Koşullar sağlandı",
     "blocked": "Eksik koşullar",
@@ -161,9 +178,9 @@
     "loading": "Seçili müfredat yükleniyor…",
     "unavailable": "Doğrulanmış müfredat kullanılamıyor. Ders uygunluğunda seçiminizi kontrol edin veya sonra deneyin.",
     "resetDone": "Varsayımsal senaryolar sıfırlandı. Gerçek tamamlamalar değişmedi.",
-    "updated": "Karşılaştırma yeniden hesaplandı.",
-    "question": "Bir dersi geçersem ya da ertelersem ne değişir?",
-    "intro": "Bir ders seç. Sonrasında hangi derslerin koşullarını sağlayabileceğini gör.",
+    "updated": "Sonuçlar güncellendi.",
+    "question": "Bu dersi geçersem hangi derslerin önü açılır?",
+    "intro": "Bir ders seç; geçtiğinde hangi derslerin yayımlanmış ön koşullarını sağlayacağını gör.",
     "using": "Tamamladığın {count} ders esas alınıyor",
     "edit": "Düzenle",
     "legacy": "Önceki müfredattan {count} ders seçimi ayrıca hesaba katılıyor.",
@@ -179,15 +196,15 @@
     "example": "Bir örnek dene",
     "noExample": "Deneyebileceğin, kuralı doğrulanmış ve henüz tamamlanmamış bir ders yok.",
     "noMatches": "Eşleşen ders bulunamadı.",
-    "protected": "{code} zaten tamamlanmış. Burada yeniden geçilmiş varsayılamaz veya ertelenemez; gerçek tamamlamaların değişmez.",
+    "protected": "{code} zaten tamamlanmış. Yeniden geçildiği varsayılmıyor; yayımlanmış ders bağlantılarını inceleyebilirsin.",
     "conditional": "Önce bu dersin ön koşullarını sağlaman gerekir. Bu sonuçlar, dersi ileride geçtiğini varsayıyor.",
     "unknownSelected": "Bu dersin koşulları doğrulanamıyor. Varsayımı inceleyebilirsin ancak dersi geçebileceğin doğrulanmış değil.",
     "sequence": "Önce {codes} derslerini geçmelisin. Bu seçimler sırayla tamamlanmalı; aynı dönemde alınabilecekleri anlamına gelmez.",
     "order": "Bu seçimler için geçerli bir tamamlama sırası doğrulanamadı. Eksik koşulları ve ön koşul yollarını incele.",
     "stillNeeds": "Hâlâ gerekenler",
-    "passHeadline": "{course} dersini geçersen {count} ek dersin ön koşulları sağlanır.",
+    "passHeadline": "{course} dersini geçmek, {count} ek dersin ön koşullarını sağlar.",
     "postponeHeadline": "{course} dersini ertelersen, geçmene kıyasla {count} ek dersin ön koşulları eksik kalır.",
-    "noPassChange": "{course} dersini geçmek, diğer derslerin ön koşul durumunu değiştirmiyor.",
+    "noPassChange": "Yalnızca bu dersi geçmek başka bir dersi uygun hâle getirmiyor. Yine de diğer koşulları tamamlamana veya mezuniyetine katkı sağlayabilir.",
     "noPostponeChange": "{course} dersini ertelemek, geçmene kıyasla diğer derslerin ön koşul durumunda fark yaratmıyor.",
     "multiHeadline": "Seçtiğin derslerin hepsini geçersen {count} ek dersin ön koşulları sağlanır.",
     "multiNoChange": "Bu geçme varsayımları başka bir dersin ön koşullarını tamamlamıyor.",
@@ -196,7 +213,7 @@
     "passReason": "{codes} derslerini geçmen, yayımlanan koşulları sağlar.",
     "postponeReason": "Bu dersi geçmeden hâlâ gerekenler",
     "indirectReason": "Bir ön koşul zinciriyle ilişkili; yalnızca bu seçimlerle koşulları sağlanmıyor.",
-    "other": "Bu dersin katkı sağlayabileceği diğer dersler",
+    "other": "Bu dersin katkı sağladığı diğer dersler",
     "relatedDirect": "Bu dersleri geçsen bile hâlâ gerekenler",
     "alternatives": "Zaten tamamladığın, yayımlanmış bir alternatif sayesinde {codes} derslerinin koşulları sağlanmaya devam ediyor.",
     "why": "Neden?",
@@ -214,7 +231,7 @@
     "postponed": "{code}, {plan} seçiminden çıkarıldı.",
     "removedLoss": "Önceki seçime kıyasla {count} dersin koşulları artık sağlanmıyor.",
     "removedNoLoss": "Bu varsayımın kaldırılması başka bir dersin ön koşul uygunluğunu etkilemiyor.",
-    "pathsButton": "Ön koşul yollarını göster",
+    "pathsButton": "Ön koşul haritasını görüntüle",
     "pathsCourse": "İncelenecek ders",
     "filter": "Ayrıntılı ders görünümü",
     "relatedFilter": "İlişkili dersler",
@@ -224,38 +241,56 @@
     "how": "Nasıl çalışır?",
     "howBody": "Yalnızca tamamlandı olarak işaretlediğin veya geçtiğini açıkça varsaydığın dersler tamamlanmış sayılır. Koşulları yeni sağlanan bir ders otomatik olarak geçilmiş sayılmaz. VE, tüm koşulları; VEYA, yayımlanan seçeneklerden birini ifade eder.",
     "multipleLimit": "Birden fazla dersi geçtiğini varsaymak, bu dersleri birlikte veya tek dönemde alabileceğini kanıtlamaz.",
-    "scope": "Yalnızca ön koşulları kontrol eder. Dersin açılması, program uyumu, kontenjan ve danışman onayı ayrıca değerlendirilir.",
+    "scope": "Yalnızca ön koşullar kontrol edilir; dersin açılması, kontenjan, ders programı ve danışman onayı ayrıdır.",
     "reset": "Varsayımsal seçimleri sıfırla",
     "resetHint": "Gerçek tamamlamaların ve ders kayıt kontrol listesi ilerlemen değişmez.",
     "saved": "Varsayımsal seçimler bu tarayıcıda ayrı saklanır.",
     "announcement": "{count} ek dersin ön koşulları sağlanıyor.",
     "unknownEffects": "Yalnızca doğrulanmış değişimler sayılıyor; bazı koşullar kullanılamıyor.",
-    "curriculum": "Müfredat"
+    "curriculum": "Müfredat",
+    "usingOne": "Tamamladığın 1 ders esas alınıyor",
+    "legacyOne": "Önceki müfredattan 1 ders seçimi ayrıca hesaba katılıyor.",
+    "passHeadlineOne": "{course} dersini geçmek, 1 ek dersin ön koşullarını sağlar.",
+    "postponeHeadlineOne": "{course} dersini ertelersen, geçmene kıyasla 1 ek dersin ön koşulları eksik kalır.",
+    "multiHeadlineOne": "Seçtiğin derslerin hepsini geçersen 1 ek dersin ön koşulları sağlanır.",
+    "longer": "Sonraki derslerle bağlantılar",
+    "longerHint": "Bunlar yayımlanmış ön koşul zincirleridir. Aradaki dersleri de geçmen gerekir; bu bağlantılar, ön koşulları yeni sağlanan ders sayısına dahil değildir.",
+    "contribution": "Bu dersi geçmek {code} koşulunu sağlar. Hâlâ gerekenler",
+    "completedConnections": "Yayımlanmış ders bağlantıları",
+    "advanced": "Birden fazla dersi karşılaştır — gelişmiş",
+    "savedComparison": "Kayıtlı karşılaştırma var",
+    "advancedIntro": "Bu ayrı varsayımsal seçimler, tamamladığın dersleri değiştirmez. Geçme/erteleme seçenekleri ve ders sıralaması her plan içinde değerlendirilir.",
+    "simpleColor": "Bu ders geçildiğinde",
+    "simpleSaved": "Ders keşfi seçimin, gelişmiş karşılaştırmalardan ayrı kaydedilir.",
+    "clearShort": "Temizle",
+    "noChangeAnnouncement": "Ön koşulları yeni sağlanan ek ders yok.",
+    "completedAnnouncement": "Bu ders zaten tamamlanmış."
   }
 };
-  const FORMS={"en": {"usingOne": "Using your 1 completed course", "legacyOne": "1 prior-curriculum course is included separately.", "passHeadlineOne": "Passing {course} would satisfy the prerequisites for 1 additional course.", "postponeHeadlineOne": "Postponing {course} leaves 1 additional course option blocked compared with passing it.", "multiHeadlineOne": "Passing all selected courses would satisfy the prerequisites for 1 additional course."}, "tr": {"usingOne": "Tamamladığın 1 ders esas alınıyor", "legacyOne": "Önceki müfredattan 1 ders seçimi ayrıca hesaba katılıyor.", "passHeadlineOne": "{course} dersini geçersen 1 ek dersin ön koşulları sağlanır.", "postponeHeadlineOne": "{course} dersini ertelersen, geçmene kıyasla 1 ek dersin ön koşulları eksik kalır.", "multiHeadlineOne": "Seçtiğin derslerin hepsini geçersen 1 ek dersin ön koşulları sağlanır."}};
-  for(const language of ['en','tr'])Object.assign(TEXT[language],FORMS[language]);
   function create(opts){
     const P=root.Planning,W=root.WhatIf,esc=opts.escape,url=opts.url;
-    let state=null,loadedDataset='',storageFailed=false,choices={a:'',b:''},queries={a:'',b:''},popup={a:false,b:false},active={a:-1,b:-1};
-    let pathsOpen=false,filter='related',graphPlan='a',direction='requirements',lastPostpone=null,message=null,lastBaselineKey='',restoringFocus=false;
+    let explorerState=null,advancedOpen=false;
+    let state=null,loadedDataset='',storageFailed=false,choices={a:'',b:'',x:''},queries={a:'',b:'',x:''},popup={a:false,b:false,x:false},active={a:-1,b:-1,x:-1};
+    let pathsOpen=false,graphPlan='a',direction='requirements',lastPostpone=null,message=null,lastBaselineKey='',restoringFocus=false;
     const lang=()=>opts.getLang();
     const t=(key,args={})=>String(TEXT[lang()][key]??key).replace(/\{(\w+)\}/g,(_,k)=>String(args[k]??''));
     const normalize=s=>String(s).toLocaleLowerCase('tr').normalize('NFD').replace(/\p{M}/gu,'').replace(/ı/g,'i');
     const planName=k=>t(k==='a'?'planA':'planB');
-    const multi=k=>Boolean(state?.presentation[k==='a'?'multiA':'multiB']);
+    const multi=k=>k!=='x'&&Boolean(state?.presentation[k==='a'?'multiA':'multiB']);
     function sync(){
       const d=opts.getDataset();if(!d)return null;
       if(loadedDataset!==d.id){
         try{const loaded=W.read(localStorage,d);state=loaded.state;storageFailed=loaded.unavailable;}catch{state=W.clean(null,d);storageFailed=true;}
-        loadedDataset=d.id;choices={a:state.a[0]||state.target||'',b:state.b[0]||''};queries={a:'',b:''};popup={a:false,b:false};active={a:-1,b:-1};pathsOpen=false;lastPostpone=null;
+        try{const simple=W.readExplorer(localStorage,d);explorerState=simple.state;storageFailed=storageFailed||simple.unavailable;}catch{explorerState=W.cleanExplorer(null,d);storageFailed=true;}
+        loadedDataset=d.id;choices={a:state.a[0]||state.target||'',b:state.b[0]||'',x:explorerState.course};queries={a:'',b:'',x:''};popup={a:false,b:false,x:false};active={a:-1,b:-1,x:-1};pathsOpen=false;lastPostpone=null;
       }
       return d;
     }
     function save(){const d=sync();if(d)try{storageFailed=!W.save(localStorage,state,d);}catch{storageFailed=true;}}
     function reset(doRefresh=true){
       const d=sync();try{storageFailed=!W.reset(localStorage);}catch{storageFailed=true;}
-      state=W.clean(null,d);choices={a:'',b:''};queries={a:'',b:''};popup={a:false,b:false};pathsOpen=false;lastPostpone=null;message={key:'resetDone'};
+      state=W.clean(null,d);choices.a='';choices.b='';queries.a='';queries.b='';popup.a=false;popup.b=false;lastPostpone=null;message={key:'resetDone'};
+      if(!doRefresh){try{localStorage.removeItem(W.explorerKey);}catch{storageFailed=true;}explorerState=W.cleanExplorer(null,d);choices.x='';queries.x='';popup.x=false;pathsOpen=false;}
       if(doRefresh)refresh('wf-reset');
     }
     function selected(key){return multi(key)?state[key]:choices[key]?[choices[key]]:[];}
@@ -266,7 +301,12 @@
       choices[key]=code;state[key]=multi(key)?[...new Set([...state[key],code])]:opts.getBaseline().includes(code)?[]:[code];state.target=code;
       popup[key]=false;queries[key]='';active[key]=-1;lastPostpone=null;save();message={key:'updated'};
     }
-    function focus(code){const d=sync();if(!d?.courses.some(c=>c.code===code))return;setChoice(d,'a',code);state.presentation.a='pass';pathsOpen=false;save();opts.open();}
+    function focus(code){const d=sync();if(!d?.courses.some(c=>c.code===code))return;setExplorer(d,code);opts.open();}
+    function setExplorer(d,code){
+      choices.x=code;explorerState=W.cleanExplorer({version:1,dataset:d.id,course:code},d);
+      storageFailed=!W.saveExplorer(localStorage,explorerState,d)||storageFailed;queries.x='';popup.x=false;active.x=-1;pathsOpen=false;
+      const v=W.explorer(d,opts.getBaseline(),code);message={key:v.protectedSelection?'completedAnnouncement':v.count?'announcement':'noChangeAnnouncement',args:{count:v.count}};
+    }
     function status(plan,code){return plan.baseline.has(code)?'completed':plan.assumed.includes(code)?'assumed':plan.results[code]?.status||'unknown';}
     const badge=s=>`<span class="wf-badge wf-${s}">${esc(t({completed:'actual',assumed:'assumed',met:'ready',missing:'blocked',unknown:'unknown'}[s]||'unknown'))}</span>`;
     function conditions(tree,missingOnly=false){
@@ -294,9 +334,10 @@
       const actual=new Set(opts.getBaseline()),rows=matches(d,key);let enabled=-1;
       return rows.map((c,index)=>{const done=actual.has(c.code);if(!done)enabled++;return `<li role="presentation"><button id="wf-option-${key}-${index}" role="option" tabindex="-1" aria-selected="${!done&&enabled===active[key]}" type="button" data-wf-choose="${esc(c.code)}" data-wf-plan="${key}" ${done?'disabled aria-disabled="true"':''}><strong>${esc(c.code)}</strong><span>${esc(c.title?.[lang()]||'')}</span>${done?`<small>${esc(t('actual'))}</small>`:''}</button></li>`;}).join('')||`<li role="presentation" class="wfs-no-match">${esc(t('noMatches'))}</li>`;
     }
-    function picker(d,key){return `<div class="wfs-picker"><label for="wf-search-${key}">${esc(t(multi(key)?'addMore':'choose'))}${key==='b'?` · ${esc(planName(key))}`:''}</label><input id="wf-search-${key}" type="search" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-controls="wf-options-${key}" aria-expanded="${popup[key]}" autocomplete="off" data-wf-search="${key}" placeholder="${esc(t('search'))}" value="${esc(queries[key])}"><ul class="wfs-picker-options" id="wf-options-${key}" role="listbox" aria-label="${esc(t('choose'))}" ${popup[key]?'':'hidden'}>${pickerOptions(d,key)}</ul></div>`;}
+    function picker(d,key){return `<div class="wfs-picker"><label for="wf-search-${key}">${esc(t(multi(key)?'addMore':'choose'))}${key==='b'?` · ${esc(planName(key))}`:''}</label><input id="wf-search-${key}" type="search" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-controls="wf-options-${key}" aria-expanded="${popup[key]}" autocomplete="off" data-wf-search="${key}" placeholder="${esc(t('search'))}" value="${esc(key==='x'&&!popup.x&&choices.x?courseLabel(d,choices.x):queries[key])}"><ul class="wfs-picker-options" id="wf-options-${key}" role="listbox" aria-label="${esc(t('choose'))}" ${popup[key]?'':'hidden'}>${pickerOptions(d,key)}</ul></div>`;}
     function updatePicker(key){
       const d=sync();if(!d)return;const input=document.getElementById(`wf-search-${key}`),list=document.getElementById(`wf-options-${key}`);
+      if(input&&key==='x'&&!popup.x)input.value=choices.x?courseLabel(d,choices.x):'';
       if(list){list.innerHTML=pickerOptions(d,key);list.hidden=!popup[key];}input?.setAttribute('aria-expanded',String(popup[key]));
       const enabled=matches(d,key).filter(c=>!opts.getBaseline().includes(c.code)),code=enabled[active[key]]?.code,index=matches(d,key).findIndex(c=>c.code===code);
       if(index>=0&&popup[key]){const id=`wf-option-${key}-${index}`;input?.setAttribute('aria-activedescendant',id);document.getElementById(id)?.scrollIntoView?.({block:'nearest'});}else input?.removeAttribute('aria-activedescendant');
@@ -333,32 +374,42 @@
       const v=view(d,key),codes=selected(key),actual=v.protectedSelection&&!multi(key);
       return `<section class="wfs-choice" id="wf-choice-${key}" aria-label="${esc(state.presentation.compare?planName(key):t('choose'))}">${state.presentation.compare?`<h2 class="wfs-plan-title">${esc(planName(key))}</h2>`:''}${picker(d,key)}${multi(key)?`<p class="wfs-multi-hint">${esc(t('multiHint'))}</p>`:`<div class="wfs-modes" role="group" aria-label="${esc(t('question'))}">${[['pass','passIt'],['postpone','postponeIt']].map(([mode,label])=>`<button type="button" id="wf-mode-${key}-${mode}" data-wf-mode="${mode}" data-wf-plan="${key}" aria-pressed="${state.presentation[key]===mode}" ${actual?'disabled':''}>${esc(t(label))}</button>`).join('')}</div>`}<div class="wfs-selected-list">${codes.map(code=>selectedCourse(d,key,code,v)).join('')}</div>${results(d,key,v)}${!codes.length?`<div class="wfs-empty"><p>${esc(t('empty'))}</p>${W.chooseExample(d,opts.getBaseline())?`<button type="button" class="wfs-example" id="wf-example-${key}" data-wf-example="${key}">${esc(t('example'))} →</button>`:`<p>${esc(t('noExample'))}</p>`}</div>`:''}${codes.length||multi(key)?`<button type="button" class="wfs-text-button wfs-add" id="wf-add-${key}" data-wf-add="${key}">+ ${esc(t(multi(key)?'addMore':'addAnother'))}</button>`:''}</section>`;
     }
-    function graphView(d,comparison){
-      const g=comparison.graph,code=state.target;if(!code)return '';
-      const plan=graphPlan==='baseline'?W.scenario(d,opts.getBaseline(),[],g):comparison[graphPlan],view=W.subgraph(g,code,direction,12),full=W.subgraph(g,code,direction,g.codes.size);
+    function graphView(d,comparison,code){
+      const g=comparison.graph;if(!code)return '';
+      const plan=graphPlan==='baseline'?W.scenario(d,opts.getBaseline(),[],g):comparison.a,view=W.subgraph(g,code,direction,12),full=W.subgraph(g,code,direction,g.codes.size);
       const distance=new Map([[code,0]]),queue=[code];for(let i=0;i<queue.length;i++)for(const e of view.edges){const match=direction==='dependents'?e.from===queue[i]:e.to===queue[i],other=direction==='dependents'?e.to:e.from;if(match&&!distance.has(other)){distance.set(other,distance.get(queue[i])+1);queue.push(other);}}
       const depth=Math.max(0,...distance.values()),columns=new Map(),positions=new Map();
       for(const node of view.nodes){const level=direction==='dependents'?(distance.get(node)||0):depth-(distance.get(node)||0);if(!columns.has(level))columns.set(level,[]);columns.get(level).push(node);}
       const rows=Math.max(1,...[...columns.values()].map(v=>v.length)),width=(depth+1)*220+20,height=rows*88+24;
       for(const [col,nodes] of columns)nodes.forEach((node,i)=>positions.set(node,{x:20+col*220,y:12+i*88+(rows-nodes.length)*44}));
-      const svg=`<svg class="wf-graph" viewBox="0 0 ${width} ${height}" style="min-width:${Math.min(width,1100)}px" role="img" aria-labelledby="wf-graph-title wf-graph-desc"><title id="wf-graph-title">${esc(t('paths')+' — '+code)}</title><desc id="wf-graph-desc">${esc(t('graphLegend'))}</desc><defs><marker id="wf-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z"/></marker></defs>${view.edges.map(e=>{const a=positions.get(e.from),b=positions.get(e.to);return `<path class="wf-edge ${e.kind==='co'?'is-corequisite':''}" d="M ${a.x+166} ${a.y+30} C ${a.x+195} ${a.y+30}, ${b.x-30} ${b.y+30}, ${b.x} ${b.y+30}" marker-end="url(#wf-arrow)"/>`;}).join('')}${view.nodes.map(node=>{const p=positions.get(node),s=status(plan,node);return `<g class="wf-node wf-${s}" transform="translate(${p.x},${p.y})"><rect width="166" height="60" rx="12"/><text x="12" y="24">${esc(node)}</text><text class="wf-node-status" x="12" y="43">${esc(t({completed:'actual',assumed:'assumed',met:'ready',missing:'blocked',unknown:'unknownGraph'}[s]))}</text></g>`;}).join('')}</svg>`;
-      const relations=W.relationships(g,code),effects=key=>d.courses.filter(c=>comparison[key].results[c.code].status!==comparison[key].baselineResults[c.code].status&&!comparison[key].assumed.includes(c.code)).map(c=>c.code);
-      return `<section class="planning-panel wf-explorer"><h2>${esc(t('paths'))} · ${esc(code)}</h2><div class="wf-graph-controls"><label>${esc(t('graphPlan'))}<select id="wf-graph-plan">${[['baseline','baseline'],['a','planA'],['b','planB']].filter(([v])=>v!=='b'||state.presentation.compare).map(([v,k])=>`<option value="${v}" ${graphPlan===v?'selected':''}>${esc(t(k))}</option>`).join('')}</select></label><label>${esc(t('graphDirection'))}<select id="wf-direction">${[['requirements','requirementsView'],['dependents','dependentsView']].map(([v,k])=>`<option value="${v}" ${direction===v?'selected':''}>${esc(t(k))}</option>`).join('')}</select></label></div><p class="wf-muted">${esc(t('graphLegend'))}</p><div class="wf-legend">${['completed','assumed','met','missing','unknown'].map(badge).join('')}</div><div class="wf-graph-scroll" tabindex="0" aria-label="${esc(t('paths'))}">${svg}</div>${view.truncated?`<p>${esc(t('graphTrim',{shown:view.nodes.length,total:view.total}))}</p>`:''}<details data-wf-details="graph-${esc(code)}-${direction}" class="wf-graph-text" open><summary>${esc(t('graphText'))}</summary><ul>${full.nodes.map(node=>{const c=g.byCode.get(node),source=c?.source||d.priorCourses?.find(c=>c.code===node)?.source;return `<li><strong>${esc(courseLabel(d,node))}</strong> ${badge(status(plan,node))}${c?expression(c,plan.completed,g):`<p>${esc(t('prior'))}</p>`}${source?`<a href="${url(source)}" target="_blank" rel="noopener noreferrer">${esc(t('currentSource'))} ↗</a>`:''}</li>`;}).join('')}</ul></details><p class="wf-muted">${esc(t('relationHint'))}</p><div class="wf-relations"><details><summary>${esc(t('direct'))} · ${relations.direct.length}</summary>${courseLinks(d,relations.direct)}</details><details><summary>${esc(t('indirect'))} · ${relations.indirect.length}</summary>${courseLinks(d,relations.indirect)}</details><details><summary>${esc(t('effect'))} — ${esc(planName('a'))}</summary>${courseLinks(d,effects('a'))}</details>${state.presentation.compare?`<details><summary>${esc(t('effect'))} — ${esc(planName('b'))}</summary>${courseLinks(d,effects('b'))}</details>`:''}</div></section>`;
+      const svg=`<svg class="wf-graph" viewBox="0 0 ${width} ${height}" style="min-width:${width}px" role="img" aria-labelledby="wf-graph-title wf-graph-desc"><title id="wf-graph-title">${esc(t('paths')+' — '+code)}</title><desc id="wf-graph-desc">${esc(t('graphLegend'))}</desc><defs><marker id="wf-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z"/></marker></defs>${view.edges.map(e=>{const a=positions.get(e.from),b=positions.get(e.to);return `<path class="wf-edge ${e.kind==='co'?'is-corequisite':''}" d="M ${a.x+166} ${a.y+30} C ${a.x+195} ${a.y+30}, ${b.x-30} ${b.y+30}, ${b.x} ${b.y+30}" marker-end="url(#wf-arrow)"/>`;}).join('')}${view.nodes.map(node=>{const p=positions.get(node),s=status(plan,node);return `<g class="wf-node wf-${s}" transform="translate(${p.x},${p.y})"><rect width="166" height="60" rx="12"/><text x="12" y="24">${esc(node)}</text><text class="wf-node-status" x="12" y="43">${esc(t({completed:'actual',assumed:'assumed',met:'ready',missing:'blocked',unknown:'unknownGraph'}[s]))}</text></g>`;}).join('')}</svg>`;
+
+      return `<section class="planning-panel wf-explorer"><h2>${esc(t('paths'))} · ${esc(code)}</h2><div class="wf-graph-controls"><label>${esc(t('graphPlan'))}<select id="wf-graph-plan">${[['baseline','baseline'],['a','simpleColor']].map(([v,k])=>`<option value="${v}" ${graphPlan===v?'selected':''}>${esc(t(k))}</option>`).join('')}</select></label><label>${esc(t('graphDirection'))}<select id="wf-direction">${[['requirements','requirementsView'],['dependents','dependentsView']].map(([v,k])=>`<option value="${v}" ${direction===v?'selected':''}>${esc(t(k))}</option>`).join('')}</select></label></div><p class="wf-muted">${esc(t('graphLegend'))}</p><div class="wf-legend">${['completed','assumed','met','missing','unknown'].map(badge).join('')}</div><div class="wf-graph-scroll" tabindex="0" aria-label="${esc(t('paths'))}">${svg}</div>${view.truncated?`<p>${esc(t('graphTrim',{shown:view.nodes.length,total:view.total}))}</p>`:''}<details data-wf-details="graph-${esc(code)}-${direction}" class="wf-graph-text" open><summary>${esc(t('graphText'))}</summary><ul>${full.nodes.map(node=>{const c=g.byCode.get(node),source=c?.source||d.priorCourses?.find(c=>c.code===node)?.source;return `<li><strong>${esc(courseLabel(d,node))}</strong> ${badge(status(plan,node))}${c?expression(c,plan.completed,g):`<p>${esc(t('prior'))}</p>`}${source?`<a href="${url(source)}" target="_blank" rel="noopener noreferrer">${esc(t('currentSource'))} ↗</a>`:''}</li>`;}).join('')}</ul></details></section>`;
     }
-    function inspection(d,comparison){
-      const key=graphPlan==='b'&&state.presentation.compare?'b':'a',v=view(d,key),g=comparison.graph;
-      const related=new Set(state.target?[...W.subgraph(g,state.target,'requirements',g.codes.size).nodes,...W.subgraph(g,state.target,'dependents',g.codes.size).nodes]:[]);
-      const rows=d.courses.filter(c=>filter==='all'||filter==='related'&&related.has(c.code)||filter==='blocked'&&v.active.results[c.code].status==='missing'||filter==='unknown'&&v.active.results[c.code].status==='unknown');
-      return `<details data-wf-details="inspection" class="wfs-inspection"><summary>${esc(t('filter'))}</summary><label for="wf-result-filter">${esc(t('filter'))}</label><select id="wf-result-filter">${[['related','relatedFilter'],['all','allFilter'],['blocked','blockedFilter'],['unknown','unknownFilter']].map(([value,label])=>`<option value="${value}" ${filter===value?'selected':''}>${esc(t(label))}</option>`).join('')}</select>${rows.map(c=>card(d,c.code,v,key,{detailed:true})).join('')}</details>`;
+    function explorerCard(d,code,v,{blocked=false,connection=false}={}){
+      const c=v.graph.byCode.get(code);if(!c)return '';
+      const why=blocked?`${esc(t('contribution',{code:choices.x}))}: ${missing(c,v.withPass.completed,v.graph)}`:connection?'':esc(t('passReason',{codes:choices.x}));
+      return `<article class="wfs-result-card" data-result-course="${esc(code)}"><strong class="course-code">${esc(code)}${c.ects!=null?` · ${esc(c.ects)} ${esc(t('credits'))}`:''}</strong><h3>${esc(c.title?.[lang()]||code)}</h3>${why?`<p class="wfs-result-reason">${why}</p>`:''}<details data-wf-details="explorer-${esc(code)}"><summary>${esc(t('why'))}</summary>${expression(c,v.withPass.completed,v.graph)}<a href="${url(c.source)}" target="_blank" rel="noopener noreferrer">${esc(t('official'))} ↗</a></details></article>`;
+    }
+    function explorerResults(d,v){
+      if(!choices.x)return '';
+      const headline=v.protectedSelection?t('protected',{code:choices.x}):v.count?t(v.count===1?'passHeadlineOne':'passHeadline',{course:courseLabel(d,choices.x),count:v.count}):t('noPassChange');
+      return `<section class="wfs-results" aria-labelledby="wf-explorer-headline"><h2 id="wf-explorer-headline" data-unlocked-count="${v.count}">${esc(headline)}</h2>${!v.protectedSelection&&v.alternatives.length&&!v.count?`<p class="wfs-result-context">${esc(t('alternatives',{codes:v.alternatives.join(', ')}))}</p>`:''}<div class="wfs-result-list">${v.changed.map(code=>explorerCard(d,code,v)).join('')}</div>${!v.protectedSelection&&v.directBlocked.length?`<details class="wfs-other" data-wf-details="direct"><summary>${esc(t('other'))}</summary>${v.directBlocked.map(code=>explorerCard(d,code,v,{blocked:true})).join('')}</details>`:''}${v.protectedSelection&&v.connections.length?`<details class="wfs-other" data-wf-details="completed-connections"><summary>${esc(t('completedConnections'))}</summary>${v.connections.map(code=>explorerCard(d,code,v,{connection:true})).join('')}</details>`:''}${v.longer.length?`<details class="wfs-other" data-wf-details="longer"><summary>${esc(t('longer'))}</summary><p class="wf-muted">${esc(t('longerHint'))}</p>${v.longer.map(code=>explorerCard(d,code,v,{connection:true})).join('')}</details>`:''}</section>`;
+    }
+    function advanced(d){
+      // No A/B evaluation or full interface until the disclosure is requested.
+      if(!advancedOpen)return '';
+      const A=view(d,'a'),B=view(d,'b'),comparison=W.compare(d,opts.getBaseline(),A.active.assumed,B.active.assumed);
+      const difference=state.presentation.compare&&selected('b').length?`<section class="wfs-difference"><h2>${esc(t('compareTitle'))}</h2>${comparison.onlyA.length||comparison.onlyB.length?`<details data-wf-details="only-a"><summary>${esc(t('onlyA'))}</summary>${courseLinks(d,comparison.onlyA)}</details><details data-wf-details="only-b"><summary>${esc(t('onlyB'))}</summary>${courseLinks(d,comparison.onlyB)}</details>`:`<p>${esc(t('samePlans'))}</p>`}</section>`:'';
+      return `<p class="wf-muted">${esc(t('advancedIntro'))}</p>${plan(d,'a')}${state.presentation.compare?plan(d,'b'):`<button type="button" id="wf-compare" class="wfs-text-button" data-wf-compare>+ ${esc(t('compareAnother'))}</button>`}${difference}<button id="wf-reset" type="button" class="planning-reset" data-wf-reset>${esc(t('reset'))}</button>`;
     }
     function render(){
       const d=sync();
-      if(!d)return `<div class="planning-page wf-page wf-simple">${opts.header(t('question'),t('intro'))}<p>${esc(t(opts.isLoaded()?'unavailable':'loading'))}</p><a href="#/uygunluk">${esc(t('edit'))}</a><button type="button" id="wf-reset" class="planning-reset" data-wf-reset>${esc(t('reset'))}</button>${storageFailed?`<p role="status">${esc(t('storage'))}</p>`:''}</div>`;
+      if(!d)return `<div class="planning-page wf-page wf-simple">${opts.header(t('question'),t('intro'))}<p>${esc(t(opts.isLoaded()?'unavailable':'loading'))}</p><a href="#/uygunluk">${esc(t('edit'))}</a>${storageFailed?`<p role="status">${esc(t('storage'))}</p>`:''}</div>`;
       const actual=opts.getBaseline(),fingerprint=JSON.stringify([...actual].sort());if(lastBaselineKey&&lastBaselineKey!==fingerprint){lastPostpone=null;message={key:'updated'};}lastBaselineKey=fingerprint;
-      const A=view(d,'a'),B=view(d,'b'),comparison=W.compare(d,actual,A.active.assumed,B.active.assumed),current=actual.filter(code=>d.courses.some(c=>c.code===code)).length,legacy=actual.filter(code=>(d.priorCourses||[]).some(c=>c.code===code)).length;
-      const compare=state.presentation.compare;
-      const difference=compare&&selected('b').length?`<section class="wfs-difference"><h2>${esc(t('compareTitle'))}</h2>${comparison.onlyA.length||comparison.onlyB.length?`<details data-wf-details="only-a"><summary>${esc(t('onlyA'))}</summary>${courseLinks(d,comparison.onlyA)}</details><details data-wf-details="only-b"><summary>${esc(t('onlyB'))}</summary>${courseLinks(d,comparison.onlyB)}</details>`:`<p>${esc(t('samePlans'))}</p>`}</section>`:'';
-      return `<div class="planning-page wf-page wf-simple">${opts.header(t('question'),t('intro'))}<p class="wfs-curriculum">${esc(d.program[lang()])} · ${esc(d.version)}</p><p class="wfs-completed">${esc(t(current===1?'usingOne':'using',{count:current}))} · <a href="#/uygunluk">${esc(t('edit'))}</a></p>${legacy?`<p class="wfs-legacy">${esc(t(legacy===1?'legacyOne':'legacy',{count:legacy}))}</p>`:''}${actual.length===0?`<p class="wfs-none-completed">${esc(t('noCompleted'))} <a href="#/uygunluk">${esc(t('setCompleted'))} →</a></p>`:''}${plan(d,'a')}${compare?plan(d,'b'):`<button type="button" id="wf-compare" class="wfs-text-button wfs-compare" data-wf-compare>+ ${esc(t('compareAnother'))}</button>`}${difference}${state.target?`<section class="wfs-paths"><button type="button" id="wf-path-toggle" class="wfs-disclosure" data-wf-paths aria-expanded="${pathsOpen}" aria-controls="wf-path-content">${esc(t('pathsButton'))} <span aria-hidden="true">${pathsOpen?'−':'+'}</span></button><div id="wf-path-content" ${pathsOpen?'':'hidden'}>${pathsOpen?`<label for="wf-target">${esc(t('pathsCourse'))}</label><select id="wf-target">${d.courses.map(c=>`<option value="${esc(c.code)}" ${state.target===c.code?'selected':''}>${esc(courseLabel(d,c.code))}</option>`).join('')}</select>${graphView(d,comparison)}${inspection(d,comparison)}`:''}</div></section>`:''}<p class="wfs-scope">${esc(t('scope'))}</p><details data-wf-details="how" class="wfs-how"><summary>${esc(t('how'))}</summary><p>${esc(t('howBody'))}</p><p>${esc(t('multipleLimit'))}</p><p>${esc(t('coreqLimit'))}</p><p>${esc(t('coverage'))}</p>${A.graph.cycles.length?`<p>${esc(t('cycles',{codes:A.graph.cycles.map(c=>c.join(' → ')).join('; ')}))}</p>`:''}${A.graph.unknown.length?`<p>${esc(t('unknownData',{codes:A.graph.unknown.join(', ')}))}</p>`:''}<p>${esc(t('saved'))} ${esc(t('resetHint'))}</p></details><footer class="wfs-footer"><button id="wf-reset" type="button" class="planning-reset" data-wf-reset>${esc(t('reset'))}</button>${storageFailed?`<p role="status" class="planning-storage-error">${esc(t('storage'))}</p>`:''}</footer><p id="wf-feedback" class="sr-only" role="status" aria-live="polite">${esc(message?t(message.key,message.args):'')}</p></div>`;
+      const v=W.explorer(d,actual,choices.x),current=actual.filter(code=>d.courses.some(c=>c.code===code)).length,legacy=actual.filter(code=>(d.priorCourses||[]).some(c=>c.code===code)).length;
+      const issue=v.withPass.issues.find(x=>x.code===choices.x),c=v.graph.byCode.get(choices.x),savedComparison=state.a.length||state.b.length;
+      return `<div class="planning-page wf-page wf-simple">${opts.header(t('question'),t('intro'))}<p class="wfs-completed">${esc(t(current===1?'usingOne':'using',{count:current}))} · <a href="#/uygunluk">${esc(t('edit'))}</a></p>${legacy?`<p class="wfs-legacy">${esc(t(legacy===1?'legacyOne':'legacy',{count:legacy}))}</p>`:''}<p class="wfs-curriculum">${esc(d.program[lang()])} · ${esc(d.version)}</p>${actual.length===0?`<p class="wfs-none-completed">${esc(t('noCompleted'))} <a href="#/uygunluk">${esc(t('setCompleted'))} →</a></p>`:''}<section class="wfs-choice" aria-label="${esc(t('choose'))}">${picker(d,'x')}${choices.x?`<button id="wf-clear-x" class="wfs-text-button wfs-clear" type="button" data-wf-clear="x">${esc(t('clearShort'))}</button>${issue?`<p class="wfs-course-warning">${esc(t(issue.kind==='unknown'?'unknownSelected':'conditional'))}</p>`:''}<details class="wfs-selected-why" data-wf-details="selected-x"><summary>${esc(t('why'))}</summary>${expression(c,v.withoutPass.completed,v.graph)}<a href="${url(c.source)}" target="_blank" rel="noopener noreferrer">${esc(t('official'))} ↗</a></details>`:`<div class="wfs-empty"><p>${esc(t('empty'))}</p>${W.chooseExample(d,actual)?`<button type="button" class="wfs-example" id="wf-example-x" data-wf-example="x">${esc(t('example'))} →</button>`:`<p>${esc(t('noExample'))}</p>`}</div>`}${explorerResults(d,v)}</section>${choices.x?`<section class="wfs-paths"><button type="button" id="wf-path-toggle" class="wfs-disclosure" data-wf-paths aria-expanded="${pathsOpen}" aria-controls="wf-path-content">${esc(t('pathsButton'))}<span aria-hidden="true">${pathsOpen?'−':'+'}</span></button><div id="wf-path-content" ${pathsOpen?'':'hidden'}>${pathsOpen?graphView(d,{graph:v.graph,a:v.withPass},choices.x):''}</div></section>`:''}<section class="wfs-advanced"><button type="button" id="wf-advanced-toggle" class="wfs-disclosure" data-wf-advanced aria-expanded="${advancedOpen}" aria-controls="wf-advanced-content">${esc(t('advanced'))}<span aria-hidden="true">${advancedOpen?'−':'+'}</span></button>${savedComparison&&!advancedOpen?`<p class="wfs-saved-comparison">${esc(t('savedComparison'))}</p>`:''}<div id="wf-advanced-content" ${advancedOpen?'':'hidden'}>${advanced(d)}</div></section><p class="wfs-scope">${esc(t('scope'))}</p><details data-wf-details="how" class="wfs-how"><summary>${esc(t('how'))}</summary><p>${esc(t('howBody'))}</p><p>${esc(t('multipleLimit'))}</p><p>${esc(t('coreqLimit'))}</p><p>${esc(t('coverage'))}</p>${v.graph.cycles.length?`<p>${esc(t('cycles',{codes:v.graph.cycles.map(c=>c.join(' → ')).join('; ')}))}</p>`:''}${v.graph.unknown.length?`<p>${esc(t('unknownData',{codes:v.graph.unknown.join(', ')}))}</p>`:''}<p>${esc(t('simpleSaved'))} ${esc(t('resetHint'))}</p></details>${storageFailed?`<p role="status" class="planning-storage-error">${esc(t('storage'))}</p>`:''}<p id="wf-feedback" class="sr-only" role="status" aria-live="polite">${esc(message?t(message.key,message.args):'')}</p></div>`;
     }
     function refresh(focusId){
       const main=document.getElementById('main-area'),scroll=main.scrollTop,open=new Map([...main.querySelectorAll('details[data-wf-details]')].map(el=>[el.dataset.wfDetails,el.open]));
@@ -374,17 +425,21 @@
     }
     function select(d,key,code){
       if(!d.courses.some(c=>c.code===code)||opts.getBaseline().includes(code))return;
+      if(key==='x'){setExplorer(d,code);refresh('wf-search-x');return;}
+      if(!advancedOpen)return;
       setChoice(d,key,code);announce(d,key);refresh(`wf-search-${key}`);
     }
-    document.addEventListener('focusin',event=>{const key=event.target.dataset?.wfSearch;if(['a','b'].includes(key)&&opts.isOpen()&&!restoringFocus){for(const other of ['a','b'])if(other!==key&&popup[other]){popup[other]=false;updatePicker(other);}popup[key]=true;updatePicker(key);}});
+    // Keep the combobox focused while choosing an option (including browsers that blur on click).
+    document.addEventListener('pointerdown',event=>{if(opts.isOpen()&&event.target.closest('[data-wf-choose]'))event.preventDefault();});
+    document.addEventListener('focusin',event=>{const key=event.target.dataset?.wfSearch;if(['a','b','x'].includes(key)&&opts.isOpen()&&!restoringFocus){for(const other of ['a','b','x'])if(other!==key&&popup[other]){popup[other]=false;updatePicker(other);}popup[key]=true;if(key==='x'){queries.x='';event.target.select?.();}updatePicker(key);}});
     document.addEventListener('focusout',event=>{
-      const key=event.target.dataset?.wfSearch;if(!['a','b'].includes(key)||!opts.isOpen())return;
+      const key=event.target.dataset?.wfSearch;if(!['a','b','x'].includes(key)||!opts.isOpen())return;
       const picker=event.target.closest('.wfs-picker');if(picker?.contains(event.relatedTarget))return;
       popup[key]=false;active[key]=-1;updatePicker(key);
     });
-    document.addEventListener('input',event=>{const key=event.target.dataset?.wfSearch;if(['a','b'].includes(key)&&opts.isOpen()){queries[key]=event.target.value;popup[key]=true;active[key]=-1;updatePicker(key);}});
+    document.addEventListener('input',event=>{const key=event.target.dataset?.wfSearch;if(['a','b','x'].includes(key)&&opts.isOpen()){queries[key]=event.target.value;popup[key]=true;active[key]=-1;updatePicker(key);}});
     document.addEventListener('keydown',event=>{
-      const key=event.target.dataset?.wfSearch;if(!['a','b'].includes(key)||!opts.isOpen())return;
+      const key=event.target.dataset?.wfSearch;if(!['a','b','x'].includes(key)||!opts.isOpen())return;
       const d=sync();if(!d)return;const candidates=matches(d,key).filter(c=>!opts.getBaseline().includes(c.code));
       if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();popup[key]=true;active[key]=candidates.length?(event.key==='ArrowDown'?(active[key]+1)%candidates.length:active[key]<0?candidates.length-1:(active[key]-1+candidates.length)%candidates.length):-1;updatePicker(key);}
       if(event.key==='Escape'){event.preventDefault();popup[key]=false;active[key]=-1;updatePicker(key);}
@@ -392,17 +447,20 @@
     });
     document.addEventListener('change',event=>{
       const d=sync(),el=event.target;if(!d||!opts.isOpen())return;
-      if(el.id==='wf-target'&&d.courses.some(c=>c.code===el.value)){state.target=el.value;save();refresh(el.id);}
-      if(el.id==='wf-result-filter'&&['related','all','blocked','unknown'].includes(el.value)){filter=el.value;refresh(el.id);}
-      if(el.id==='wf-graph-plan'&&['baseline','a','b'].includes(el.value)){graphPlan=el.value;refresh(el.id);}
+      if(el.id==='wf-graph-plan'&&['baseline','a'].includes(el.value)){graphPlan=el.value;refresh(el.id);}
       if(el.id==='wf-direction'&&['requirements','dependents'].includes(el.value)){direction=el.value;refresh(el.id);}
     });
     document.addEventListener('click',event=>{
       const target=event.target,focusEl=target.closest('[data-wf-focus],[data-what-if-code]');
       if(focusEl){event.preventDefault();focus(focusEl.dataset.wfFocus||focusEl.dataset.whatIfCode);return;}
+      if(target.closest('[data-wf-advanced]')&&opts.isOpen()){advancedOpen=!advancedOpen;popup.x=false;refresh('wf-advanced-toggle');return;}
+      if(target.closest('[data-wf-clear]')?.dataset.wfClear==='x'){
+        const d=sync();if(!d)return;choices.x='';queries.x='';popup.x=false;pathsOpen=false;explorerState=W.cleanExplorer(null,d);
+        try{localStorage.removeItem(W.explorerKey);}catch{storageFailed=true;}message={key:'updated'};refresh('wf-search-x');return;
+      }
       if(target.closest('[data-wf-reset]')){reset();return;}
       if(!opts.isOpen())return;const d=sync();if(!d)return;
-      const choose=target.closest('[data-wf-choose]');if(choose&&['a','b'].includes(choose.dataset.wfPlan)){select(d,choose.dataset.wfPlan,choose.dataset.wfChoose);return;}
+      const choose=target.closest('[data-wf-choose]');if(choose&&['a','b','x'].includes(choose.dataset.wfPlan)){select(d,choose.dataset.wfPlan,choose.dataset.wfChoose);return;}
       const mode=target.closest('[data-wf-mode]');if(mode&&['a','b'].includes(mode.dataset.wfPlan)&&['pass','postpone'].includes(mode.dataset.wfMode)){
         const key=mode.dataset.wfPlan;if(opts.getBaseline().includes(choices[key])){message={key:'protected',args:{code:choices[key]}};refresh();return;}
         state.presentation[key]=mode.dataset.wfMode;save();announce(d,key);refresh(`wf-mode-${key}-${mode.dataset.wfMode}`);return;
@@ -410,10 +468,10 @@
       const clear=target.closest('[data-wf-clear]');if(clear&&['a','b'].includes(clear.dataset.wfClear)){const key=clear.dataset.wfClear,previous=choices[key];state[key]=[];choices[key]='';queries[key]='';popup[key]=false;lastPostpone=null;if(state.target===previous)state.target=choices.a||choices.b||state.a[0]||state.b[0]||'';save();message={key:'updated'};refresh(`wf-search-${key}`);return;}
       const add=target.closest('[data-wf-add]');if(add&&['a','b'].includes(add.dataset.wfAdd)){const key=add.dataset.wfAdd;state[key]=selected(key);state.presentation[key==='a'?'multiA':'multiB']=true;state.presentation[key]='pass';queries[key]='';popup[key]=true;save();refresh(`wf-search-${key}`);return;}
       const compare=target.closest('[data-wf-compare]');if(compare){state.presentation.compare=true;save();refresh('wf-search-b');return;}
-      const example=target.closest('[data-wf-example]');if(example&&['a','b'].includes(example.dataset.wfExample)){const code=W.chooseExample(d,opts.getBaseline());if(code)select(d,example.dataset.wfExample,code);return;}
+      const example=target.closest('[data-wf-example]');if(example&&['a','b','x'].includes(example.dataset.wfExample)){const code=W.chooseExample(d,opts.getBaseline());if(code)select(d,example.dataset.wfExample,code);return;}
       const postponed=target.closest('[data-wf-postpone]');if(postponed&&['a','b'].includes(postponed.dataset.wfPlan)&&d.courses.some(c=>c.code===postponed.dataset.wfPostpone)){remove(d,postponed.dataset.wfPlan,postponed.dataset.wfPostpone);return;}
-      if(target.closest('[data-wf-paths]')){pathsOpen=!pathsOpen;refresh('wf-path-toggle');return;}
-      if(!target.closest('.wfs-picker'))for(const key of ['a','b'])if(popup[key]){popup[key]=false;updatePicker(key);}
+      if(target.closest('[data-wf-paths]')){pathsOpen=!pathsOpen;popup.x=false;refresh('wf-path-toggle');return;}
+      if(!target.closest('.wfs-picker'))for(const key of ['a','b','x'])if(popup[key]){popup[key]=false;updatePicker(key);}
     });
     function reload(){loadedDataset='';lastPostpone=null;if(opts.isOpen())opts.refresh();}
     return {render,focus,reset,reload};
