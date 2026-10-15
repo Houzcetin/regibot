@@ -2,6 +2,8 @@
   {
     "id": "regulation-tr",
     "title": "Yaşar Üniversitesi Ön Lisans ve Lisans Eğitim-Öğretim ve Sınav Yönetmeliği",
+    "short_title": "Yönetmelik",
+    "authority": 1,
     "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/tr/59751247618113477416.pdf",
     "language": "tr",
     "retrieved_at": "2026-10-15",
@@ -11,6 +13,8 @@
   {
     "id": "regulation-en",
     "title": "Yaşar University Regulation on Education-Training and Exams for Associate and Bachelor's Degrees",
+    "short_title": "Regulation",
+    "authority": 1,
     "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/en/11960708961476643.pdf",
     "language": "en",
     "retrieved_at": "2026-10-15",
@@ -20,6 +24,8 @@
   {
     "id": "oim-registration",
     "title": "Öğrenci İşleri Müdürlüğü — Ders Kayıtları",
+    "short_title": "Öğrenci İşleri – Ders Kayıtları",
+    "authority": 2,
     "url": "https://oim.yasar.edu.tr/ders-kayitlari/",
     "language": "tr",
     "retrieved_at": "2026-10-15",
@@ -41,6 +47,8 @@
   {
     "id": "obs-guide",
     "title": "OBS Ders Kaydı Kılavuzu",
+    "short_title": "OBS Ders Kaydı Kılavuzu",
+    "authority": 2,
     "url": "https://oim.yasar.edu.tr/wp-content/uploads/2020/12/kayit.pdf",
     "language": "tr",
     "retrieved_at": "2026-10-15",
@@ -50,6 +58,8 @@
   {
     "id": "academic-calendar",
     "title": "Yaşar Üniversitesi 2026-2027 Akademik Takvimi",
+    "short_title": "Akademik Takvim 2026-2027",
+    "authority": 2,
     "url": "https://oim.yasar.edu.tr/wp-content/uploads/2026/04/2026-2027-Akademik-Takvim.pdf",
     "language": "tr",
     "retrieved_at": "2026-10-15",
@@ -59,6 +69,8 @@
   {
     "id": "student-handbook",
     "title": "Yaşar Üniversitesi Öğrenci El Kitabı (2025, Rev. 12)",
+    "short_title": "Öğrenci El Kitabı 2025",
+    "authority": 3,
     "url": "https://www.yasar.edu.tr/wp-content/uploads/2025/07/Ogrenci-El-Kitabi-2025-Revizyon-12-08.07.2025.pdf",
     "language": "tr",
     "retrieved_at": "2026-10-15",
@@ -68,6 +80,8 @@
   {
     "id": "contacts-oim",
     "title": "Öğrenci İşleri Müdürlüğü — İletişim",
+    "short_title": "Öğrenci İşleri – İletişim",
+    "authority": 2,
     "url": "https://oim.yasar.edu.tr/iletisim/",
     "language": "tr",
     "retrieved_at": "2026-10-15",
@@ -77,6 +91,8 @@
   {
     "id": "contacts-ce",
     "title": "Bilgisayar Mühendisliği Bölümü — İletişim",
+    "short_title": "Bilgisayar Müh. – İletişim",
+    "authority": 2,
     "url": "https://ce.yasar.edu.tr/iletisim/",
     "language": "tr",
     "retrieved_at": "2026-10-15",
@@ -86,6 +102,8 @@
   {
     "id": "ce-curriculum",
     "title": "Bilgisayar Mühendisliği — Müfredat ve Ön Koşul İlişkileri",
+    "short_title": "Bilgisayar Müh. – Müfredat",
+    "authority": 2,
     "url": "https://ce.yasar.edu.tr/mufredat-ve-on-kosul-iliskileri/",
     "language": "tr",
     "retrieved_at": "2026-10-15",
