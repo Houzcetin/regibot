@@ -1,0 +1,28 @@
+/* Shared compact dependency SVG and accessible rule list; IDs are supplied by the view. */
+(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./planning-core'),require('./what-if-core'));else root.CourseMap=factory(root.Planning,root.WhatIf);})(typeof globalThis!=='undefined'?globalThis:this,(P,W)=>{
+  'use strict';
+  const TEXT={en:{title:'Course dependency map',legend:'Arrow: required course → dependent course. Solid: prerequisite; dashed: corequisite. Connections do not make every OR alternative mandatory.',text:'Text equivalent and full AND/OR requirements',completed:'Completed',assumed:'Assumed passed',met:'Requirements met',missing:'Blocked',unknown:'Cannot verify',pre:'Prerequisites',co:'Corequisites',none:'No listed requirement',source:'Official course record',legacy:'Legacy code; its own requirements are unavailable.',trim:'Compact map; the complete relevant list is below.'},tr:{title:'Ders bağımlılık haritası',legend:'Ok: gereken ders → bağımlı ders. Düz çizgi: ön koşul; kesikli çizgi: eş koşul. Bağlantılar, her VEYA alternatifini zorunlu kılmaz.',text:'Metin karşılığı ve tam VE/VEYA koşulları',completed:'Tamamlandı',assumed:'Geçildiği varsayılıyor',met:'Koşullar sağlandı',missing:'Eksik koşullar',unknown:'Doğrulanamıyor',pre:'Ön koşullar',co:'Eş koşullar',none:'Listelenmiş koşul yok',source:'Resmi ders kaydı',legacy:'Önceki müfredat kodu; kendi koşulları mevcut değil.',trim:'Kısa harita; ilgili derslerin tam listesi aşağıda.'}};
+  const esc=v=>String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  function expression(r,done,lang){
+    if(!r)return esc(TEXT[lang].none);
+    if(r.op==='course')return `<span class="wf-condition ${done.has(r.code)?'is-met':'is-missing'}">${esc(r.code)} ${done.has(r.code)?'✓':'○'}</span>`;
+    return '( '+r.items.map(x=>expression(x,done,lang)).join(`<strong class="wf-operator"> ${r.op==='and'?(lang==='tr'?'VE':'AND'):(lang==='tr'?'VEYA':'OR')} </strong>`)+ ' )';
+  }
+  function requirements(c,done,d,lang='en'){
+    const t=TEXT[lang],g=W.graph(d);if(g.unknown.includes(c.code))return `<p>${esc(t.unknown)}</p>`;
+    return [['prerequisites','pre'],['corequisites','co']].map(([field,label])=>`<div class="wf-rule"><strong>${esc(t[label])}</strong><div>${expression(c[field],done,lang)}</div></div>`).join('');
+  }
+  function render({dataset:d,course:code,plan,id,direction='dependents',lang='en'}){
+    if(!/^[a-zA-Z][\w-]*$/.test(id))throw Error('Invalid map ID');
+    const t=TEXT[lang],g=W.graph(d),view=W.subgraph(g,code,direction,12),full=W.subgraph(g,code,direction,g.codes.size);
+    const status=node=>plan.baseline.has(node)?'completed':plan.assumed.includes(node)?'assumed':plan.results[node]?.status||'unknown';
+    const distance=new Map([[code,0]]),queue=[code];for(let i=0;i<queue.length;i++)for(const e of view.edges){const match=direction==='dependents'?e.from===queue[i]:e.to===queue[i],other=direction==='dependents'?e.to:e.from;if(match&&!distance.has(other)){distance.set(other,distance.get(queue[i])+1);queue.push(other);}}
+    const depth=Math.max(0,...distance.values()),columns=new Map(),positions=new Map();
+    for(const node of view.nodes){const level=direction==='dependents'?(distance.get(node)||0):depth-(distance.get(node)||0);if(!columns.has(level))columns.set(level,[]);columns.get(level).push(node);}
+    const rows=Math.max(1,...[...columns.values()].map(v=>v.length)),width=(depth+1)*220+20,height=rows*88+24;
+    for(const [col,nodes] of columns)nodes.forEach((node,i)=>positions.set(node,{x:20+col*220,y:12+i*88+(rows-nodes.length)*44}));
+    const badge=node=>`<span class="wf-badge wf-${status(node)}">${esc(t[status(node)])}</span>`;
+    return `<p class="wf-muted">${esc(t.legend)}</p><div class="wf-legend">${['completed','assumed','met','missing','unknown'].map(s=>`<span class="wf-badge wf-${s}">${esc(t[s])}</span>`).join('')}</div><div class="wf-graph-scroll" tabindex="0" aria-label="${esc(t.title)}"><svg class="wf-graph" viewBox="0 0 ${width} ${height}" style="min-width:${width}px" role="img" aria-labelledby="${id}-title ${id}-desc"><title id="${id}-title">${esc(t.title+' — '+code)}</title><desc id="${id}-desc">${esc(t.legend)}</desc><defs><marker id="${id}-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z"/></marker></defs>${view.edges.map(e=>{const a=positions.get(e.from),b=positions.get(e.to);return `<path class="wf-edge ${e.kind==='co'?'is-corequisite':''}" d="M ${a.x+166} ${a.y+30} C ${a.x+195} ${a.y+30}, ${b.x-30} ${b.y+30}, ${b.x} ${b.y+30}" marker-end="url(#${id}-arrow)"/>`;}).join('')}${view.nodes.map(node=>{const p=positions.get(node),s=status(node);return `<g class="wf-node wf-${s}" transform="translate(${p.x},${p.y})"><rect width="166" height="60" rx="12"/><text x="12" y="24">${esc(node)}</text><text class="wf-node-status" x="12" y="43">${esc(t[s])}</text></g>`;}).join('')}</svg></div>${view.truncated?`<p class="wf-muted">${esc(t.trim)}</p>`:''}<details class="wf-graph-text" data-wf-details="${id}-text" open><summary>${esc(t.text)}</summary><ul>${full.nodes.map(node=>{const c=g.byCode.get(node),source=c?.source||d.priorCourses?.find(c=>c.code===node)?.source;return `<li><strong>${esc(node+' · '+(c?.title?.[lang]||''))}</strong> ${badge(node)}${c?requirements(c,plan.completed,d,lang):`<p>${esc(t.legacy)}</p>`}${P.officialCourseUrl(source)?`<a href="${esc(source)}" target="_blank" rel="noopener noreferrer">${esc(t.source)} ↗</a>`:''}</li>`;}).join('')}</ul></details>`;
+  }
+  return {render,requirements,esc,TEXT};
+});
