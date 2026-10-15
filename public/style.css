@@ -116,3 +116,14 @@
 @media(max-width:420px){.semester-badge{display:none}}
 /* In a conversation only the chat log scrolls; main-area padding made a second scrollbar around it. */
 .main-area:has(.assistant-conversation){padding:0;overflow:hidden}
+/* Dismissible footer notice: hiding it collapses --footer-height so main-area, sidebar and the mobile composer reclaim the space. */
+.page-footer{gap:8px}
+.footer-close{width:22px;height:22px;flex:none;display:grid;place-items:center;padding:0;border:0;border-radius:6px;background:transparent;color:inherit;font-size:16px;line-height:1;cursor:pointer;opacity:.7}
+.footer-close:hover{background:var(--surface-2);opacity:1}
+:root.footer-hidden{--footer-height:0px}
+:root.footer-hidden .page-footer{display:none}
+:root.footer-hidden .session-pill{bottom:12px}
+/* "More questions" toggle chip: dashed outline so it reads as an action, not a question. */
+.more-chip{gap:6px;border-style:dashed;color:#5a6878;font-weight:700}
+.more-chip-arrow{font-size:15px;line-height:1}
+:root[data-theme="dark"] .more-chip{color:#aab7c4}

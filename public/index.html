@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1e2a3a">
   <title>Yaşar Asistan</title>
-  <script>try{if(localStorage.getItem('regibot-theme')==='dark')document.documentElement.dataset.theme='dark';}catch(e){}</script>
+  <script>try{if(localStorage.getItem('regibot-theme')==='dark')document.documentElement.dataset.theme='dark';if(localStorage.getItem('regibot-footer')==='hidden')document.documentElement.classList.add('footer-hidden');}catch(e){}</script>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -61,7 +61,7 @@
       </aside>
       <main class="main-area" id="main-area" tabindex="-1"><div class="assistant-landing"><div class="assistant-hero"><img class="hero-logo" src="/assets/logo.svg" alt=""><span class="ai-badge"><span aria-hidden="true">✦</span> AI destekli</span><h1 class="assistant-title">Yaşar Öğrenci Asistanı</h1><p class="assistant-description">Ders kaydı, ekle/bırak, yönetmelik ve akademik takvim hakkında sorularını sor.</p><div class="composer-shell"><form id="chat-form"><label class="sr-only" for="chat-input">Mesajınız</label><textarea id="chat-input" maxlength="500" rows="1" placeholder="Bir soru sor… örn. Ekle/bırak ne zaman bitiyor?"></textarea><button class="send-button" id="chat-send" type="submit" aria-label="Gönder"><span class="sr-only">Gönder</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><span class="char-counter" id="char-counter"></span></form></div><div class="suggestion-chips" aria-label="Örnek sorular"></div><p class="assistant-note">Yanıtlar resmi kaynaklara dayanır; kararlarını danışmanınla doğrula.</p><div id="assistant-deadline"></div></div></div></main>
     </div>
-    <footer class="page-footer" id="page-footer">Bu Yaşar Üniversitesi'nin resmi sistemi değildir; resmi kaynaklara dayanan bir öğrenci projesidir.</footer>
+    <footer class="page-footer" id="page-footer"><span id="footer-text">Bu Yaşar Üniversitesi'nin resmi sistemi değildir; resmi kaynaklara dayanan bir öğrenci projesidir.</span><button class="footer-close" id="footer-close" type="button" aria-label="Bildirimi kapat" title="Bildirimi kapat">×</button></footer>
     <div class="session-pill" id="session-pill">Demo tarihi: 15.09.2026</div>
   </div>
 </body>
