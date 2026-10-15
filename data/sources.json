@@ -57,6 +57,15 @@
     "kind": "sections"
   },
   {
+    "id": "student-handbook",
+    "title": "Yaşar Üniversitesi Öğrenci El Kitabı (2025, Rev. 12)",
+    "url": "https://www.yasar.edu.tr/wp-content/uploads/2025/07/Ogrenci-El-Kitabi-2025-Revizyon-12-08.07.2025.pdf",
+    "language": "tr",
+    "retrieved_at": "2026-10-15",
+    "file": "student-handbook.txt",
+    "kind": "handbook"
+  },
+  {
     "id": "contacts-oim",
     "title": "Öğrenci İşleri Müdürlüğü — İletişim",
     "url": "https://oim.yasar.edu.tr/iletisim/",

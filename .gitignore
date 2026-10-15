@@ -1,2 +1,5 @@
 node_modules/
 .env
+# Re-downloadable from the url in data/sources.json; its welcome letters name individuals.
+data/raw/student-handbook.pdf
+/Ogrenci-El-Kitabi-*.pdf

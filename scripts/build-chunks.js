@@ -5,6 +5,9 @@
 //   boundaries and every piece keeps the same article label.
 // - "sections" sources use "=== Heading" lines as section boundaries; inside a section,
 //   sub-headings and FAQ questions start new units, which are merged up to MAX_WORDS.
+// - "handbook" sources take their section headings from the table of contents; each section
+//   becomes one chunk (long ones split at paragraph breaks). The welcome letters signed by
+//   named individuals are skipped, and lines with personal titles or e-mails are dropped.
 // - "plain" sources are split by paragraphs only.
 const fs = require('fs');
 const path = require('path');
@@ -153,6 +156,76 @@ function chunkSections(src, text) {
   return chunks;
 }
 
+// Turkish-aware key for comparing a TOC entry with a body heading ("Kayıt" vs "KAYIT").
+const headingKey = (s) =>
+  s.toLocaleUpperCase('tr').replace(/^\d+\.\s*/, '').replace(/[^A-ZÇĞİÖŞÜ0-9]+/g, '');
+
+// Lines that could identify an individual (titles, personal e-mail addresses) are never indexed.
+const PERSONAL_LINE = /\b(Prof|Doç|Dr|Öğr\.\s*Gör|Arş\.\s*Gör)\.|\b[a-zçğıöşü]+\.[a-zçğıöşü]+@/i;
+
+// PDF lines -> paragraphs: a paragraph ends at sentence punctuation followed by a capitalised line or a bullet.
+function proseParagraphs(lines) {
+  const paras = [];
+  let prevEnds = true;
+  for (const raw of lines) {
+    const line = raw.replace(/\s+/g, ' ').trim();
+    if (!line) continue;
+    const bullet = /^([•▪]|- |\d+\. )/.test(line);
+    if (!paras.length || bullet || (prevEnds && /^[A-ZÇĞİÖŞÜ"“]/.test(line))) paras.push(line);
+    else paras[paras.length - 1] += ' ' + line;
+    prevEnds = /[.:!?…]$/.test(line);
+  }
+  return paras;
+}
+
+function chunkHandbook(src, text) {
+  const lines = text.split('\n');
+  const tocIdx = lines.map((l, i) => (/\.{5,}\s*\d+\s*$/.test(l) ? i : -1)).filter((i) => i >= 0);
+  const toc = tocIdx.map((i) => lines[i].replace(/\.{5,}.*$/, '').replace(/\s+/g, ' ').trim().replace(/\s*-$/, ''));
+  // Start at chapter 1: everything before it (cover, credits, welcome letters) is skipped.
+  const entries = toc.slice(toc.findIndex((t) => /^1\.\s/.test(t)));
+
+  // Locate each TOC entry as a standalone line in the body, in order.
+  const body = lines.slice(tocIdx[tocIdx.length - 1] + 1);
+  const found = [];
+  let from = 0;
+  for (const entry of entries) {
+    const key = headingKey(entry);
+    const at = body.findIndex((l, i) => i >= from && headingKey(l) === key);
+    if (at < 0) {
+      console.warn(`  [handbook] heading not found in body: "${entry}"`);
+      continue;
+    }
+    found.push({ entry, at, chapter: /^\d+\.\s/.test(entry) });
+    from = at + 1;
+  }
+
+  const chunks = [];
+  let chapter = null;
+  found.forEach((h, k) => {
+    if (h.chapter) chapter = h.entry.replace(/^\d+\.\s*/, '');
+    const end = k + 1 < found.length ? found[k + 1].at : body.length;
+    const sectionLines = body.slice(h.at + 1, end).filter((l) => !PERSONAL_LINE.test(l));
+    const paras = proseParagraphs(sectionLines);
+    if (words(paras.join(' ')) < 5) return; // chapter title directly followed by its first section
+    const name = h.chapter ? chapter : `${chapter} › ${h.entry}`;
+    const groups = packParagraphs(paras);
+    groups.forEach((g, gi) => {
+      chunks.push({
+        id: `${src.id}-${chunks.length + 1}`,
+        source_id: src.id,
+        article: null,
+        title: src.title,
+        heading: `${name}${groups.length > 1 ? ` (${gi + 1}/${groups.length})` : ''}`,
+        text: g.join('\n'),
+        url: src.url,
+        language: src.language,
+      });
+    });
+  });
+  return chunks;
+}
+
 function chunkPlain(src, text) {
   const paras = text.split(/\n\s*\n/).map((p) => p.replace(/\s+/g, ' ').trim()).filter(Boolean);
   return packParagraphs(paras).map((g, gi) => ({
@@ -171,7 +244,7 @@ const sources = JSON.parse(fs.readFileSync(path.join(DATA, 'sources.json'), 'utf
 const all = [];
 for (const src of sources) {
   const text = fs.readFileSync(path.join(DATA, 'raw', src.file), 'utf8').replace(/\r/g, '');
-  const fn = { regulation: chunkRegulation, sections: chunkSections, plain: chunkPlain }[src.kind];
+  const fn = { regulation: chunkRegulation, sections: chunkSections, handbook: chunkHandbook, plain: chunkPlain }[src.kind];
   if (!fn) throw new Error(`Unknown kind "${src.kind}" for ${src.id}`);
   const chunks = fn(src, text);
   const sizes = chunks.map((c) => words(c.text));
