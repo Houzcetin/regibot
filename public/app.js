@@ -192,7 +192,7 @@
     $('sidebar').setAttribute('aria-label',t('sidebar'));
     $('sidebar-toggle').setAttribute('aria-label',t('hamburger'));
     $('top-brand-title').textContent=t('brandTitle');
-    document.querySelector('.top-brand').setAttribute('aria-label',t('home'));
+    document.querySelector('.top-brand')?.setAttribute('aria-label',t('home'));
     $('home-button').setAttribute('aria-label',t('home'));
     $('home-button').title=t('home');
     $('announcements-button').setAttribute('aria-label',t('announcement'));
