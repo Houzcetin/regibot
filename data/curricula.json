@@ -1,0 +1,382 @@
+[
+  {
+    "id": "ce-2025-2026",
+    "program": {
+      "tr": "Bilgisayar Mühendisliği",
+      "en": "Computer Engineering"
+    },
+    "version": "2025–2026",
+    "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png",
+    "courses": [
+      {
+        "code": "MATH 1100",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "MATH 1131",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "PHYS 1121",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "SE 1105",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "SOFL 1101",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "UMFD 1020",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "COMP 1202",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "MATH 1132",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "PHYS 1122",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "UMFD 1120",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "SOFL 1102",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "UMFD 1220",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "COMP 2233",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "EEE 2274",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "HIST 1110",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "MATH 2260",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "SE 2228",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "TURK 1110",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "COMP 3330",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "COMP 2215",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "EEE 2110",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "HIST 1210",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "MATH 2255",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "TURK 1210",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "UFND 7010",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "MATH 2261",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "COMP 3327",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "COMP 3315",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "ISG 9110",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "SE 2230",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "COMP 3323",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "COMP 3304",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "COMP 3328",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "ENGR 3450",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "ENGR 4400",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "COMP 4910",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "COMP 4801",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "ISG 9210",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "ENGR 4411",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "UMFD 1720",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      },
+      {
+        "code": "COMP 4920",
+        "title": null,
+        "ects": null,
+        "prerequisites": null,
+        "corequisites": null,
+        "verification": "unverified",
+        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+      }
+    ]
+  }
+]

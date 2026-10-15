@@ -34,6 +34,63 @@
     }
   };
 
+  const P=window.Planning;
+  const PL={
+    en:{selectionHint:'Mark the courses you have already completed. The checker uses only these selections.',eligibilityNav:'Course Eligibility',checklistNav:'Registration Checklist',resetPlanning:'Reset my planning data',program:'Program',curriculum:'Curriculum version',completed:'Already completed',met:'Prerequisites met',missing:'Missing prerequisites',unknown:'Cannot verify',unknownField:'Unverified',requirements:'Prerequisites',corequisites:'Corequisites',none:'None (verified)',and:' AND ',or:' OR ',missingLabel:'Unsatisfied prerequisite requirements (OR alternatives shown above): ',coLabel:'Corequisites still needed (completion or concurrent enrolment must be confirmed): ',metExplanation:'All verified prerequisite and corequisite requirements are satisfied by your completed courses.',completedExplanation:'You marked this course as completed.',unknownExplanation:'Official prerequisite/corequisite rules, title and ECTS have not been verified. No eligibility decision can be made from semester order or course names.',disclaimer:'Meeting prerequisites does not confirm course availability, quota, timetable compatibility, or advisor approval.',localNote:'Only your course selections and checklist progress are saved on this browser. No login or transcript upload is needed. These are your own planning notes, not confirmation of registration or advisor approval.',saveFailed:'Browser storage is unavailable. Changes may not persist; reset could not remove any inaccessible saved data.',dataUnavailable:'Curriculum data could not be loaded or validated. Try again later or consult the official chart.',actual:'Actual date (Europe/Istanbul)',demo:'Configured demo date — used for event status',upcomingState:'Upcoming',ongoingState:'Ongoing',pastState:'Past',calendarAction:'Add to calendar',eligibilityAction:'Check course prerequisites',checklistAction:'Open registration checklist',loadAction:'Open course-load guide',calendarLink:'View academic calendar',contactAction:'Official contact information',emailAction:'Draft an email',draftTitle:'Editable email draft',recipient:'Recipient — enter your advisor or department address',subject:'Subject',body:'Message',openEmail:'Open in email app',closeDraft:'Close draft',draftNotice:'For quota requests, contact your department; for approval, contact your assigned advisor via OBS. Verify the recipient using official contact information. Nothing is sent automatically. Drafts are not saved.',progress:'Steps marked complete',checklistIntro:'Review each step and mark it yourself after you have checked it. Check current announcements for class-specific registration windows.',deadlines:'Registration-related deadlines',source:'Official source',emptyCalendar:'Calendar data unavailable. Check the official academic calendar.',ects:'ECTS'},
+    tr:{selectionHint:'Önceden tamamladığınız dersleri işaretleyin. Kontrol yalnızca bu seçimleri kullanır.',eligibilityNav:'Ders Uygunluğu',checklistNav:'Ders Kayıt Kontrol Listesi',resetPlanning:'Planlama verilerimi sıfırla',program:'Program',curriculum:'Müfredat sürümü',completed:'Zaten tamamlandı',met:'Ön koşullar sağlandı',missing:'Eksik ön koşullar',unknown:'Doğrulanamıyor',unknownField:'Doğrulanmamış',requirements:'Ön koşullar',corequisites:'Eş koşullar',none:'Yok (doğrulanmış)',and:' VE ',or:' VEYA ',missingLabel:'Sağlanmayan ön koşullar (VEYA seçenekleri yukarıda gösterilir): ',coLabel:'Gereken eş koşullar (tamamlama veya eş zamanlı kayıt doğrulanmalı): ',metExplanation:'Doğrulanmış ön koşullar ve eş koşullar tamamladığınız derslerle sağlanıyor.',completedExplanation:'Bu dersi tamamlandı olarak işaretlediniz.',unknownExplanation:'Resmi ön koşul/eş koşul kuralları, ders adı ve AKTS doğrulanmadı. Dönem sırası veya ders adından uygunluk kararı verilemez.',disclaimer:'Ön koşulların sağlanması dersin açılacağını, kontenjanı, program uyumunu veya danışman onayını doğrulamaz.',localNote:'Yalnızca ders seçimleriniz ve kontrol listesi ilerlemeniz bu tarayıcıda saklanır. Giriş veya transkript yükleme gerekmez. Bunlar kişisel planlama notlarıdır; kayıt veya danışman onayını doğrulamaz.',saveFailed:'Tarayıcı depolaması kullanılamıyor. Değişiklikler saklanmayabilir; sıfırlama erişilemeyen kayıtları silemedi.',dataUnavailable:'Müfredat verileri yüklenemedi veya doğrulanamadı. Daha sonra deneyin ya da resmi şemaya bakın.',actual:'Gerçek tarih (Europe/Istanbul)',demo:'Yapılandırılmış demo tarihi — etkinlik durumları için kullanılır',upcomingState:'Yaklaşan',ongoingState:'Devam ediyor',pastState:'Geçmiş',calendarAction:'Takvime ekle',eligibilityAction:'Ders ön koşullarını kontrol et',checklistAction:'Kayıt kontrol listesini aç',loadAction:'Ders yükü rehberini aç',calendarLink:'Akademik takvimi görüntüle',contactAction:'Resmi iletişim bilgileri',emailAction:'E-posta taslağı hazırla',draftTitle:'Düzenlenebilir e-posta taslağı',recipient:'Alıcı — danışmanınızın veya bölümün adresini girin',subject:'Konu',body:'Mesaj',openEmail:'E-posta uygulamasında aç',closeDraft:'Taslağı kapat',draftNotice:'Kontenjan için bölümünüzle; onay için OBS üzerinden atanmış danışmanınızla iletişime geçin. Alıcıyı resmi iletişim bilgilerinden doğrulayın. Otomatik gönderim yapılmaz. Taslaklar saklanmaz.',progress:'Tamamlandı işaretlenen adımlar',checklistIntro:'Her adımı kontrol ettikten sonra kendiniz işaretleyin. Sınıfınıza özel kayıt aralıkları için güncel duyuruları inceleyin.',deadlines:'Ders kaydıyla ilgili tarihler',source:'Resmi kaynak',emptyCalendar:'Takvim verileri kullanılamıyor. Resmi akademik takvimi kontrol edin.',ects:'AKTS'}
+  };
+  for(const l of ['tr','en'])Object.assign(TEXT[l],PL[l]);
+  let datasets=[],planningState=P.cleanState(null,[]),planningLoaded=false,storageFailed=false;
+  const stepDetails={
+    curriculum:{link:'/uygunluk',en:['Review curriculum and prerequisites','Confirm your assigned curriculum version in OBS. Review the official chart and check prerequisite and corequisite requirements. Unverified rules need confirmation from your department.'],tr:['Müfredatı ve ön koşulları inceleyin','OBS üzerinden size atanmış müfredat sürümünü doğrulayın. Resmi şemayı ve ön koşul/eş koşulları inceleyin. Doğrulanmamış kuralları bölümünüzle teyit edin.']},
+    select:{link:'/rehber/ders-kayit',en:['Select courses','Review required and elective courses in OBS, including courses you must repeat. Check availability, quota and any financial obligations before finalizing.'],tr:['Dersleri seçin','OBS üzerinde zorunlu, seçmeli ve tekrar almanız gereken dersleri inceleyin. Kesinleştirmeden önce dersin açılmasını, kontenjanı ve mali yükümlülükleri kontrol edin.']},
+    conflicts:{link:'/rehber/ders-kayit',en:['Check timetable conflicts manually','Compare the day, start/end time and section of every lecture, lab and tutorial in OBS. Flag overlapping times and ask your advisor about applicable repeat-course exceptions.'],tr:['Program çakışmalarını elle kontrol edin','OBS üzerinde her dersin, laboratuvarın ve uygulamanın gününü, başlangıç/bitiş saatini ve şubesini karşılaştırın. Çakışmaları belirleyip tekrar derslerine ilişkin istisnaları danışmanınıza sorun.']},
+    load:{link:'/rehber/ders-yuku',en:['Review ECTS rules','Add up the selected ECTS and review the regulation for your academic standing, year and transfer status. Ask your advisor about your applicable limit and exceptions.'],tr:['AKTS kurallarını inceleyin','Seçilen AKTS toplamını hesaplayın; başarı durumunuz, sınıfınız ve geçiş durumunuza göre yönetmeliği inceleyin. Size uygulanan sınırı ve istisnaları danışmanınıza sorun.']},
+    submit:{link:'/rehber/ders-kayit',en:['Submit registration in OBS','Review OBS warnings, then finalize your selection within the official registration window. Selected courses are not sent for advisor approval until you finalize them.'],tr:['OBS üzerinde kaydı kesinleştirin','OBS uyarılarını inceleyip resmi kayıt süresi içinde seçiminizi kesinleştirin. Kesinleştirmediğiniz dersler danışman onayına gönderilmez.']},
+    approval:{link:'/iletisim',en:['Confirm advisor approval','Check the approval status in OBS and contact your assigned advisor if needed. After advisor approval, course changes must be handled by your advisor.'],tr:['Danışman onayını doğrulayın','OBS üzerinden onay durumunu kontrol edin; gerekirse atanmış danışmanınızla iletişime geçin. Danışman onayından sonra ders değişikliklerini danışmanınız yapar.']}
+  };
+  function planningSave(){if(!datasets.length){storageFailed=true;return;}try{storageFailed=!P.save(localStorage,planningState,datasets);}catch{storageFailed=true;}}
+  function planningFooter(){return `<p>${esc(t('localNote'))}</p><button type="button" class="guide-question" data-reset-planning>${esc(t('resetPlanning'))}</button>${storageFailed?`<p role="status">${esc(t('saveFailed'))}</p>`:''}`;}
+  function ruleText(r){if(!r)return t('none');return r.op==='course'?r.code:'('+r.items.map(ruleText).join(t(r.op))+')';}
+  function renderEligibility(){
+    const d=datasets.find(d=>d.id===planningState.dataset);
+    const codes=new Set(d?.courses.map(c=>c.code)||[]),done=new Set(planningState.completed);
+    return `<div class="main-content"><h1 class="page-title">${esc(t('eligibilityNav'))}</h1><section class="surface-card"><p>${esc(t('disclaimer'))}</p>${d?`<div class="planning-selects"><label>${esc(t('program'))}<select id="planning-program">${[...new Set(datasets.map(x=>x.program[lang]))].map(p=>`<option ${p===d.program[lang]?'selected':''}>${esc(p)}</option>`).join('')}</select></label><label>${esc(t('curriculum'))}<select id="planning-dataset">${datasets.filter(x=>x.program[lang]===d.program[lang]).map(x=>`<option value="${esc(x.id)}" ${x.id===d.id?'selected':''}>${esc(x.version)}</option>`).join('')}</select></label></div>${d.courses.some(c=>c.verification!=='verified')?`<p>${esc(t('unknownExplanation'))}</p>`:''}<p>${esc(t('selectionHint'))}</p><div class="planning-courses">${d.courses.map(c=>{
+      const result=P.check(c,done,codes),verified=c.verification==='verified';
+      const explanation=result.status==='unknown'?t('unknownExplanation'):result.status==='completed'?t('completedExplanation'):result.status==='met'?t('metExplanation'):(result.missing.length?t('missingLabel')+result.missing.join(', ')+'. ':'')+(result.corequisites.length?t('coLabel')+result.corequisites.join(', '):'');
+      return `<article class="source-card"><label><input type="checkbox" aria-label="${esc(t('completed')+': '+c.code)}" data-course="${esc(c.code)}" ${done.has(c.code)?'checked':''}> ${esc(c.code)} — ${esc(c.title?.[lang]||t('unknownField'))}</label><p>${esc(t('ects'))}: ${esc(c.ects??t('unknownField'))}</p><p>${esc(t('requirements'))}: ${esc(verified?ruleText(c.prerequisites):t('unknownField'))}</p><p>${esc(t('corequisites'))}: ${esc(verified?ruleText(c.corequisites):t('unknownField'))}</p><strong>${esc(t(result.status))}</strong><p>${esc(explanation)}</p><a href="${safeUrl(c.source)}" target="_blank" rel="noopener noreferrer">${esc(t('source'))}</a></article>`;
+    }).join('')}</div>`:`<p role="status">${esc(planningLoaded?t('dataUnavailable'):t('loading'))}</p>`}${planningFooter()}</section></div>`;
+  }
+  function datesNotice(){return `<p>${esc(t('actual'))}: ${esc(calendarData.realToday||new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Istanbul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()))}${calendarData.isDemoDate?`<br>${esc(t('demo'))}: ${esc(calendarData.today)}`:''}</p>`;}
+  function renderChecklist(){
+    const official=sourcesData.sources.find(s=>s.id==='oim-registration');
+    const regulation=sourcesData.sources.find(s=>s.id===(lang==='tr'?'regulation-tr':'regulation-en'));
+    const calendarSource=sourcesData.sources.find(s=>s.id==='academic-calendar');
+    const evs=calendarData.events.filter(e=>/registration|add\/drop|tuition|withdrawal/i.test(e.event_en));
+    return `<div class="main-content"><h1 class="page-title">${esc(t('checklistNav'))}</h1><section class="surface-card"><p>${esc(t('checklistIntro'))}</p><p aria-live="polite">${esc(t('progress'))}: ${planningState.steps.length} / ${P.steps.length}</p>${P.steps.map(id=>{const step=stepDetails[id],source=id==='load'?regulation:official;return `<article class="checklist-step"><label><input type="checkbox" ${planningLoaded?'':'disabled'} data-step="${id}" ${planningState.steps.includes(id)?'checked':''}> <strong>${esc(step[lang][0])}</strong></label><p>${esc(step[lang][1])}</p><a href="#${step.link}">${esc(id==='curriculum'?t('eligibilityAction'):id==='load'?t('loadAction'):id==='approval'?t('contactAction'):t('registrationNav'))}</a>${source?` · <a href="${safeUrl(source.url)}" target="_blank" rel="noopener noreferrer">${esc(t('source'))}</a>`:''}</article>`;}).join('')}${planningFooter()}</section><section class="surface-card"><h2>${esc(t('deadlines'))}</h2>${datesNotice()}${evs.map(e=>`<article class="event-row"><span>${esc(lang==='tr'?e.event:e.event_en)}</span><span>${esc(rangeLong(e))}</span><span>${esc(t(P.eventState(e,calendarData.today)+'State'))}</span><a href="/api/calendar/${encodeURIComponent(P.eventId(e))}.ics?lang=${lang}">${esc(t('calendarAction'))}</a></article>`).join('')||`<p>${esc(t('emptyCalendar'))}</p>`}<a href="#/takvim">${esc(t('calendarLink'))}</a>${calendarSource?` · <a href="${safeUrl(calendarSource.url)}" target="_blank" rel="noopener noreferrer">${esc(t('source'))}</a>`:''}</section></div>`;
+  }
+  function renderActions(actions){return `<div class="response-actions">${(Array.isArray(actions)?actions:[]).filter(a=>P.actionValid(a,calendarData.events)).map(a=>a.type==='navigate'?`<a class="guide-question" href="#${P.destinations[a.destination]}">${esc(t({eligibility:'eligibilityAction',checklist:'checklistAction',load:'loadAction',calendar:'calendarLink',contact:'contactAction'}[a.destination]))}</a>`:a.type==='calendar'?`<a class="guide-question" href="/api/calendar/${encodeURIComponent(a.eventId)}.ics?lang=${lang}">${esc(t('calendarAction'))}</a>`:`<button class="guide-question" type="button" data-email-topic="${a.topic}">${esc(t('emailAction'))}</button>`).join('')}</div>`;}
+  function openDraft(topic){
+    const tr=lang==='tr',quota=topic==='quota';
+    const subject=tr?(quota?'Ders kontenjanı hakkında':'Ders kaydı ve danışman onayı hakkında'):(quota?'Course quota enquiry':'Course registration and advisor approval enquiry');
+    const body=tr?`Sayın [Alıcı adı],\n\n[Program / müfredat] öğrencisiyim. [Dönem] için [Ders kodu / şube] hakkında ${quota?'kontenjan durumunu':'kayıt ve danışman onayı durumunu'} öğrenmek istiyorum.\n[Sorunuz / durumunuz]\n\nSaygılarımla,\n[Ad soyad]\n[Öğrenci numarası]`:`Dear [Recipient name],\n\nI am a student in [Program / curriculum]. I would like to ask about ${quota?'the quota':'registration and advisor approval'} for [Course code / section] in [Semester].\n[Your question / circumstances]\n\nKind regards,\n[Full name]\n[Student number]`;
+    const dialog=document.createElement('dialog');dialog.className='planning-dialog';dialog.setAttribute('aria-label',t('draftTitle'));
+    dialog.innerHTML=`<h2>${esc(t('draftTitle'))}</h2><p>${esc(t('draftNotice'))}</p><p><a href="#/iletisim" data-close-contact>${esc(t('contactAction'))}</a></p><form><label>${esc(t('recipient'))}<input name="recipient" type="email" required placeholder="${tr?'[Alıcı e-posta adresi]':'[Recipient email address]'}"></label><label>${esc(t('subject'))}<input name="subject" value="${esc(subject)}" maxlength="200"></label><label>${esc(t('body'))}<textarea name="body" rows="12" maxlength="5000">${esc(body)}</textarea></label><button type="submit" class="guide-question">${esc(t('openEmail'))}</button><button type="button" data-close class="guide-question">${esc(t('closeDraft'))}</button></form>`;
+    document.body.append(dialog);const close=()=>{dialog.close();dialog.remove();};dialog.querySelector('[data-close]').onclick=close;dialog.querySelector('[data-close-contact]').onclick=close;dialog.addEventListener('cancel',()=>dialog.remove());
+    dialog.querySelector('form').onsubmit=e=>{e.preventDefault();const f=e.target.elements;location.href='mailto:'+encodeURIComponent(f.recipient.value)+'?subject='+encodeURIComponent(f.subject.value)+'&body='+encodeURIComponent(f.body.value);};dialog.showModal();
+  }
+  document.addEventListener('click',e=>{
+    const email=e.target.closest('[data-email-topic]');if(email&&['quota','advisor'].includes(email.dataset.emailTopic))openDraft(email.dataset.emailTopic);
+    if(e.target.closest('[data-reset-planning]')){try{storageFailed=!P.reset(localStorage);}catch{storageFailed=true;}planningState=P.cleanState(null,datasets);renderRoute();}
+  });
+  document.addEventListener('change',e=>{
+    if(e.target.id==='planning-program'){const d=datasets.find(d=>d.program[lang]===e.target.value);if(d){planningState.dataset=d.id;planningState.completed=[];planningSave();renderRoute();}}
+    if(e.target.id==='planning-dataset'&&datasets.some(d=>d.id===e.target.value)){planningState.dataset=e.target.value;planningState.completed=[];planningSave();renderRoute();}
+    const course=e.target.dataset.course,step=e.target.dataset.step;
+    if((course||step)&&planningLoaded){const key=course?'completed':'steps',value=course||step;planningState[key]=planningState[key].filter(x=>x!==value);if(e.target.checked)planningState[key].push(value);planningState=P.cleanState(planningState,datasets);planningSave();renderRoute();const el=[...document.querySelectorAll(course?'[data-course]':'[data-step]')].find(x=>(course?x.dataset.course:x.dataset.step)===value);el?.focus();}
+  });
+  async function loadPlanning(){try{const r=await fetch('/api/curricula');if(!r.ok)throw Error();const data=await r.json();datasets=Array.isArray(data.datasets)?data.datasets.filter(P.validDataset):[];try{planningState=P.read(localStorage,datasets);}catch{planningState=P.cleanState(null,datasets);storageFailed=true;}}catch{datasets=[];}planningLoaded=true;if(['/uygunluk','/kontrol-listesi'].includes(currentRoute()))renderRoute();}
+
   const ICONS = {
     menu: '<svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>',
     chat: '<svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-5.2A7.5 7.5 0 1 1 20 11.5Z"/><path d="M8 11h8M8 14h5"/></svg>',
@@ -63,7 +120,7 @@
   const $ = id => document.getElementById(id);
   const readStore = (key, fallback) => { try { const value = localStorage.getItem(key); return value ?? fallback; } catch { return fallback; } };
   let lang = readStore('regibot-language','tr') === 'en' ? 'en' : 'tr';
-  let calendarData = { today: new Date().toISOString().slice(0,10), isDemoDate: false, events: [] };
+  let calendarData = { today: new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Istanbul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()), isDemoDate: false, events: [] };
   let sourcesData = { sources: [], totalChunks: 0 };
   let healthData = { ok:false, model:'—', hasKey:false, chunks:0 };
   let chatEntries = [];
@@ -192,7 +249,7 @@
     log.innerHTML=entries.map(entry=>{
       const role=entry.role==='user'?'user':'assistant';
       const text=entry.welcome?t('welcome'):entry.content;
-      const body=role==='user'?`<div class="bubble"></div>`:`<div class="bubble">${safeMarkdown(text)}</div>${sourceCards(entry.sources)}`;
+      const body=role==='user'?`<div class="bubble"></div>`:`<div class="bubble">${safeMarkdown(text)}</div>${sourceCards(entry.sources)}${renderActions(entry.actions)}`;
       const warning=entry.lowConfidence?`<p class="chat-warning">${esc(t('lowConfidence'))}</p>`:'';
       return `<div class="message-row ${role}">${role==='assistant'?'<div class="chat-avatar" aria-hidden="true"><img src="/assets/logo.svg" alt=""></div>':''}<div class="message-body">${body}${warning}</div></div>`;
     }).join('');
@@ -215,7 +272,7 @@
       if(!response.ok||data?.error){chatEntries.push({role:'assistant',content:data?.answer||t('errorFallback'),error:true});}
       else{
         const answer=typeof data?.answer==='string'?data.answer:t('errorFallback');
-        chatEntries.push({role:'assistant',content:answer,sources:Array.isArray(data?.sources)?data.sources:[],lowConfidence:Boolean(data?.lowConfidence)});
+        chatEntries.push({role:'assistant',content:answer,sources:Array.isArray(data?.sources)?data.sources:[],actions:Array.isArray(data?.actions)?data.actions:[],lowConfidence:Boolean(data?.lowConfidence)});
         conversationHistory.push({role:'user',content:message},{role:'assistant',content:answer});conversationHistory=conversationHistory.slice(-6);
       }
     }catch{if(session===chatSession)chatEntries.push({role:'assistant',content:t('errorFallback'),error:true});}
@@ -242,7 +299,7 @@
       }).join('')}</div></section>`;
     }).join('');
     const source=sourcesData.sources.find(s=>s.id==='academic-calendar');
-    return `<div class="main-content"><div class="page-head"><div><p class="eyebrow">${esc(t('calendarNav'))}</p><h1 class="page-title">${esc(t('calendarTitle'))}</h1><p class="page-description">${esc(t('calendarDescription'))}</p></div></div><section class="surface-card"><div class="calendar-groups">${entries||`<p class="empty-note">${esc(t('noUpcoming'))}</p>`}</div>${source?`<a class="calendar-link" href="${safeUrl(source.url)}" target="_blank" rel="noopener noreferrer">${icon('file')}${esc(t('calendarPdf'))}</a>`:''}</section></div>`;
+    return `<div class="main-content"><div class="page-head"><div><p class="eyebrow">${esc(t('calendarNav'))}</p><h1 class="page-title">${esc(t('calendarTitle'))}</h1><p class="page-description">${esc(t('calendarDescription'))}</p></div></div><section class="surface-card">${datesNotice()}<div class="calendar-groups">${entries||`<p class="empty-note">${esc(t('noUpcoming'))}</p>`}</div>${source?`<a class="calendar-link" href="${safeUrl(source.url)}" target="_blank" rel="noopener noreferrer">${icon('file')}${esc(t('calendarPdf'))}</a>`:''}</section></div>`;
   }
   function renderGuide(path) {
     const data=TEXT[lang].guides[path];if(!data)return renderAssistant();
@@ -290,6 +347,8 @@
     let html;
     if(assistantRoute)html=renderAssistant();
     else if(route==='/takvim')html=renderCalendar();
+    else if(route==='/uygunluk')html=renderEligibility();
+    else if(route==='/kontrol-listesi')html=renderChecklist();
     else if(TEXT[lang].guides[route])html=renderGuide(route);
     else if(route==='/yonetmelik')html=renderSourcesPage('regulation');
     else if(route==='/el-kitabi')html=renderSourcesPage('handbook');
@@ -330,12 +389,15 @@
       fetch('/api/sources').then(r=>{if(!r.ok)throw new Error();return r.json();}),
       fetch('/api/health').then(r=>{if(!r.ok)throw new Error();return r.json();})
     ]);
-    if(calendarResult.status==='fulfilled')calendarData=calendarResult.value;
+    if(calendarResult.status==='fulfilled'){const d=calendarResult.value;if(P.date(d.today)&&Array.isArray(d.events))calendarData={...d,events:d.events.filter(P.validEvent)};}
     if(sourcesResult.status==='fulfilled')sourcesData=sourcesResult.value;
     if(healthResult.status==='fulfilled')healthData=healthResult.value;
     updateHeader();
-    if(['/','/asistan'].includes(currentRoute())){const deadline=$('assistant-deadline');if(deadline)deadline.innerHTML=renderDeadlineLine();}
-    else if(['/takvim','/yonetmelik','/el-kitabi','/kaynaklar'].includes(currentRoute()))renderRoute();
+    if(['/','/asistan'].includes(currentRoute())){
+      const deadline=$('assistant-deadline');if(deadline)deadline.innerHTML=renderDeadlineLine();
+      if(chatEntries.length)renderChatEntries();
+    }
+    else if(['/takvim','/yonetmelik','/el-kitabi','/kaynaklar','/kontrol-listesi'].includes(currentRoute()))renderRoute();
   }
 
   document.querySelectorAll('.language-switch button').forEach(button=>button.addEventListener('click',()=>{
@@ -358,5 +420,5 @@
   window.addEventListener('hashchange',renderRoute);
   window.addEventListener('keydown',event=>{if(event.key==='Escape')closeSidebar();});
   document.querySelectorAll('[data-icon]').forEach(node=>{node.innerHTML=icon(node.dataset.icon);});
-  updateLocalizedChrome();renderRoute();loadData();
+  updateLocalizedChrome();renderRoute();loadData();loadPlanning();
 })();

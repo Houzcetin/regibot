@@ -127,3 +127,20 @@
 .more-chip{gap:6px;border-style:dashed;color:#5a6878;font-weight:700}
 .more-chip-arrow{font-size:15px;line-height:1}
 :root[data-theme="dark"] .more-chip{color:#aab7c4}
+
+/* Planning tools reuse the application's surfaces, cards and theme tokens. */
+.planning-selects { display:flex; flex-wrap:wrap; gap:1rem; margin:1rem 0; }
+.planning-selects label,.planning-dialog label { display:grid; gap:.5rem; }
+.planning-selects select,.planning-dialog input,.planning-dialog textarea { font:inherit; color:inherit; background:var(--surface, Canvas); border:1px solid var(--line); padding:.65rem; border-radius:8px; max-width:100%; }
+.planning-courses { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:1rem; margin:1rem 0; }
+.planning-courses p { margin:.65rem 0; }
+.checklist-step { padding:1rem 0; border-bottom:1px solid var(--line); }
+.checklist-step input,.planning-courses input { width:1.1rem; height:1.1rem; vertical-align:middle; accent-color:#315bb1; }
+.response-actions { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.75rem; }
+.response-actions .guide-question { width:auto; padding:.65rem; }
+.planning-dialog { width:min(620px,calc(100% - 2rem)); max-height:90vh; overflow:auto; border:1px solid var(--line); border-radius:14px; padding:1.5rem; color:var(--text,#172338); background:var(--surface,#fff); }
+.planning-dialog::backdrop { background:#0008; }
+.planning-dialog form { display:grid; gap:1rem; }
+.planning-dialog textarea { width:100%; resize:vertical; }
+
+.planning-selects select:focus-visible { outline:3px solid #efbd69; outline-offset:2px; }
