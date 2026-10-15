@@ -7,6 +7,13 @@ const fs = require('node:fs');
 const CONFLICTS = new Map(JSON.parse(fs.readFileSync(path.join(__dirname, 'data/conflicts.json'), 'utf8')).map(c => [c.chunk_id, c]));
 const { search, isDateQuestion, matchCalendar, LOW_SCORE, chunks, calendar, sources, tokens } = require('./lib/retrieval');
 
+const P = require('./public/planning-core');
+const { actionsFor } = require('./lib/actions');
+let curricula = [];
+try {
+  const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/curricula.json'), 'utf8'));
+  curricula = Array.isArray(data) ? data.filter(P.validDataset) : [];
+} catch { console.warn('[planning] Curriculum data unavailable; serving an empty dataset list.'); }
 const app = express();
 // Hosted behind one reverse proxy (e.g. Render): take the client IP from X-Forwarded-For so the per-IP rate
 // limit applies per visitor instead of to the proxy. Trusting exactly one hop keeps the header unspoofable.
@@ -179,7 +186,7 @@ app.post('/api/chat', async (req, res) => {
     if (response.stop_reason === 'refusal') return res.json({ answer: MSG.refusal[lang], sources: [], lowConfidence: !hits.length || hits[0].score < LOW_SCORE });
     const raw = (response.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n');
     const mapped = sourceCards(raw, hits, Boolean(dateHits));
-    return res.json({ ...mapped, lowConfidence: !hits.length || hits[0].score < LOW_SCORE });
+    return res.json({ ...mapped, actions: actionsFor(message, mapped.answer, mapped.sources, dateHits, calendar), lowConfidence: !hits.length || hits[0].score < LOW_SCORE });
   } catch (error) {
     if (error instanceof Anthropic.AuthenticationError) return fail(res, 502, 'auth', lang);
     if (error instanceof Anthropic.RateLimitError) return fail(res, 503, 'rate', lang);
@@ -191,9 +198,15 @@ app.post('/api/chat', async (req, res) => {
     return fail(res, 502, 'error', lang);
   }
 });
+app.get('/api/curricula', (req, res) => res.json({ datasets: curricula }));
+app.get('/api/calendar/:id.ics', (req, res) => {
+  const event = calendar.find(e => P.validEvent(e) && P.eventId(e) === req.params.id);
+  if (!event) return res.status(404).end();
+  res.set('Content-Type', 'text/calendar; charset=utf-8').set('Content-Disposition', 'attachment; filename=regibot-event.ics').send(P.ics(event, req.query.lang === 'tr' ? 'tr' : 'en'));
+});
 app.get('/api/calendar', (req, res) => {
-  const { today, isDemoDate } = todayInfo();
-  res.json({ today, isDemoDate, events: [...calendar].sort((a, b) => a.start.localeCompare(b.start)) });
+  const { today, isDemoDate, realToday } = todayInfo();
+  res.json({ today, isDemoDate, realToday, events: calendar.filter(P.validEvent).sort((a, b) => a.start.localeCompare(b.start)) });
 });
 app.get('/api/health', (req, res) => res.json({ ok: true, model: MODEL, hasKey: Boolean(API_KEY), chunks: chunks.length }));
 app.get('/api/sources', (req, res) => {
