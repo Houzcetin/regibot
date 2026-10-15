@@ -1,0 +1,9 @@
+=== Öğrenci İşleri Müdürlüğü İletişim (Student Affairs Office Contact)
+Yaşar Üniversitesi, Öğrenci İşleri Müdürlüğü (Student Affairs Office / Registrar)
+Adres (Address): Üniversite Caddesi, No:37-39, Ağaçlı Yol, Bornova, İzmir
+Telefon (Phone): +90 (232) 570 7070
+Faks (Fax): +90 (232) 570 7000
+Destek (Support): Öğrenci e-posta hesabı ile https://oimdestek.yasar.edu.tr adresi üzerinden destek talebi oluşturulabilir. (Students can open a support ticket at https://oimdestek.yasar.edu.tr using their student e-mail account.)
+Web: https://oim.yasar.edu.tr
+Not: Ders kotaları ile ilgili talepler bölüm başkanlıkları tarafından yapılmaktadır; Öğrenci İşleri Müdürlüğü'ne ders kotaları ile ilgili talepte bulunulmamalıdır. (Course quota requests are handled by department heads, not by Student Affairs.)
+Akademik danışmana OBS üzerinden mesaj gönderilebilir. (Students can message their academic advisor through OBS.)

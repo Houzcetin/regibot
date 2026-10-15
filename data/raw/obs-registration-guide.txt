@@ -1,0 +1,69 @@
+Ders kayıtları hakkında
+
+
+Ders kayıtları için sınıfınıza göre duyuru yapılan tarih ve saatlerde OBS
+‘ye giriş yapılıp ‘’Ders ve Dönem İşlemleri ‘’ bölümü işaretlenir.
+
+
+Ders ve Dönem işlemleri sekmesi altında Ders Kayıt sekmesi işaretlenir, bu
+bölümden itibaren ilgili dönemde açılmış dersler sayfada görülür.
+
+
+Açılan menü kısmında dersler sınıf sınıf ve güz-bahar yarıyıl dersleri şeklinde
+sekmeler ayrılmıştır.Seçmek istediğiniz ders müfredatınızda hangi sınıfta ve
+dönemde ise o sekmede önünüze çıkacaktır. Müfredatınız ile ilgili bilgilere
+https://obs.yasar.edu.tr/oibs/bologna/# adresinden ulaşabilirsiniz.
+
+
+Dersin solundaki + 	işareti işaretlendiğinde dersin şubeleri menüde belirecektir.
+
+
+Menüde ders adının yanında dersin programı hakkında bilgi verilmektedir. Sağ üst
+köşede Ek İşlemler işaretlendiğinde ise kontenjan durumu hakkında bilgi
+alınabilmekte.
+
+
+Kontenjanı dolu olan derslerin kota artırım yetkisi sadece ilgili dersin
+veren anabilim dalı başkanlıklarında bulunmaktadır.
+
+
+Belirlediğiniz dersi seçtiğinizde , dersin kodu alt taraftaki seçilen dersler menüsüne
+eklenecektir.
+
+
+Seçtiğiniz dersin haftalık ders programını orta menüde bulunan Ek İşlemler
+kısmından Ders Programı sekmesinden kontrol edebilirsiniz.
+
+
+Ders programları bir birleri ile çakışan dersleri seçemezsiniz. Sadece F/U notu ile
+başarısız olunan derslerin herhangi bir ders ile çakışması durumunda bu derslere
+kayıtlanabilirsiniz.
+
+
+Çok şubesi olan derslerde öncelikle 9 adet şube görüntülenir.Daha fazla şubenin
+programı seçeneklerde görebilmek için sağ alttaki Tüm Dersler Listesi
+işaretlenmelidir.
+
+
+Tüm dersler sekmesi işaretlendikten sonra açılan şube sayısı ve sayfa sayısı
+derslerin altında görülecektir.
+
+
+Ders seçiminizi tamamladığınızda haftalık ders programınızı kontrol etmeyi unutmayın.
+Uzaktan eğitim ile verilen UFND dersleri ve YÖK zorunlu dersleri olan Türkçe ve Atatürk
+İlke Ve İnkılapları dersleri programınızda derslik tanımı olmadığı için görülmeyecektir.
+
+
+Tüm kontrolleri sağladıktan sonra Kontrol Et, Kesinleştir ve Danışman Onayına
+Gönder butonları ile kaydınızı tamamlayabilirsiniz. Eğer ücret yatırmadı iseniz
+izin vermeyecektir kesinleştir butonu sonrası yatırmanız gereken ücret ekranda
+görülecektir.
+
+
+Bu mesaj müfredatınızda bulunan dersler için genel bir uyarı mesajıdır. Eğitim ücretinizi ödemiş iseniz ekrana gelen
+mesajdaki tamam butonuna basarak ders kaydınızı tamamlayabilirsiniz. Almadığınız zorunlu ders veya dersler
+mevcut ise danışman hocanız rehberliğinde ders kaydınızı tamamlayabilirsiniz. Ders kaydınızı yine de
+kesinleştiremiyorsanız; son bölümdeki UYARI kısmındaki gerekçeyi dikkate alarak ders kaydınızı revize etmeniz
+gerekmektedir.
+
+

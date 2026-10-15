@@ -1,0 +1,10 @@
+=== Bilgisayar Mühendisliği Müfredatı — Dönemlere Göre Dersler (Computer Engineering Curriculum by Semester, 2025-2026 chart)
+Kaynak: Bölüm web sitesindeki "Müfredat ve Ön Koşul İlişkileri" şeması (2025-2026). Ön koşul (prerequisite) okları için şemanın kendisine bakınız: https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png. (Source: the department's curriculum and prerequisite chart. For prerequisite arrows, see the chart itself.) Ders kodları şemada yazıldığı şekliyle aktarılmıştır (course codes are copied exactly as written in the chart, e.g. UMFD).
+1. Dönem (1st semester): MATH 1100, MATH 1131, PHYS 1121, SE 1105, SOFL 1101, UMFD 1020
+2. Dönem (2nd semester): COMP 1202, MATH 1132, PHYS 1122, UMFD 1120, SOFL 1102, UMFD 1220
+3. Dönem (3rd semester): COMP 2233, EEE 2274, HIST 1110, MATH 2260, SE 2228, TURK 1110, Üniversite Seçmeli (University Elective)
+4. Dönem (4th semester): COMP 3330, COMP 2215, EEE 2110, HIST 1210, MATH 2255, TURK 1210, UFND 7010
+5. Dönem (5th semester): MATH 2261, COMP 3327, COMP 3315, ISG 9110, SE 2230, Üniversite Seçmeli (University Elective), Alan Seçmeli (Area Elective)
+6. Dönem (6th semester): COMP 3323, COMP 3304, COMP 3328, ENGR 3450, ENGR 4400, Üniversite Seçmeli (University Elective)
+7. Dönem (7th semester): COMP 4910, COMP 4801, ISG 9210, ENGR 4411, UMFD 1720, Üniversite Seçmeli (University Elective), Alan Seçmeli (Area Elective)
+8. Dönem (8th semester): COMP 4920, Üniversite Seçmeli (University Elective), Alan Seçmeli (Area Elective)

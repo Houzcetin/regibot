@@ -1,0 +1,86 @@
+[
+  {
+    "id": "regulation-tr",
+    "title": "Yaşar Üniversitesi Ön Lisans ve Lisans Eğitim-Öğretim ve Sınav Yönetmeliği",
+    "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/tr/59751247618113477416.pdf",
+    "language": "tr",
+    "retrieved_at": "2026-10-15",
+    "file": "regulation-tr.txt",
+    "kind": "regulation"
+  },
+  {
+    "id": "regulation-en",
+    "title": "Yaşar University Regulation on Education-Training and Exams for Associate and Bachelor's Degrees",
+    "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/en/11960708961476643.pdf",
+    "language": "en",
+    "retrieved_at": "2026-10-15",
+    "file": "regulation-en.txt",
+    "kind": "regulation"
+  },
+  {
+    "id": "oim-registration",
+    "title": "Öğrenci İşleri Müdürlüğü — Ders Kayıtları",
+    "url": "https://oim.yasar.edu.tr/ders-kayitlari/",
+    "language": "tr",
+    "retrieved_at": "2026-10-15",
+    "file": "oim-course-registration.txt",
+    "kind": "sections",
+    "section_anchors": {
+      "Eğitim Ücreti": "1651736436831-6ae05c6f-c362",
+      "Ders Kayıt Takvimi": "1651736436858-9bc23710-528e",
+      "Ders Kayıt Kuralları": "1652249650175-34a39788-3492",
+      "Ders Kaydı Nasıl Yapılır?": "1652267406882-68e9d4af-4cfd",
+      "Ders İşlemleri Nelerdir ?": "1662375869037-9b07bb85-7204",
+      "Çap ve Yandal Ders Kaydı": "1651736469055-7d439fe8-b037",
+      "Dersten Çekilme": "1729003017542-0215983a-0337",
+      "Müfredat Bilgisi": "1652249654136-be444a36-d5a7",
+      "Muafiyet ve İntibak İşlemleri": "1662381763028-f2310ec5-615c",
+      "Sıkça Sorulan Sorular": "1651736468439-a357881c-c12c"
+    }
+  },
+  {
+    "id": "obs-guide",
+    "title": "OBS Ders Kaydı Kılavuzu",
+    "url": "https://oim.yasar.edu.tr/wp-content/uploads/2020/12/kayit.pdf",
+    "language": "tr",
+    "retrieved_at": "2026-10-15",
+    "file": "obs-registration-guide.txt",
+    "kind": "plain"
+  },
+  {
+    "id": "academic-calendar",
+    "title": "Yaşar Üniversitesi 2026-2027 Akademik Takvimi",
+    "url": "https://oim.yasar.edu.tr/wp-content/uploads/2026/04/2026-2027-Akademik-Takvim.pdf",
+    "language": "tr",
+    "retrieved_at": "2026-10-15",
+    "file": "academic-calendar-2026-2027.txt",
+    "kind": "sections"
+  },
+  {
+    "id": "contacts-oim",
+    "title": "Öğrenci İşleri Müdürlüğü — İletişim",
+    "url": "https://oim.yasar.edu.tr/iletisim/",
+    "language": "tr",
+    "retrieved_at": "2026-10-15",
+    "file": "contacts.txt",
+    "kind": "sections"
+  },
+  {
+    "id": "contacts-ce",
+    "title": "Bilgisayar Mühendisliği Bölümü — İletişim",
+    "url": "https://ce.yasar.edu.tr/iletisim/",
+    "language": "tr",
+    "retrieved_at": "2026-10-15",
+    "file": "contacts-ce.txt",
+    "kind": "sections"
+  },
+  {
+    "id": "ce-curriculum",
+    "title": "Bilgisayar Mühendisliği — Müfredat ve Ön Koşul İlişkileri",
+    "url": "https://ce.yasar.edu.tr/mufredat-ve-on-kosul-iliskileri/",
+    "language": "tr",
+    "retrieved_at": "2026-10-15",
+    "file": "ce-curriculum.txt",
+    "kind": "sections"
+  }
+]
