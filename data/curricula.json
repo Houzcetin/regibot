@@ -6,376 +6,813 @@
       "en": "Computer Engineering"
     },
     "version": "2025–2026",
-    "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png",
+    "source": "https://ce.yasar.edu.tr/en/program-prerequisite-relationships/",
     "courses": [
       {
         "code": "MATH 1100",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "MATHEMATICAL LOGIC",
+          "tr": "MATEMATİKSEL MANTIK"
+        },
+        "ects": 5.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851135&lang=en",
+        "semester": 1,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "MATH 1131",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "CALCULUS I",
+          "tr": "ANALİZ I"
+        },
+        "ects": 7.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850979&lang=en",
+        "semester": 1,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "PHYS 1121",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "PHYSICS I",
+          "tr": "FİZİK I"
+        },
+        "ects": 7.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851058&lang=en",
+        "semester": 1,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "SE 1105",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "PROGRAMMING AND PROBLEM SOLVING I",
+          "tr": "PROGRAMLAMA VE PROBLEM ÇÖZME I"
+        },
+        "ects": 6.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851040&lang=en",
+        "semester": 1,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "SOFL 1101",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "ENGLISH FOR ACADEMIC PURPOSES I",
+          "tr": "AKADEMİK İNGİLİZCE I"
+        },
+        "ects": 4.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851055&lang=en",
+        "semester": 1,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "UMFD 1020",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "FOUNDATIONS OF CRITICAL AND ANALYTICAL THINKING",
+          "tr": "ELEŞTİREL VE ANALİTİK DÜŞÜNMENİN TEMELLERİ"
+        },
+        "ects": 2.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851164&lang=en",
+        "semester": 1,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "COMP 1202",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "DISCRETE COMPUTATIONAL STRUCTURES",
+          "tr": "AYRIK HESAPLAMA YAPILARI"
+        },
+        "ects": 6.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851136&lang=en",
+        "semester": 2,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "MATH 1132",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "CALCULUS II",
+          "tr": "ANALİZ II"
+        },
+        "ects": 7.0,
+        "prerequisites": {
+          "op": "or",
+          "items": [
+            {
+              "op": "course",
+              "code": "MATH 1131"
+            },
+            {
+              "op": "course",
+              "code": "MATH 131"
+            },
+            {
+              "op": "course",
+              "code": "MATH 111"
+            }
+          ]
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850987&lang=tr",
+        "semester": 2,
+        "requirementsText": "( MATH 1131 or MATH 131 or MATH 111 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( MATH 1131 veya MATH 131 veya MATH 111 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850987&lang=tr"
       },
       {
         "code": "PHYS 1122",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "PHYSICS II",
+          "tr": "FİZİK II"
+        },
+        "ects": 7.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851059&lang=en",
+        "semester": 2,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "UMFD 1120",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "FOUNDATIONS OF ENTREPRENEURSHIP",
+          "tr": "GİRİŞİMCİLİĞİN TEMELLERİ"
+        },
+        "ects": 2.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851165&lang=en",
+        "semester": 2,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "SOFL 1102",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "ENGLISH FOR ACADEMIC PURPOSES II",
+          "tr": "AKADEMİK İNGİLİZCE II"
+        },
+        "ects": 4.0,
+        "prerequisites": {
+          "op": "or",
+          "items": [
+            {
+              "op": "course",
+              "code": "SOFL 1101"
+            },
+            {
+              "op": "course",
+              "code": "SOFL 101"
+            }
+          ]
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851056&lang=tr",
+        "semester": 2,
+        "requirementsText": "( SOFL 1101 or SOFL 101 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( SOFL 1101 veya SOFL 101 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851056&lang=tr"
       },
       {
         "code": "UMFD 1220",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "FOUNDATIONS OF DESIGN THINKING",
+          "tr": "TASARIM ODAKLI DÜŞÜNMENİN TEMELLERİ"
+        },
+        "ects": 2.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851166&lang=en",
+        "semester": 2,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "COMP 2233",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "DATA STRUCTURES",
+          "tr": "VERİ YAPILARI"
+        },
+        "ects": 6.0,
+        "prerequisites": {
+          "op": "course",
+          "code": "SE 1105"
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851156&lang=tr",
+        "semester": 3,
+        "requirementsText": "( SE 1105 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( SE 1105 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851156&lang=tr"
       },
       {
         "code": "EEE 2274",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "FUNDAMENTALS OF ELECTRONICS",
+          "tr": "ELEKTRONİĞİN TEMELLERİ"
+        },
+        "ects": 6.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851042&lang=en",
+        "semester": 3,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "HIST 1110",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "ATATÜRK'S PRINCIPLES AND HISTORY OF REVOLUTION I",
+          "tr": "ATATÜRK İLKELERİ VE İNKILAP TARİHİ I"
+        },
+        "ects": 2.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851043&lang=en",
+        "semester": 3,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "MATH 2260",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "PROBABILITY AND STATISTICS FOR ENGINEERING",
+          "tr": "MÜHENDİSLER İÇİN OLASILIK VE İSTATİSTİK"
+        },
+        "ects": 6.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851144&lang=en",
+        "semester": 3,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "SE 2228",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "ANALYSIS AND DESIGN OF ALGORITHMS",
+          "tr": "ALGORİTMA ANALİZİ VE TASARIMI"
+        },
+        "ects": 6.0,
+        "prerequisites": {
+          "op": "course",
+          "code": "SE 1105"
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851057&lang=tr",
+        "semester": 3,
+        "requirementsText": "( SE 1105 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( SE 1105 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851057&lang=tr"
       },
       {
         "code": "TURK 1110",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "TURKISH I",
+          "tr": "TÜRK DİLİ I"
+        },
+        "ects": 2.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851047&lang=en",
+        "semester": 3,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "COMP 3330",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "AUTOMATA THEORY",
+          "tr": "OTOMATLAR KURAMI"
+        },
+        "ects": 6.0,
+        "prerequisites": {
+          "op": "or",
+          "items": [
+            {
+              "op": "course",
+              "code": "MATH 1100"
+            },
+            {
+              "op": "course",
+              "code": "MATH 1101"
+            }
+          ]
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851079&lang=tr",
+        "semester": 4,
+        "requirementsText": "( MATH 1100 or MATH 1101 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( MATH 1100 veya MATH 1101 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851079&lang=tr"
       },
       {
         "code": "COMP 2215",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "OBJECT ORIENTED PARADIGMS",
+          "tr": "NESNE YÖNELİMLİ PARADİGMALAR"
+        },
+        "ects": 7.0,
+        "prerequisites": {
+          "op": "course",
+          "code": "SE 1105"
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851031&lang=tr",
+        "semester": 4,
+        "requirementsText": "( SE 1105 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( SE 1105 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851031&lang=tr"
       },
       {
         "code": "EEE 2110",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "DIGITAL DESIGN",
+          "tr": "SAYISAL TASARIM"
+        },
+        "ects": 6.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851048&lang=en",
+        "semester": 4,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "HIST 1210",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "ATATÜRK'S PRINCIPLES AND HISTORY OF REVOLUTION II",
+          "tr": "ATATÜRK İLKELERİ VE İNKILAP TARİHİ II"
+        },
+        "ects": 2.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851044&lang=en",
+        "semester": 4,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "MATH 2255",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "LINEAR ALGEBRA",
+          "tr": "DOĞRUSAL CEBİR"
+        },
+        "ects": 6.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851137&lang=en",
+        "semester": 4,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "TURK 1210",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "TURKISH II",
+          "tr": "TÜRK DİLİ II"
+        },
+        "ects": 2.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851049&lang=tr",
+        "semester": 4,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none",
+        "requirementsTextTr": "Yok",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851049&lang=tr"
       },
       {
         "code": "UFND 7010",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "SOCIAL RESPONSIBILITY",
+          "tr": "SOSYAL SORUMLULUK"
+        },
+        "ects": 1.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000879545&lang=en",
+        "semester": 4,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "MATH 2261",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "INTRODUCTION DIFFERENTIAL EQUATIONS",
+          "tr": "DİFERANSİYEL DENKLEMLERE GİRİŞ"
+        },
+        "ects": 4.0,
+        "prerequisites": {
+          "op": "or",
+          "items": [
+            {
+              "op": "course",
+              "code": "MATH 1131"
+            },
+            {
+              "op": "course",
+              "code": "MATH 131"
+            },
+            {
+              "op": "course",
+              "code": "MATH 111"
+            }
+          ]
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851142&lang=tr",
+        "semester": 5,
+        "requirementsText": "( MATH 1131 or MATH 131 or MATH 111 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( MATH 1131 veya MATH 131 veya MATH 111 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851142&lang=tr"
       },
       {
         "code": "COMP 3327",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "COMPUTER NETWORKS",
+          "tr": "BİLGİSAYAR AĞLARI"
+        },
+        "ects": 6.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851141&lang=en",
+        "semester": 5,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "COMP 3315",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "COMPUTER ORGANIZATION",
+          "tr": "BİLGİSAYAR ORGANİZASYONU"
+        },
+        "ects": 7.0,
+        "prerequisites": {
+          "op": "course",
+          "code": "EEE 2110"
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850988&lang=tr",
+        "semester": 5,
+        "requirementsText": "( EEE 2110 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( EEE 2110 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850988&lang=tr"
       },
       {
         "code": "ISG 9110",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "OCCUPATIONAL HEALTH AND SAFETY I",
+          "tr": "İŞ SAĞLIĞI VE GÜVENLİĞİ I"
+        },
+        "ects": 2.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851045&lang=en",
+        "semester": 5,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "SE 2230",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "DATABASE SYSTEMS",
+          "tr": "VERİ TABANI SİSTEMLERİ"
+        },
+        "ects": 6.0,
+        "prerequisites": {
+          "op": "course",
+          "code": "SE 1105"
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851175&lang=tr",
+        "semester": 5,
+        "requirementsText": "( SE 1105 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( SE 1105 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851175&lang=tr"
       },
       {
         "code": "COMP 3323",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "OPERATING SYSTEMS",
+          "tr": "İŞLETİM SİSTEMLERİ"
+        },
+        "ects": 6.0,
+        "prerequisites": {
+          "op": "or",
+          "items": [
+            {
+              "op": "course",
+              "code": "COMP 2233"
+            },
+            {
+              "op": "course",
+              "code": "COMP 1123"
+            },
+            {
+              "op": "course",
+              "code": "COMP 2213"
+            }
+          ]
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850989&lang=tr",
+        "semester": 6,
+        "requirementsText": "( COMP 2233 or COMP 1123 or COMP 2213 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( COMP 2233 veya COMP 1123 veya COMP 2213 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850989&lang=tr"
       },
       {
         "code": "COMP 3304",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "FUNDAMENTALS OF SOFTWARE ENGINEERING",
+          "tr": "YAZILIM MÜHENDİSLİĞİNİN TEMELLERİ"
+        },
+        "ects": 6.0,
+        "prerequisites": {
+          "op": "course",
+          "code": "COMP 2215"
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851143&lang=tr",
+        "semester": 6,
+        "requirementsText": "( COMP 2215 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( COMP 2215 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851143&lang=tr"
       },
       {
         "code": "COMP 3328",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "EMBEDDED SYSTEMS",
+          "tr": "GÖMÜLÜ SİSTEMLER"
+        },
+        "ects": 7.0,
+        "prerequisites": {
+          "op": "course",
+          "code": "COMP 3315"
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850990&lang=tr",
+        "semester": 6,
+        "requirementsText": "( COMP 3315 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( COMP 3315 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850990&lang=tr"
       },
       {
         "code": "ENGR 3450",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "PROJECT MANAGEMENT",
+          "tr": "PROJE YÖNETIMI"
+        },
+        "ects": 5.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851052&lang=en",
+        "semester": 6,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "ENGR 4400",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "ENGINEERING ETHICS AND SEMINAR",
+          "tr": "MÜHENDİSLİK ETİĞİ VE SEMİNER"
+        },
+        "ects": 2.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851051&lang=en",
+        "semester": 6,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "COMP 4910",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "SENIOR DESIGN PROJECT I",
+          "tr": "MEZUNİYET TASARIM PROJESİ I"
+        },
+        "ects": 8.0,
+        "prerequisites": {
+          "op": "and",
+          "items": [
+            {
+              "op": "course",
+              "code": "EEE 2110"
+            },
+            {
+              "op": "course",
+              "code": "ISG 9110"
+            },
+            {
+              "op": "course",
+              "code": "SE 2228"
+            }
+          ]
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850991&lang=tr",
+        "semester": 7,
+        "requirementsText": "( EEE 2110 ) and ( ISG 9110 ) and ( SE 2228 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( EEE 2110 ) ve ( ISG 9110 ) ve ( SE 2228 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850991&lang=tr"
       },
       {
         "code": "COMP 4801",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "INTERNSHIP",
+          "tr": "STAJ"
+        },
+        "ects": 4.0,
+        "prerequisites": {
+          "op": "course",
+          "code": "ISG 9110"
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851157&lang=tr",
+        "semester": 7,
+        "requirementsText": "( ISG 9110 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( ISG 9110 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851157&lang=tr"
       },
       {
         "code": "ISG 9210",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "OCCUPATIONAL HEALTH AND SAFETY II",
+          "tr": "İŞ SAĞLIĞI VE GÜVENLİĞİ II"
+        },
+        "ects": 2.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851046&lang=en",
+        "semester": 7,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "ENGR 4411",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "ENGINEERING FOR SUSTAINABLE DEVELOPMENT",
+          "tr": "SÜRDÜRÜLEBİLİR KALKINMA İÇİN MÜHENDİSLİK"
+        },
+        "ects": 3.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000853409&lang=en",
+        "semester": 7,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "UMFD 1720",
-        "title": null,
-        "ects": null,
+        "title": {
+          "en": "CAREER PLANNIG",
+          "tr": "KARİYER PLANLAMA"
+        },
+        "ects": 2.0,
         "prerequisites": null,
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000862545&lang=en",
+        "semester": 7,
+        "requirementsText": "None",
+        "verificationReason": "explicit-none"
       },
       {
         "code": "COMP 4920",
-        "title": null,
-        "ects": null,
-        "prerequisites": null,
+        "title": {
+          "en": "SENIOR DESIGN PROJECT II",
+          "tr": "MEZUNİYET TASARIM PROJESİ II"
+        },
+        "ects": 8.0,
+        "prerequisites": {
+          "op": "or",
+          "items": [
+            {
+              "op": "course",
+              "code": "COMP 4910"
+            },
+            {
+              "op": "course",
+              "code": "COMP 495"
+            }
+          ]
+        },
         "corequisites": null,
-        "verification": "unverified",
-        "source": "https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png"
+        "verification": "verified",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850980&lang=tr",
+        "semester": 8,
+        "requirementsText": "( COMP 4910 or COMP 495 )",
+        "verificationReason": "catalogue-prerequisites",
+        "requirementsTextTr": "( COMP 4910 veya COMP 495 )",
+        "sourceTr": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850980&lang=tr"
+      }
+    ],
+    "catalogueSource": "https://obs.yasar.edu.tr/oibs/bologna/progCourses.aspx?curSunit=71&lang=en",
+    "departmentSource": "https://ce.yasar.edu.tr/en/",
+    "scheduleSource": "https://ce.yasar.edu.tr/en/2026/09/2026-2027-fall-semester-course-schedule/",
+    "reviewedAt": "2026-10-15",
+    "catalogueVersion": "402794",
+    "priorCourses": [
+      {
+        "code": "MATH 111",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850987&lang=tr"
+      },
+      {
+        "code": "MATH 131",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850987&lang=tr"
+      },
+      {
+        "code": "SOFL 101",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851056&lang=tr"
+      },
+      {
+        "code": "MATH 1101",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000851079&lang=tr"
+      },
+      {
+        "code": "COMP 1123",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850989&lang=tr"
+      },
+      {
+        "code": "COMP 2213",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850989&lang=tr"
+      },
+      {
+        "code": "COMP 495",
+        "source": "https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=4005000850980&lang=tr"
       }
     ]
   }

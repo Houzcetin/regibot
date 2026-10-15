@@ -25,10 +25,39 @@ test('corequisites remain separate and do not count as completed prerequisites',
   const r=P.check({...c,prerequisites:null,corequisites:course('SE 1105')},new Set(),codes);
   assert.equal(r.status,'missing');assert.deepEqual(r.missing,[]);assert.deepEqual(r.corequisites,['SE 1105']);
 });
-test('production dataset is valid and has no guessed eligibility rules',()=>{
+test('production rules and legacy alternatives are backed by exact catalogue evidence',()=>{
   assert.ok(datasets.every(P.validDataset));assert.ok(datasets[0].courses.length>35);
-  for(const c of datasets[0].courses)assert.equal(P.check(c,new Set(),new Set(datasets[0].courses.map(c=>c.code))).status,'unknown');
+  const evidence=require('../data/raw/ce-bologna-2025.json'),codes=P.courseCodes(datasets[0]);
+  assert.equal(datasets[0].courses.filter(c=>c.verification==='verified').length,41);
+  for(const c of datasets[0].courses){
+    const record=evidence.records.find(r=>r.code===c.code);assert.ok(record);assert.deepEqual(c.title,record.title);assert.equal(c.ects,record.ects);
+    if(c.verification==='verified')assert.ok(record.requirementsText==='None'||record.requirementsLabelTr==='Ön Koşulları');
+    else assert.equal(P.check(c,new Set(),codes).status,'unknown');
+  }
+  const oop=datasets[0].courses.find(c=>c.code==='COMP 2215');
+  assert.equal(P.check(oop,new Set(),codes).status,'missing');assert.equal(P.check(oop,new Set(['SE 1105']),codes).status,'met');
+  const calculus=datasets[0].courses.find(c=>c.code==='MATH 1132');assert.equal(calculus.prerequisites.op,'or');
+  assert.equal(P.check(calculus,new Set(['MATH 131']),codes).status,'met');
+  assert.equal(P.check(calculus,new Set(['MATH 1131']),codes).status,'met');
+  assert.equal(P.check(calculus,new Set(['MATH 1100']),codes).status,'missing');
+  const saved=P.cleanState({dataset:datasets[0].id,completed:['MATH 131','FAKE 100']},datasets);assert.deepEqual(saved.completed,['MATH 131']);
+  const priorSet=new Set(datasets[0].priorCourses.map(c=>c.code));assert.equal(priorSet.size,7);
+  for(const code of priorSet)assert.ok(evidence.records.some(r=>(r.requirementsTextTr||'').includes(code)));
+  const project=datasets[0].courses.find(c=>c.code==='COMP 4910');assert.equal(project.prerequisites.op,'and');
+  assert.equal(P.check(project,new Set(['EEE 2110','ISG 9110']),codes).status,'missing');
+  assert.equal(P.check(project,new Set(['EEE 2110','ISG 9110','SE 2228']),codes).status,'met');
   assert.equal(P.validDataset({...datasets[0],courses:[{...datasets[0].courses[0],source:'javascript:alert(1)'}]}),false);
+});
+test('completed items move below pending items with stable order and without mutation',()=>{
+ const items=['a','b','c','d'],done=new Set(['a','c']);
+ assert.deepEqual(P.pendingFirst(items,done,x=>x),['b','d','a','c']);assert.deepEqual(items,['a','b','c','d']);
+ assert.deepEqual(P.pendingFirst(items,new Set(),x=>x),items);
+ assert.deepEqual(P.pendingFirst(items,new Set(items),x=>x),items);
+});
+test('official course URLs and imported metadata reject malformed values',()=>{
+ for(const url of ['https://obs.yasar.edu.tr.evil.test/oibs/bologna/','https://user:pass@ce.yasar.edu.tr/en/','https://obs.yasar.edu.tr/login','javascript:alert(1)'])assert.equal(P.officialCourseUrl(url),false);
+ assert.equal(P.officialCourseUrl('https://obs.yasar.edu.tr/oibs/bologna/progCourseDetails.aspx?curCourse=1&lang=tr'),true);
+ const invalid={...datasets[0],courses:[{...datasets[0].courses[0],semester:99}]};assert.equal(P.validDataset(invalid),false);assert.equal(P.validDataset({...datasets[0],courses:[null]}),false);
 });
 test('checklist and course state survives reload, drops invalid values and resets',()=>{
   const values=new Map(),storage={getItem:k=>values.get(k),setItem:(k,v)=>values.set(k,v),removeItem:k=>values.delete(k)};
@@ -71,14 +100,33 @@ test('calendar action recognizes verified Turkish and English inclusive date ran
 test('frontend boots planning routes with validated data in both languages',async()=>{
  const vm=require('node:vm'),fs=require('node:fs');
  for(const lang of ['en','tr'])for(const route of ['/uygunluk','/kontrol-listesi','/','/asistan']){
-   const nodes=new Map(),listeners={};
-   const node=id=>{if(!nodes.has(id))nodes.set(id,{innerHTML:'',textContent:'',dataset:{},style:{},focus(){},classList:{toggle(){},add(){},remove(){},contains(){return false;}},setAttribute(){},removeAttribute(){},addEventListener(){},querySelector(){return null;},querySelectorAll(){return [];}});return nodes.get(id);};
-   const context={window:{Planning:P,addEventListener(){},matchMedia(){return {matches:false};}},document:{body:{classList:{toggle(){}}},documentElement:{dataset:{}},getElementById:node,querySelectorAll(){return [];},querySelector(){return null;},addEventListener(k,fn){listeners[k]=fn;}},location:{hash:'#'+route},CSS:{escape:s=>s},requestAnimationFrame:fn=>fn(),localStorage:{getItem:k=>k==='regibot-language'?lang:null},fetch:async url=>({ok:true,json:async()=>url==='/api/curricula'?{datasets}:url==='/api/calendar'?{events:calendar,today:'2026-09-15',realToday:'2026-10-15',isDemoDate:true}:url==='/api/sources'?{sources:[],totalChunks:0}:{ok:true}}),setTimeout,Intl,Date,console};
+   const nodes=new Map(),listeners={},animations=[];let reducedMotion=false;
+   const node=id=>{if(!nodes.has(id))nodes.set(id,{innerHTML:'',textContent:'',dataset:{},style:{},focus(){},classList:{toggle(){},add(){},remove(){},contains(){return false;}},setAttribute(){},removeAttribute(){},addEventListener(){},querySelector(){return null;},querySelectorAll(selector){
+     if(id==='main-area'&&selector==='[data-planning-item]')return [...this.innerHTML.matchAll(/data-planning-item="([^"]+)"/g)].map((m,index)=>({dataset:{planningItem:m[1]},getBoundingClientRect(){return {top:index*100,left:0};},querySelector(){return null;},animate(frames,options){animations.push({frames,options});}}));
+     return [];
+   }});return nodes.get(id);};
+   const context={window:{Planning:P,addEventListener(){},matchMedia(query){return {matches:query.includes('prefers-reduced-motion')&&reducedMotion};}},document:{body:{classList:{toggle(){}}},documentElement:{dataset:{}},getElementById:node,querySelectorAll(){return [];},querySelector(){return null;},addEventListener(k,fn){listeners[k]=fn;}},location:{hash:'#'+route},CSS:{escape:s=>s},requestAnimationFrame:fn=>fn(),localStorage:{getItem:k=>k==='regibot-language'?lang:null},fetch:async url=>({ok:true,json:async()=>url==='/api/curricula'?{datasets}:url==='/api/calendar'?{events:calendar,today:'2026-09-15',realToday:'2026-10-15',isDemoDate:true}:url==='/api/sources'?{sources:[],totalChunks:0}:{ok:true}}),setTimeout,Intl,Date,console};
    vm.runInNewContext(fs.readFileSync(require.resolve('../public/app.js'),'utf8'),context);
    await new Promise(resolve=>setImmediate(resolve));
    const html=node('main-area').innerHTML;assert.ok(!html.includes('undefined'));
    assert.ok(html.includes(route==='/uygunluk'?'data-course="SE 1105"':route==='/kontrol-listesi'?'data-step="approval"':'assistant-landing'));
    if(route==='/'||route==='/asistan'){assert.ok(html.includes('suggestion-chips'));assert.ok(html.includes('/assets/logo.svg'));assert.ok(!html.includes('data-course='));}
-   if(route==='/kontrol-listesi'){assert.ok(html.includes('2026-09-15'));assert.ok(html.includes('2026-10-15'));}
+   if(route==='/kontrol-listesi'){
+     assert.ok(html.includes('2026-09-15'));assert.ok(html.includes('2026-10-15'));
+     listeners.change({target:{id:'',dataset:{step:'curriculum'},checked:true}});
+     const reordered=node('main-area').innerHTML;
+     assert.ok(reordered.indexOf('data-step="select"')<reordered.indexOf('data-step="curriculum"'));
+     assert.ok(animations.length>0);assert.equal(animations[0].options.duration,440);
+     const animationCount=animations.length;reducedMotion=true;
+     listeners.change({target:{id:'',dataset:{step:'curriculum'},checked:false}});assert.equal(animations.length,animationCount);
+     assert.ok(node('main-area').innerHTML.indexOf('data-step="curriculum"')<node('main-area').innerHTML.indexOf('data-step="select"'));
+   }
+   if(route==='/uygunluk'){
+     listeners.change({target:{id:'',dataset:{course:'MATH 1100'},checked:true}});
+     assert.ok(animations.length>0);
+     const reordered=node('main-area').innerHTML;assert.ok(reordered.indexOf('data-course="SE 1105"')<reordered.indexOf('data-course="MATH 1100"'));
+     listeners.input({target:{id:'course-search',value:'ZZZZZ'}});
+     assert.ok(!node('main-area').innerHTML.includes('data-planning-item="course:'));
+   }
  }
 });
