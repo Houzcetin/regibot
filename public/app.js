@@ -190,7 +190,7 @@
   function requestImpact(message,course='',required=false){
     const d=selectedDataset(),resolved=d?CA.resolve(message,d,conversationHistory):{kind:'missing'};
     const choice=course||(resolved.kind==='resolved'?resolved.course:'');
-    pendingImpact={message,course:choice,required:required||!choice&&['missing','ambiguous','unknown'].includes(resolved.kind),candidates:resolved.kind==='ambiguous'?resolved.candidates:[],notice:['missing','ambiguous','unknown'].includes(resolved.kind)?CA.clarification(resolved.kind,lang):''};
+    pendingImpact={message,course:choice,required:required||!choice&&['missing','ambiguous','unknown'].includes(resolved.kind),candidates:resolved.kind==='ambiguous'?resolved.candidates:[],notice:['missing','ambiguous','unknown'].includes(resolved.kind)?CA.clarification(resolved.kind,CA.detectLang(message)||lang):''};
     if(!['/','/asistan'].includes(currentRoute()))location.hash='#/asistan';else renderRoute();$('impact-course-choice')?.focus();
   }
   const whatIfUI=window.WhatIfUI.create({

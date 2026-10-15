@@ -6,8 +6,23 @@
   function isRequest(text,d){
     const s=fold(text);
     if(!codes(text).length&&!/prereq|on\s*(?:kosul|sart)|unlock/.test(s)&&/login|payment|registration|upload|password|odeme|kayit|sifre|oturum/.test(s)&&!(d&&nameMatches(text,d).length))return false;
-    const course=/\b(course|courses|ders|dersi|dersten|dersin)\b/.test(s)||codes(text).length>0||/this|bunu|bu ders/.test(s)||!!d&&nameMatches(text,d).length>0;
-    return /prereq|on\s*(?:kosul|sart)|unlock|hangi ders|which courses/.test(s)||course&&/\b(pass|passing|passed|fail|failing|failed|postpone|postponing|take)\b|gecer|gecme|geceme|gecsem|gecebilir|basarisiz|kalir|kalma|kalsam|erteler|erteleme|alabilir|almak/.test(s);
+    // Generic regulation questions ("Can I take courses from a higher year?", "Üst sınıftan ders alabilir miyim?",
+    // retake rules) belong to normal chat; "take"/"alabilir" and retakes only count when a specific course is named.
+    const specific=codes(text).length>0||/\bthis\b|bunu|bu ders/.test(s)||!!d&&nameMatches(text,d).length>0;
+    if(!specific&&/retake|repeat|tekrar|yeniden/.test(s))return false;
+    const course=specific||/\b(course|courses|ders|dersi|dersten|dersin)\b/.test(s);
+    return /prereq|on\s*(?:kosul|sart)|unlock|hangi ders|which courses/.test(s)||course&&/\b(pass|passing|passed|fail|failing|failed|postpone|postponing)\b|gecer|gecme|geceme|gecsem|gecebilir|basarisiz|kalir|kalma|kalsam|erteler|erteleme/.test(s)||specific&&/\btake\b|alabilir|almak/.test(s);
+  }
+  // Language of what the student typed; null when there is no clear signal (callers fall back to the UI language).
+  const TR_WORDS=new Set('ne nedir nasil neden nerede nereden hangi hangisi kac ve ile icin bir mi mu miyim misin muyum miyiz var yok zaman ders dersi dersler dersleri dersten dersin kayit donem donemde sinav sinavi ogrenci danisman alabilir alabilirim olur olursa eger gerekir gerekiyor merhaba tesekkurler lutfen basarisiz kalirsam gecersem ertelersem ekleme birakma yaz bana'.split(' '));
+  const EN_WORDS=new Set('the what how when where which why who can could should do does did is are am i my me an of to in for and if will would course courses take register registration fail pass exam grade semester hello hi thanks please many much have has from with'.split(' '));
+  function detectLang(text){
+    let tr=0,en=0;
+    // Locale-neutral lowercase: the Turkish locale would turn the English "I" into "ı". "İ" becomes "i" + U+0307.
+    for(const w of String(text||'').toLowerCase().split(/[^\p{L}\p{M}]+/u).filter(Boolean)){
+      if(/[çğıöşü̇]/.test(w)||TR_WORDS.has(fold(w)))tr++;else if(EN_WORDS.has(w))en++;
+    }
+    return tr>en?'tr':en>tr?'en':null;
   }
   function validateContext(value,datasets){
     const v=value===undefined?{dataset:datasets[0]?.id,sharing:'none'}:value;
@@ -111,5 +126,5 @@
   }
   function clarification(kind,lang){const tr=lang==='tr';return kind==='completed'?(tr?'Bu ders tamamlanmış olarak işaretli. Ders tekrarını mı, yoksa tamamlanmamış olduğu ayrı bir varsayımı mı kastediyorsun? Gerçek ilerlemen değişmedi.':'This course is marked completed. Do you mean a retake, or a separate hypothetical comparison treating it as incomplete? Your actual progress is unchanged.'):kind==='unknown'?(tr?'Bu ders kodunu seçili müfredatta doğrulayamıyorum. Lütfen desteklenen bir ders seç.':'I can’t verify that course code in the selected curriculum. Please choose a supported course.'):kind==='unavailable'?(tr?'Doğrulanmış müfredat şu anda kullanılamıyor.':'The verified curriculum is unavailable.'):kind==='ambiguous'?(tr?'Birden fazla ders eşleşiyor. Hangisini kastediyorsun?':'Several courses match. Which one do you mean?'):(tr?'Hangi dersi kastediyorsun? Bir ders kodu yaz veya aşağıdan seç.':'Which course do you mean? Enter its code or choose below.');}
   async function explain(a,lang,generate){try{const text=await generate(a);if(text?.refused===true)return {refused:true};if(typeof text==='string'&&text.trim())return {answer:text.trim(),fallback:false};}catch{}return {answer:fallback(a,lang),fallback:true};}
-  return {isRequest,codes,resolve,validateContext,build,valid,calculate,rule,fallback,clarification,explain};
+  return {isRequest,detectLang,codes,resolve,validateContext,build,valid,calculate,rule,fallback,clarification,explain};
 });

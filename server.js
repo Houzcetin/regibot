@@ -39,8 +39,9 @@ function todayInfo() {
   const realToday = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
   return { today: DEMO_DATE || realToday, isDemoDate: Boolean(DEMO_DATE), realToday };
 }
-function langGuess(message) {
-  return /[ğüşıöçİ]|\b(merhaba|nedir|nasil|ne zaman|ne zaman|kac|ders|kayit|danisman|ogrenci|basarisiz|kalirsam|gecersem|ertelersem|ne olur|hangi ders|alabilir miyim|ekleme|birakma)\b/i.test(message) ? 'tr' : 'en';
+// Reply in the language the student typed; the UI language only breaks ties (e.g. a bare course code).
+function langGuess(message, fallback = 'en') {
+  return CA.detectLang(message) || (fallback === 'tr' ? 'tr' : 'en');
 }
 function requestLang(req) {
   const explicit = req.body?.lang;
@@ -114,7 +115,7 @@ function passageText(question, lang, hits, dateHits, today) {
   if (!hits.length || hits[0].score < LOW_SCORE) out.push('Note: retrieval confidence is low; the passages may not contain the answer.');
   // Stated explicitly: with mostly English passages the model sometimes answered Turkish questions in English.
   // Based on what the student typed, not the UI toggle.
-  out.push(`Answer language: ${langGuess(question) === 'tr' ? 'Turkish' : 'English'}`);
+  out.push(`Answer language: ${lang === 'tr' ? 'Turkish' : 'English'}`);
   out.push(`Question: ${escText(question)}`);
   return out.join('\n');
 }
@@ -166,15 +167,14 @@ function sourceCards(answer, hits, hasCalendar) {
 app.post('/api/chat', async (req, res) => {
   const body = req.body || {};
   if (typeof body.message !== 'string' || !body.message.trim() || body.message.trim().length > 500) {
-    const lang = body.lang === 'tr' || body.lang === 'en' ? body.lang : langGuess(typeof body.message === 'string' ? body.message : '');
-    return fail(res, 400, 'invalid', lang);
+    return fail(res, 400, 'invalid', langGuess(typeof body.message === 'string' ? body.message : '', body.lang));
   }
   const message = body.message.trim();
-  const lang = body.lang === 'tr' || body.lang === 'en' ? body.lang : langGuess(message);
+  const lang = langGuess(message, body.lang);
   if (!allowed(req.ip || req.socket.remoteAddress || 'unknown')) return fail(res, 429, 'limit', lang);
   const history = normalizeHistory(body.history);
   if (CA.isRequest(message,curricula.find(d=>d.id===body.planning?.dataset)||curricula[0])) {
-    const analysisLang=langGuess(message);
+    const analysisLang=lang;
     const context=CA.validateContext(body.planning,curricula);
     if(!curricula.length)return res.json({answer:CA.clarification('unavailable',analysisLang),sources:[]});
     if(!context)return res.status(400).json({error:true,answer:analysisLang==='tr'?'Ders bağlamı geçersiz. Desteklenen müfredat ve ders kodlarını kullan.':'Invalid course context. Use a supported curriculum and course codes.',sources:[]});
