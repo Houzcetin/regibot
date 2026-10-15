@@ -1,0 +1,1418 @@
+{
+  "model": "claude-haiku-5-5",
+  "baseUrl": "http://localhost:3123",
+  "date": "2026-10-15T13:42:32.856Z",
+  "questions": [
+    {
+      "id": "q01",
+      "lang": "tr",
+      "type": "answer",
+      "question": "Bir dönemde en fazla kaç AKTS ders alabilirim?",
+      "notes": "Successful students: max 40 (Madde 22-23); the answer should mention the GPA dependence.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Bir dönemde alabileceğiniz en fazla AKTS, genel not ortalamanıza (GNO) göre değişir:\n\n- **Başarılı statü (GNO en az 2,00):** En fazla 40 AKTS ders alabilirsiniz. Staj dersi bu sınıra dahil değildir [Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (1/3)].\n- **Sınamalı statü (GNO 1,99 veya altı):** En fazla 32 AKTS ders alabilirsiniz (staj hariç) [Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (1/3)]. Yönetmelik de sınamalı öğrenciler için en fazla 32 kredilik ders sınırını belirtir [Yönetmelik, Madde 24].\n- **Dikey veya yatay geçiş öğrencileri:** İlk iki dönemde en fazla 30 AKTS alabilirsiniz. Akademik danışmanınızın uygun görmesi halinde bu sınır 40 AKTS'ye kadar yükseltilebilir [Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (3/3)].\n\nYönetmelik genel olarak bir dönemde en az 20, en fazla 40 kredilik ders alınabileceğini belirtir [Yönetmelik, Madde 22]. Yönetmelik kredi, resmi sayfa ise AKTS cinsinden ifade eder; bu konuda Öğrenci İşleri'ne (oimdestek.yasar.edu.tr, +90 232 570 7070) danışabilirsiniz.\n\nGNO'nuzu ve geçiş durumunuzu (varsa) paylaşırsanız size hangi sınırın geçerli olduğunu daha net söyleyebilirim. Kayıt işleminizi etkileyeceği için son kararı akademik danışmanınızla teyit edin.",
+      "sources": [
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Sıkça Sorulan Sorular (1/3)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736468439-a357881c-c12c"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Sıkça Sorulan Sorular (3/3)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736468439-a357881c-c12c"
+        },
+        {
+          "title": "Yönetmelik",
+          "article": "Madde 22",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/tr/59751247618113477416.pdf"
+        },
+        {
+          "title": "Yönetmelik",
+          "article": "Madde 24",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/tr/59751247618113477416.pdf"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 9160,
+      "mappedChunkIds": [
+        "oim-registration-25",
+        "oim-registration-27",
+        "regulation-tr-m22",
+        "regulation-tr-m24"
+      ],
+      "expect_facts": [
+        [
+          "40"
+        ]
+      ],
+      "expect_sources": [
+        "regulation-tr-m22",
+        "regulation-tr-m23",
+        "regulation-en-m22",
+        "regulation-en-m23",
+        "oim-registration-6",
+        "oim-registration-11",
+        "oim-registration-25",
+        "oim-registration-26",
+        "oim-registration-27"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q02",
+      "lang": "tr",
+      "type": "answer",
+      "question": "Genel not ortalamam 1,80. Bu dönem en fazla kaç AKTS alabilirim?",
+      "notes": "Probation (GPA <= 1.99): max 32 (Madde 24).",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Genel not ortalamanız 1,80 olduğu için **sınamalı** statüsündesiniz, çünkü 1,99 veya altındaki not ortalaması bu statüyü gerektiriyor [Yönetmelik, Madde 24]. Bu durumda bu dönem en fazla **32 AKTS** ders alabilirsiniz [Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (1/3)].\n\n- Önce başarısız olduğunuz alt sınıf derslerini almakla yükümlüsünüz, ardından 32 AKTS'ye kadar bulunduğunuz sınıfın derslerini alabilirsiniz.\n- Üst sınıftan yeni ders alamazsınız.\n- Staj dersinin AKTS'si bu 32 AKTS'ye dahil değildir; not ortalamanız 1,99 veya altında olduğu için toplamda 32 AKTS artı staj dersi alabilirsiniz [Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (2/3)].\n\nBu bilgi kaydınızı etkilediği için lütfen akademik danışmanınızla teyit edin.",
+      "sources": [
+        {
+          "title": "Yönetmelik",
+          "article": "Madde 24",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/tr/59751247618113477416.pdf"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Sıkça Sorulan Sorular (1/3)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736468439-a357881c-c12c"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Sıkça Sorulan Sorular (2/3)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736468439-a357881c-c12c"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 6318,
+      "mappedChunkIds": [
+        "regulation-tr-m24",
+        "oim-registration-25",
+        "oim-registration-26"
+      ],
+      "expect_facts": [
+        [
+          "32"
+        ]
+      ],
+      "expect_sources": [
+        "regulation-tr-m24",
+        "regulation-en-m24",
+        "oim-registration-11",
+        "oim-registration-25",
+        "oim-registration-26"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q03",
+      "lang": "tr",
+      "type": "answer",
+      "question": "Üst sınıftan ders alabilir miyim?",
+      "notes": "Depends on status: successful students may (up to 40 AKTS) after failed/current courses; probation students may not.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Bu, genel not ortalamanıza ve bölümde kaç dönem eğitim aldığınıza bağlıdır:\n\n- **Başarılı öğrenci** (bölümde en az iki dönem eğitim almış ve genel not ortalaması en az 2.00): En fazla 40 AKTS ders alabilirsiniz (staj dersi hariç). Önce varsa başarısız olduğunuz alt sınıf derslerini almanız gerekir. Bu koşulu sağlarsanız 40 AKTS'ye kadar bir üst sınıfın derslerini alabilirsiniz. [Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (1/3)]\n- **Sınamalı öğrenci** (genel not ortalaması en fazla 1.99): En fazla 32 AKTS ders alabilirsiniz (staj dersi hariç) ve hiçbir şekilde üst sınıftan ders alamazsınız. [Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (1/3)]\n\nGenel not ortalamanızı ve bölümdeki dönem sayınızı belirtirseniz hangi durumda olduğunuzu netleştirebilirim. Bölümde iki dönemden az eğitim almış olmanız durumunda kurallar kaynaklarımda yer almıyor; bu durumda Öğrenci İşleri Ofisi (oimdestek.yasar.edu.tr, +90 232 570 7070) ile iletişime geçmenizi öneririm.\n\nDers kaydınızı etkileyeceği için lütfen danışmanınızla da kontrol edin.",
+      "sources": [
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Sıkça Sorulan Sorular (1/3)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736468439-a357881c-c12c"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Sıkça Sorulan Sorular (2/3)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736468439-a357881c-c12c"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 7045,
+      "mappedChunkIds": [
+        "oim-registration-25",
+        "oim-registration-26"
+      ],
+      "expect_facts": [
+        [
+          "başarılı",
+          "2,00",
+          "2.00"
+        ],
+        [
+          "sınamalı",
+          "1,99",
+          "1.99"
+        ]
+      ],
+      "expect_sources": [
+        "oim-registration-25",
+        "oim-registration-26"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q04",
+      "lang": "tr",
+      "type": "answer",
+      "question": "Başarısız olduğum zorunlu dersi tekrar almak zorunda mıyım?",
+      "notes": "Yes: F/U/W/NA in a mandatory course must be retaken the first semester it is offered (Madde 26/3).",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Evet. Zorunlu bir dersten F, U, W veya NA notu aldıysanız, o dersin açıldığı ilk dönemde öncelikle o dersi almak zorundasınız [Yönetmelik, Madde 26].\n\nSınamalı statüdeyseniz, başarısız olduğunuz zorunlu dersleri tekrar almakla yükümlüsünüz ve bir dönemde en fazla 32 kredilik ders alabilirsiniz [Yönetmelik, Madde 24].\n\nBaşarısız olduğunuz ders seçmeli ise, dersi tekrarlayabilir veya aynı ders grubundan başka bir seçmeli ders alabilirsiniz [Yönetmelik, Madde 26].\n\nDönem sonu genel not ortalamanızın 1,99 veya altında olup olmadığını ve hangi dersten başarısız olduğunuzu söylerseniz durumunuza göre daha net yanıt verebilirim. Kayıtlarınızı etkiliyorsa lütfen akademik danışmanınızla teyit edin.",
+      "sources": [
+        {
+          "title": "Yönetmelik",
+          "article": "Madde 26",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/tr/59751247618113477416.pdf"
+        },
+        {
+          "title": "Yönetmelik",
+          "article": "Madde 24",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/tr/59751247618113477416.pdf"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 7184,
+      "mappedChunkIds": [
+        "regulation-tr-m26",
+        "regulation-tr-m24"
+      ],
+      "expect_facts": [
+        [
+          "açıldığı ilk",
+          "ilk açıldığı",
+          "ilk dönem",
+          "ilk yarıyıl",
+          "takip eden"
+        ]
+      ],
+      "expect_sources": [
+        "regulation-tr-m26",
+        "regulation-en-m26",
+        "regulation-tr-m29-1",
+        "oim-registration-4",
+        "oim-registration-12"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q05",
+      "lang": "tr",
+      "type": "answer",
+      "question": "Güz dönemi ders ekleme-bırakma haftası ne zaman?",
+      "notes": "21-30 Eylül 2026.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Güz dönemi ders ekleme-çıkarma haftası **21-30 Eylül 2026** tarihleri arasındadır [Akademik Takvim 2026-2027, Güz Dönemi (Fall Semester) 2026-2027 — Ön Lisans / Lisans]. Bugün (15 Eylül 2026) itibarıyla bu haftanın başlamasına 6 gün var.\n\n- Ders ekleme-bırakma süresinin son gününde saat 17.30 itibarıyla ders kayıt ekranları kapanır ve ders kaydı kesinleşir [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (2/4)].\n\nDers kaydınızı etkileyebilecek bu tarihler için akademik danışmanınızla mutlaka teyit edin.",
+      "sources": [
+        {
+          "title": "Akademik Takvim 2026-2027",
+          "article": null,
+          "url": "https://oim.yasar.edu.tr/wp-content/uploads/2026/04/2026-2027-Akademik-Takvim.pdf"
+        },
+        {
+          "title": "Akademik Takvim 2026-2027",
+          "article": null,
+          "url": "https://oim.yasar.edu.tr/wp-content/uploads/2026/04/2026-2027-Akademik-Takvim.pdf"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Ders Kayıt Kuralları (2/4)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1652249650175-34a39788-3492"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 3351,
+      "mappedChunkIds": [
+        "calendar",
+        "academic-calendar-1",
+        "academic-calendar-2",
+        "academic-calendar-3",
+        "academic-calendar-4",
+        "oim-registration-5"
+      ],
+      "expect_facts": [
+        [
+          "21"
+        ],
+        [
+          "30"
+        ]
+      ],
+      "expect_sources": [
+        "calendar",
+        "academic-calendar-1",
+        "oim-registration-2",
+        "oim-registration-3"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q06",
+      "lang": "tr",
+      "type": "answer",
+      "question": "Dersten çekilme için son gün ne zaman?",
+      "notes": "Fall: 9 Ekim 2026, 17:00.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "**Güz Dönemi dersten çekilme son tarihi 9 Ekim 2026, saat 17.00'dir** [Akademik Takvim 2026-2027, Güz Dönemi (Fall Semester) 2026-2027 — Ön Lisans / Lisans; Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme].\n\n- Başvurular yalnızca OİM formu üzerinden kabul edilir. E-posta veya OİM destek sistemiyle yapılan başvurular kabul edilmez [Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme].\n- Bahar Dönemi için son tarih 19 Şubat 2027'dir [Akademik Takvim 2026-2027, Bahar Dönemi (Spring Semester) 2026-2027 — Ön Lisans / Lisans].\n\nDersten çekilme kaydınızı etkiliyorsa lütfen akademik danışmanınızla teyit edin.",
+      "sources": [
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Dersten Çekilme",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1729003017542-0215983a-0337"
+        },
+        {
+          "title": "Akademik Takvim 2026-2027",
+          "article": null,
+          "url": "https://oim.yasar.edu.tr/wp-content/uploads/2026/04/2026-2027-Akademik-Takvim.pdf"
+        },
+        {
+          "title": "Akademik Takvim 2026-2027",
+          "article": null,
+          "url": "https://oim.yasar.edu.tr/wp-content/uploads/2026/04/2026-2027-Akademik-Takvim.pdf"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 6696,
+      "mappedChunkIds": [
+        "oim-registration-14",
+        "calendar",
+        "academic-calendar-1",
+        "academic-calendar-2",
+        "academic-calendar-3",
+        "academic-calendar-4"
+      ],
+      "expect_facts": [
+        [
+          "9 Ekim",
+          "09.10",
+          "9.10.2026",
+          "2026-10-09",
+          "09 Ekim"
+        ]
+      ],
+      "expect_sources": [
+        "calendar",
+        "academic-calendar-1",
+        "oim-registration-14"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q07",
+      "lang": "tr",
+      "type": "answer",
+      "question": "Lisans eğitimim boyunca en fazla kaç dersten çekilebilirim?",
+      "notes": "Max 4 courses in a bachelor's programme.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Lisans öğreniminiz boyunca **en fazla dört dersten** çekilebilirsiniz [Yönetmelik, Madde 30]. Ön lisans programlarında bu sınır iki derstir [Yönetmelik, Madde 30].\n\n- Dersten çekilme işlemleri, bu dönem için **9 Ekim 2026, 17.00**'de kapanır. E-posta veya OİM destek sistemiyle yapılan başvurular kabul edilmez [Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme].\n- Çekilen dersler not ortalamanızda hesaba katılmaz, ancak not döküm belgesinde W notuyla görünür [Yönetmelik, Madde 30].\n\nBu bilgi kaydınızı etkileyebileceği için lütfen akademik danışmanınızla teyit edin.",
+      "sources": [
+        {
+          "title": "Yönetmelik",
+          "article": "Madde 30",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/tr/59751247618113477416.pdf"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Dersten Çekilme",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1729003017542-0215983a-0337"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 4578,
+      "mappedChunkIds": [
+        "regulation-tr-m30",
+        "oim-registration-14"
+      ],
+      "expect_facts": [
+        [
+          "dört",
+          "4 ders",
+          "en fazla 4",
+          "4 adet"
+        ]
+      ],
+      "expect_sources": [
+        "oim-registration-14",
+        "regulation-tr-m30",
+        "regulation-en-m30-1",
+        "regulation-en-m30-2"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q08",
+      "lang": "tr",
+      "type": "answer",
+      "question": "Danışmanım ders kaydımı onayladıktan sonra kendim ders ekleyip bırakabilir miyim?",
+      "notes": "No: after approval only the academic advisor can add/drop (Ders Kayıt Kuralları 11).",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "**Hayır.** Danışman onayından sonra ders ekleme ve çıkarma işlemlerini yalnızca akademik danışmanınız yapabilir [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (2/4)].\n\n- Danışman onayından önce, dersleri kesinleştirmediğiniz sürece OBS üzerinden ekleme ve çıkarma yapabilirsiniz [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (2/4)].\n- Seçimlik dersleri, ders ekleme-bırakma süresi içinde danışmanınızın rehberliğinde değiştirebilir, bırakabilir veya yeni seçimlik ders alabilirsiniz [Yönetmelik, Madde 25].\n- Ders ekleme-bırakma süresinin son gününde ders kayıt ekranları saat 17.30 itibarıyla kapanır [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (2/4)]. Bu sürenin kesin tarihini kaynaklarda bulamadım; Akademik Takvim'e bakmanızı veya Öğrenci İşleri'ne (oimdestek.yasar.edu.tr, +90 232 570 7070) danışmanızı öneririm.\n\nKayıtlarınızda değişiklik gerekiyorsa lütfen akademik danışmanınızla görüşün.",
+      "sources": [
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Ders Kayıt Kuralları (2/4)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1652249650175-34a39788-3492"
+        },
+        {
+          "title": "Yönetmelik",
+          "article": "Madde 25",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/tr/59751247618113477416.pdf"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 6701,
+      "mappedChunkIds": [
+        "oim-registration-5",
+        "regulation-tr-m25"
+      ],
+      "expect_facts": [
+        [
+          "danışman"
+        ],
+        [
+          "sadece",
+          "yalnızca",
+          "yalnız"
+        ]
+      ],
+      "expect_sources": [
+        "oim-registration-5",
+        "oim-registration-4",
+        "obs-guide-1",
+        "regulation-tr-m19"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q09",
+      "lang": "tr",
+      "type": "answer",
+      "question": "Staj dersinin AKTS'si dönemlik AKTS limitime dahil mi?",
+      "notes": "No, internship credits are not included.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "**Hayır**, staj dersinin AKTS'si dönemlik ders yüküne dahil değildir [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4)]. Dönemlik ders yükü azami 40 AKTS'dir, ancak staj dersleri bu sınırın dışında tutulur [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4)].\n\nStaj dersine kaydolabilmek için önce staj uygulamasını tamamlayıp onaylı staj defterini staj komisyonuna teslim etmeniz gerekir [Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (3/3)].\n\nBu bilgi kaydınızı etkiliyorsa lütfen akademik danışmanınızla teyit edin.",
+      "sources": [
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Ders Kayıt Kuralları (3/4)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1652249650175-34a39788-3492"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Sıkça Sorulan Sorular (3/3)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736468439-a357881c-c12c"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 4873,
+      "mappedChunkIds": [
+        "oim-registration-6",
+        "oim-registration-27"
+      ],
+      "expect_facts": [
+        [
+          "dahil değil",
+          "dâhil değil",
+          "katılmaz",
+          "dahil edilmez",
+          "dâhil edilmez",
+          "sayılmaz",
+          "dahil olmaz",
+          "dahil değildir",
+          "dâhil değildir"
+        ]
+      ],
+      "expect_sources": [
+        "oim-registration-6",
+        "oim-registration-26"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q10",
+      "lang": "tr",
+      "type": "answer",
+      "question": "Dönem sonu sınavına girebilmek için derslere yüzde kaç devam etmem gerekiyor?",
+      "notes": "70% theory, 80% practice unless the syllabus says otherwise.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Dönem sonu sınavına girebilmek için, ders izlencesinde aksi belirtilmedikçe, **teorik ders saatlerinin en az %70'ine** ve **uygulama ders saatlerinin en az %80'ine** devam etmeniz gerekir [Yönetmelik, Madde 29]. Öğrenci El Kitabı da aynı oranları belirtmektedir [Öğrenci El Kitabı 2025, Eğitim-Öğretim Süreci › Derslere Devam Zorunluluğu].\nDersinizin ders izlencesinde farklı bir oran yazabileceği için, dönem başında izlencenizi kontrol etmenizi öneririm. Devam durumunuzu Öğrenci Bilgi Sisteminden (OBS) takip edebilirsiniz [Öğrenci El Kitabı 2025, Öğrenci Bilgi Sistemi].\n\nBu bilgi kaydınızı etkiliyorsa, lütfen akademik danışmanınızla teyit edin.",
+      "sources": [
+        {
+          "title": "Yönetmelik",
+          "article": "Madde 29",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/tr/59751247618113477416.pdf"
+        },
+        {
+          "title": "Öğrenci El Kitabı 2025",
+          "article": "Eğitim-Öğretim Süreci › Derslere Devam Zorunluluğu",
+          "url": "https://www.yasar.edu.tr/wp-content/uploads/2025/07/Ogrenci-El-Kitabi-2025-Revizyon-12-08.07.2025.pdf"
+        },
+        {
+          "title": "Öğrenci El Kitabı 2025",
+          "article": "Öğrenci Bilgi Sistemi",
+          "url": "https://www.yasar.edu.tr/wp-content/uploads/2025/07/Ogrenci-El-Kitabi-2025-Revizyon-12-08.07.2025.pdf"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 4916,
+      "mappedChunkIds": [
+        "regulation-tr-m29-1",
+        "regulation-tr-m29-2",
+        "student-handbook-20",
+        "student-handbook-29"
+      ],
+      "expect_facts": [
+        [
+          "70"
+        ],
+        [
+          "80"
+        ]
+      ],
+      "expect_sources": [
+        "regulation-tr-m29-1",
+        "regulation-en-m29-1",
+        "student-handbook-20"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q11",
+      "lang": "tr",
+      "type": "answer",
+      "question": "Ders programı çakışan iki derse kayıt olabilir miyim?",
+      "notes": "New courses cannot overlap; exception for courses previously failed with F/U (not NA).",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "**Hayır, genel kural olarak ilk kez alacağınız iki dersin ders programları çakışamaz.** Tüm derslere devam zorunludur ve bu nedenle çakışan derslere kayıt yapılamaz [Yönetmelik, Madde 29]. OBS kılavuzu da aynı kuralı belirtir [OBS Ders Kaydı Kılavuzu].\n\nTek istisna, daha önce **F veya U** notu aldığınız bir dersin, yeni alacağınız bir dersle çakışmasıdır. Bu durumda F/U aldığınız derse kayıt yapabilirsiniz, ancak devam koşulu aranmaz ve tüm sınav ve ödevlere katılmanız gerekir [Yönetmelik, Madde 29; Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4)]. Devamsızlıktan (NA) aldığınız dersler bu istisnanın dışındadır [Yönetmelik, Madde 29].\n\nÇift anadal veya yandal dersleri de anadal programınızla çakışıyorsa kayıt yapılamaz [Öğrenci İşleri – Ders Kayıtları, Çap ve Yandal Ders Kaydı].\n\nKayıt işleminizi etkileyeceği için lütfen akademik danışmanınızla teyit edin.",
+      "sources": [
+        {
+          "title": "Yönetmelik",
+          "article": "Madde 29",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/tr/59751247618113477416.pdf"
+        },
+        {
+          "title": "OBS Ders Kaydı Kılavuzu",
+          "article": null,
+          "url": "https://oim.yasar.edu.tr/wp-content/uploads/2020/12/kayit.pdf"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Ders Kayıt Kuralları (3/4)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1652249650175-34a39788-3492"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Çap ve Yandal Ders Kaydı",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736469055-7d439fe8-b037"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 7772,
+      "mappedChunkIds": [
+        "regulation-tr-m29-1",
+        "regulation-tr-m29-2",
+        "obs-guide-1",
+        "oim-registration-6",
+        "oim-registration-13"
+      ],
+      "expect_facts": [
+        [
+          "F/U",
+          "(F)",
+          "F veya U",
+          "F ya da U",
+          "F notu",
+          "F/ U",
+          "F, U",
+          "F) veya (U"
+        ]
+      ],
+      "expect_sources": [
+        "regulation-tr-m29-1",
+        "regulation-en-m29-1",
+        "oim-registration-4",
+        "oim-registration-26",
+        "obs-guide-1",
+        "oim-registration-7"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q12",
+      "lang": "tr",
+      "type": "answer",
+      "question": "Ders kaydımı kayıt haftasında yapamadım. Ekle-bırak haftasında tamamlayabilir miyim?",
+      "notes": "Yes (Madde 25/3). The handbook says otherwise; the regulation wins (data/conflicts.md #1).",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Evet. Yönetmeliğe göre, kayıtlarını süresinde tamamlayamayan öğrenciler kayıtlarını **en son ders ekleme-bırakma süresi içinde** tamamlayabilir [Yönetmelik, Madde 25].\n\n- Güz dönemi ders kayıtları şu anda devam ediyor: **14–18 Eylül 2026** [Akademik Takvim 2026-2027]. Mümkünse bu tarihler içinde kaydınızı yapmanızı öneririm.\n- Güz dönemi ders ekleme-çıkarma süresi: **21–30 Eylül 2026** [Akademik Takvim 2026-2027]. Son gün saat 17.30'da kayıt ekranları kapanır [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (2/4)].\n- Bu süre bitiminden sonra ders kaydı yapılamaz ve kayıtlı olmadığınız derslere devam edemezsiniz [Yönetmelik, Madde 25].\n\nDers kayıt ekranında seçtiğiniz dersleri kesinleştirmeniz gerekir; kesinleştirilmeyen dersler danışman onayına gönderilmez [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (2/4)].\n\nKaydınızı danışmanınızla birlikte tamamlamanız ve ders seçimlerinizi onaylatmanız önemlidir.",
+      "sources": [
+        {
+          "title": "Yönetmelik",
+          "article": "Madde 25",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/tr/59751247618113477416.pdf"
+        },
+        {
+          "title": "Akademik Takvim 2026-2027",
+          "article": null,
+          "url": "https://oim.yasar.edu.tr/wp-content/uploads/2026/04/2026-2027-Akademik-Takvim.pdf"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Ders Kayıt Kuralları (2/4)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1652249650175-34a39788-3492"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 8153,
+      "mappedChunkIds": [
+        "regulation-tr-m25",
+        "calendar",
+        "academic-calendar-1",
+        "academic-calendar-2",
+        "academic-calendar-3",
+        "academic-calendar-4",
+        "oim-registration-5"
+      ],
+      "expect_facts": [
+        [
+          "ekle"
+        ],
+        [
+          "tamamla"
+        ]
+      ],
+      "expect_sources": [
+        "regulation-tr-m25",
+        "regulation-en-m25",
+        "oim-registration-5",
+        "oim-registration-12"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q13",
+      "lang": "tr",
+      "type": "answer",
+      "question": "Öğrenci İşleri'ne nasıl ulaşabilirim?",
+      "notes": "Phone +90 232 570 7070 and the oimdestek support portal.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Öğrenci İşleri Müdürlüğü'ne şu yollarla ulaşabilirsiniz:\n\n- **Telefon:** +90 (232) 570 7070 [Öğrenci İşleri – İletişim, Öğrenci İşleri Müdürlüğü İletişim (Student Affairs Office Contact)]\n- **Faks:** +90 (232) 570 7000 [Öğrenci İşleri – İletişim, Öğrenci İşleri Müdürlüğü İletişim (Student Affairs Office Contact)]\n- **Destek talebi:** Öğrenci e-posta hesabınızla https://oimdestek.yasar.edu.tr adresinden destek talebi oluşturabilirsiniz [Öğrenci İşleri – İletişim, Öğrenci İşleri Müdürlüğü İletişim (Student Affairs Office Contact)]\n- **Adres:** Üniversite Caddesi, No:37-39, Ağaçlı Yol, Bornova, İzmir [Öğrenci İşleri – İletişim, Öğrenci İşleri Müdürlüğü İletişim (Student Affairs Office Contact)]\n- **Web:** https://oim.yasar.edu.tr [Öğrenci İşleri – İletişim, Öğrenci İşleri Müdürlüğü İletişim (Student Affairs Office Contact)]\n\nDers kotalarıyla ilgili talepleri Öğrenci İşleri'ne değil, bölüm başkanlıklarına iletmeniz gerekir [Öğrenci İşleri – İletişim, Öğrenci İşleri Müdürlüğü İletişim (Student Affairs Office Contact)]. Akademik danışmanınıza ise OBS üzerinden mesaj gönderebilirsiniz [Öğrenci İşleri – İletişim, Öğrenci İşleri Müdürlüğü İletişim (Student Affairs Office Contact)].",
+      "sources": [
+        {
+          "title": "Öğrenci İşleri – İletişim",
+          "article": "Öğrenci İşleri Müdürlüğü İletişim (Student Affairs Office Contact)",
+          "url": "https://oim.yasar.edu.tr/iletisim/"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 4061,
+      "mappedChunkIds": [
+        "contacts-oim-1"
+      ],
+      "expect_facts": [
+        [
+          "570 7070",
+          "5707070",
+          "570 70 70"
+        ],
+        [
+          "oimdestek"
+        ]
+      ],
+      "expect_sources": [
+        "contacts-oim-1"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q14",
+      "lang": "tr",
+      "type": "refusal",
+      "question": "COMP 2215 dersinin final sınavı hangi salonda yapılacak?",
+      "notes": "Exam room assignments are not in the documents. (Replaced the baseline cafeteria-hours question: the handbook does list dorm dining-hall hours, so the bot's grounded partial answer was correct.)",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Bu bilgi elimdeki kaynaklarda yer almadığı için COMP 2215 final sınavının hangi salonda yapılacağını bilmiyorum. Salon bilgisi için Öğrenci İşleri'ne (oimdestek.yasar.edu.tr, +90 232 570 7070) başvurabilirsiniz.\n\nGüz dönemi dönem sonu sınavları takvime göre şu tarihlerde yapılacak:\n- **1. bölüm:** 26–30 Aralık 2026 [Akademik Takvim 2026-2027]\n- **2. bölüm:** 4–12 Ocak 2027 [Akademik Takvim 2026-2027]\n\nCOMP 2215'in hangi bölümde yapılacağını kaynaklarda bulamadım. Bunu da Öğrenci İşleri'nden veya danışmanınızdan öğrenebilirsiniz.\n\nSınav planınızı etkileyecek bir karar vermeden önce bilgileri akademik danışmanınızla teyit edin.",
+      "sources": [
+        {
+          "title": "Akademik Takvim 2026-2027",
+          "article": null,
+          "url": "https://oim.yasar.edu.tr/wp-content/uploads/2026/04/2026-2027-Akademik-Takvim.pdf"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 5871,
+      "mappedChunkIds": [
+        "calendar",
+        "academic-calendar-1",
+        "academic-calendar-2",
+        "academic-calendar-3",
+        "academic-calendar-4"
+      ],
+      "expect_facts": [],
+      "expect_sources": [],
+      "pass": true,
+      "refused": true,
+      "pointed": true,
+      "reason": "refusal and support direction found"
+    },
+    {
+      "id": "q15",
+      "lang": "tr",
+      "type": "refusal",
+      "question": "Önümüzdeki bahar döneminde COMP 3304 dersini hangi hoca verecek?",
+      "notes": "Instructor assignments are not in the documents.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Verilen kaynaklarda COMP 3304'ü hangi öğretim üyesinin vereceği bilgisi yok, bu yüzden bilmiyorum. Ders, Bilgisayar Mühendisliği müfredatında 6. dönemde yer alıyor [Bilgisayar Müh. – Müfredat, Bilgisayar Mühendisliği Müfredatı — Dönemlere Göre Dersler (Computer Engineering Curriculum by Semester, 2025-2026 chart)].\n\n- Öğretim üyesi ve bahar dönemi ders programı için Öğrenci İşleri Ofisi'ne başvurabilirsiniz: oimdestek.yasar.edu.tr, +90 232 570 7070.\n- Bölümünüzün danışmanına da danışabilirsiniz.\n\nBu bilgi kaydınızı etkiliyorsa lütfen danışmanınızla teyit edin.",
+      "sources": [
+        {
+          "title": "Bilgisayar Müh. – Müfredat",
+          "article": "Bilgisayar Mühendisliği Müfredatı — Dönemlere Göre Dersler (Computer Engineering Curriculum by Semester, 2025-2026 chart)",
+          "url": "https://ce.yasar.edu.tr/mufredat-ve-on-kosul-iliskileri/"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 4386,
+      "mappedChunkIds": [
+        "ce-curriculum-1"
+      ],
+      "expect_facts": [],
+      "expect_sources": [],
+      "pass": true,
+      "refused": true,
+      "pointed": true,
+      "reason": "refusal and support direction found"
+    },
+    {
+      "id": "q16",
+      "lang": "en",
+      "type": "answer",
+      "question": "My GPA is 2.40. What is the maximum ECTS I can take in a semester?",
+      "notes": "Successful student: 40.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "With a GPA of 2.40, you are in the successful (**başarılı**) status, since a GPA of at least 2.00 qualifies. You can register for a maximum of **40 credits (ECTS)** in a semester [Yönetmelik, Madde 23]. The internship course does not count toward this limit, so you can take it on top of the 40 [Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (2/3)].\n\nPlease confirm this with your academic advisor before registering, since it affects your course load.",
+      "sources": [
+        {
+          "title": "Yönetmelik",
+          "article": "Madde 23",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/tr/59751247618113477416.pdf"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Sıkça Sorulan Sorular (2/3)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736468439-a357881c-c12c"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 5268,
+      "mappedChunkIds": [
+        "regulation-tr-m23",
+        "oim-registration-26"
+      ],
+      "expect_facts": [
+        [
+          "40"
+        ]
+      ],
+      "expect_sources": [
+        "regulation-tr-m22",
+        "regulation-tr-m23",
+        "regulation-en-m22",
+        "regulation-en-m23",
+        "oim-registration-6",
+        "oim-registration-11",
+        "oim-registration-25",
+        "oim-registration-26",
+        "oim-registration-27"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q17",
+      "lang": "en",
+      "type": "answer",
+      "question": "How many ECTS can I take in my first two semesters at the university?",
+      "notes": "30 ECTS in the first two semesters (Student Affairs, Ders Yükü).",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "In your first two semesters, you can take up to **30 ECTS** per semester [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4)].\n\n- If you entered by lateral or vertical transfer, the limit is also 30 ECTS, but your advisor can raise it to 40 ECTS during the add/drop week [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4)].\n- Internship courses are not counted toward the maximum course load [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4)].\n- The regulation sets a general range of 20 to 40 ECTS per semester [Regulation, Article 22]. The 30 ECTS limit for early semesters comes from the official page, which is stricter than the regulation's 40 ECTS maximum. I found no passage that explains this in more detail, so please check with the Student Affairs Office.\n\nAre you a lateral or vertical transfer student? That would change which limit applies to you.\n\nPlease confirm with your academic advisor before registering, since this affects your course load.",
+      "sources": [
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Ders Kayıt Kuralları (3/4)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1652249650175-34a39788-3492"
+        },
+        {
+          "title": "Regulation",
+          "article": "Article 22",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/en/11960708961476643.pdf"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 8250,
+      "mappedChunkIds": [
+        "oim-registration-6",
+        "regulation-en-m22"
+      ],
+      "expect_facts": [
+        [
+          "30"
+        ]
+      ],
+      "expect_sources": [
+        "oim-registration-6",
+        "oim-registration-27"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q18",
+      "lang": "en",
+      "type": "answer",
+      "question": "I am a lateral transfer student registering for the first time. How many ECTS can I take?",
+      "notes": "30 in the first two semesters, up to 40 with advisor approval during add/drop.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "As a lateral transfer student in your first two semesters, your course load is **at most 30 ECTS** [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4)]. Your academic advisor can raise this to **up to 40 ECTS** during the add/drop week [Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (3/3)]. Courses that you must take first, such as failed courses, cannot be removed during registration [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4)].\n\nPlease confirm with your academic advisor before registering, since this affects your registration.",
+      "sources": [
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Sıkça Sorulan Sorular (3/3)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736468439-a357881c-c12c"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Ders Kayıt Kuralları (3/4)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1652249650175-34a39788-3492"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 6043,
+      "mappedChunkIds": [
+        "oim-registration-27",
+        "oim-registration-6"
+      ],
+      "expect_facts": [
+        [
+          "30"
+        ],
+        [
+          "40"
+        ]
+      ],
+      "expect_sources": [
+        "oim-registration-6",
+        "oim-registration-27",
+        "oim-registration-2"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q19",
+      "lang": "en",
+      "type": "answer",
+      "question": "Can I retake a course in which I got a D+ to improve my grade?",
+      "notes": "Successful students may repeat C-/D+/D courses during add/drop if there is space.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Whether you can retake it depends on your academic standing:\n\n- **Successful students** can repeat a course with a C-, D+ or D only during the course add-drop period, and only if there is a vacancy in the course [Regulation, Article 26].\n- **Probational students**, meaning those with a GPA of 1.99 or below at the end of any term [Regulation, Article 24], can repeat any course with a C-, D+ or D [Regulation, Article 26].\n\nIf you withdraw from the retake, the earlier grade still counts in your GPA [Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme]. Course withdrawal applications close on 9 October 2026 at 5:00 PM, and e-mail or OIM Support System applications are not accepted [Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme].\n\nThe add-drop dates are not in the passages I have. Please check the academic calendar or contact the Student Affairs Office (oimdestek.yasar.edu.tr, +90 232 570 7070). If you tell me whether your GPA is above or below 1.99, I can say which rule applies to you.\n\nPlease confirm with your academic advisor before you register, since this affects your registration.",
+      "sources": [
+        {
+          "title": "Regulation",
+          "article": "Article 26",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/en/11960708961476643.pdf"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Dersten Çekilme",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1729003017542-0215983a-0337"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 7859,
+      "mappedChunkIds": [
+        "regulation-en-m26",
+        "oim-registration-14"
+      ],
+      "expect_facts": [
+        [
+          "add"
+        ],
+        [
+          "vacan",
+          "space",
+          "seat",
+          "available",
+          "capacity",
+          "room",
+          "quota"
+        ]
+      ],
+      "expect_sources": [
+        "regulation-en-m26",
+        "regulation-tr-m26",
+        "oim-registration-6",
+        "oim-registration-12"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q20",
+      "lang": "en",
+      "type": "answer",
+      "question": "When is course registration for the fall semester?",
+      "notes": "14-18 September 2026.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Fall 2026 course registration runs from **14 to 18 September 2026**, and it is ongoing today (15 September) [Akademik Takvim 2026-2027, Güz Dönemi (Fall Semester) 2026-2027 — Ön Lisans / Lisans].\n\n- Tuition must be paid within the registration period, and students who haven't paid cannot complete registration [Regulation, Article 16]. Fall tuition payment is open from 7 to 18 September 2026 [Akademik Takvim 2026-2027].\n\nPlease confirm with your academic advisor, since this affects your registration.",
+      "sources": [
+        {
+          "title": "Akademik Takvim 2026-2027",
+          "article": null,
+          "url": "https://oim.yasar.edu.tr/wp-content/uploads/2026/04/2026-2027-Akademik-Takvim.pdf"
+        },
+        {
+          "title": "Regulation",
+          "article": "Article 16",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/en/11960708961476643.pdf"
+        },
+        {
+          "title": "Akademik Takvim 2026-2027",
+          "article": null,
+          "url": "https://oim.yasar.edu.tr/wp-content/uploads/2026/04/2026-2027-Akademik-Takvim.pdf"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 3244,
+      "mappedChunkIds": [
+        "calendar",
+        "academic-calendar-1",
+        "academic-calendar-2",
+        "academic-calendar-3",
+        "academic-calendar-4",
+        "regulation-en-m16"
+      ],
+      "expect_facts": [
+        [
+          "14"
+        ],
+        [
+          "18"
+        ]
+      ],
+      "expect_sources": [
+        "calendar",
+        "academic-calendar-1",
+        "oim-registration-1",
+        "oim-registration-2"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q21",
+      "lang": "en",
+      "type": "answer",
+      "question": "Does a W grade affect my GPA?",
+      "notes": "W is not included in GPA but appears on the transcript.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "No, a W grade does not affect your GPA. It is not included in the GPA calculation, but it does appear on your transcript [Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme]. This fits the regulation, which calculates GPA as a weighted average of the numeric values of course grades [Yönetmelik, Madde 21].\n\n- **Transcript:** The W stays visible on your transcript.\n- **Graduation:** If you meet all graduation requirements, a W does not prevent you from graduating [Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme].\n- **Deadline:** Course withdrawal closes on 9 October 2026 at 17:00, and applications sent by e-mail or the OIM Support System are not accepted [Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme].\n\nPlease confirm with your academic advisor before withdrawing from a course, since it affects your registration.",
+      "sources": [
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Dersten Çekilme",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1729003017542-0215983a-0337"
+        },
+        {
+          "title": "Yönetmelik",
+          "article": "Madde 21",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/tr/59751247618113477416.pdf"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 4050,
+      "mappedChunkIds": [
+        "oim-registration-14",
+        "regulation-tr-m21"
+      ],
+      "expect_facts": [
+        [
+          "transcript"
+        ]
+      ],
+      "expect_sources": [
+        "oim-registration-14",
+        "regulation-en-m30-1",
+        "regulation-en-m30-2",
+        "regulation-tr-m30"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q22",
+      "lang": "en",
+      "type": "answer",
+      "question": "How does advisor approval work during course registration?",
+      "notes": "Finalise (kesinleştir) the selection, it goes to the advisor; changes possible until approval, afterwards only by the advisor.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Advisor approval happens after you submit your course selection:\n\n- **Advisor guidance:** Your advisor guides your registration renewal and course changes, but you are responsible for errors in your registration [Regulation, Article 19].\n- **Submitting for approval:** After you click Kontrol Et and then Kesinleştir, your registration goes to advisor approval. You then contact your advisor to complete it [Öğrenci İşleri – Ders Kayıtları, Ders Kaydı Nasıl Yapılır?].\n- **Blocking issues:** The system won't allow registration if your fee is unpaid or if there is a quota or schedule conflict [Öğrenci İşleri – Ders Kayıtları, Ders Kaydı Nasıl Yapılır?].\n- **Adding courses:** Advisors add courses and approve registrations on the dates in the course registration calendar. I don't have those approval dates in the passages, so please check the calendar or ask your advisor [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Takvimi (1/2)].\n- **DGS and transfer students:** If you want more than 30 AKTS, your advisor may add the courses if they consider it appropriate [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Takvimi (1/2)].\n- **Double major or minor:** Fill in the course enrollment form and send it to your double major or minor advisor. Register only after you receive their approval email [Öğrenci İşleri – Ders Kayıtları, Çap ve Yandal Ders Kaydı].\n\nPlease confirm with your academic advisor, since this affects your registration.",
+      "sources": [
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Ders Kayıt Takvimi (1/2)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736436858-9bc23710-528e"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Ders Kaydı Nasıl Yapılır?",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1652267406882-68e9d4af-4cfd"
+        },
+        {
+          "title": "Regulation",
+          "article": "Article 19",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/en/11960708961476643.pdf"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Çap ve Yandal Ders Kaydı",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736469055-7d439fe8-b037"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 5792,
+      "mappedChunkIds": [
+        "oim-registration-2",
+        "oim-registration-8",
+        "regulation-en-m19",
+        "oim-registration-13"
+      ],
+      "expect_facts": [
+        [
+          "finaliz",
+          "confirm",
+          "submit",
+          "lock",
+          "kesinleştir"
+        ],
+        [
+          "advisor"
+        ]
+      ],
+      "expect_sources": [
+        "oim-registration-5",
+        "oim-registration-4",
+        "oim-registration-8",
+        "obs-guide-1",
+        "regulation-en-m19",
+        "regulation-tr-m19",
+        "student-handbook-17"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q23",
+      "lang": "en",
+      "type": "answer",
+      "question": "What attendance is required to take the final exam?",
+      "notes": "70% theory, 80% practice.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "To take the final exam, you must attend at least **70% of theoretical course hours** and at least **80% of practical course hours**, unless the course syllabus states otherwise [Regulation, Article 29]. Your lecturer assesses attendance and must announce the attendance rules in the syllabus at the start of the term [Regulation, Article 29].\n\nPlease confirm with your academic advisor when this affects your registration.",
+      "sources": [
+        {
+          "title": "Regulation",
+          "article": "Article 29",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/en/11960708961476643.pdf"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 2136,
+      "mappedChunkIds": [
+        "regulation-en-m29-1",
+        "regulation-en-m29-2"
+      ],
+      "expect_facts": [
+        [
+          "70"
+        ],
+        [
+          "80"
+        ]
+      ],
+      "expect_sources": [
+        "regulation-en-m29-1",
+        "regulation-tr-m29-1",
+        "student-handbook-20"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q24",
+      "lang": "en",
+      "type": "answer",
+      "question": "I am in a double major programme. How many ECTS can I take per semester?",
+      "notes": "Double major: max 3 courses / 20 ECTS; total with the main programme max 50.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "For your double major courses, the limit is **20 AKTS** per semester, with at most **3 courses** [Öğrenci İşleri – Ders Kayıtları, Çap ve Yandal Ders Kaydı]. Your main major and double major courses together can total at most **50 AKTS** in one semester [Öğrenci İşleri – Ders Kayıtları, Çap ve Yandal Ders Kaydı].\n\n- If you are in your main major's graduation period or have already graduated, the 20 AKTS limit does not apply to double major courses [Öğrenci İşleri – Ders Kayıtları, Çap ve Yandal Ders Kaydı].\n- The general regulation sets a course load of 20 to 40 credits per semester [Regulation, Article 22], and it leaves double major matters to the relevant regulation [Regulation, Article 14], so the official page's limits apply here.\n\nPlease confirm with your academic advisor, since this affects your registration.",
+      "sources": [
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Çap ve Yandal Ders Kaydı",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736469055-7d439fe8-b037"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Ders Kayıt Kuralları (4/4)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1652249650175-34a39788-3492"
+        },
+        {
+          "title": "Regulation",
+          "article": "Article 22",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/en/11960708961476643.pdf"
+        },
+        {
+          "title": "Regulation",
+          "article": "Article 14",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/en/11960708961476643.pdf"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 6838,
+      "mappedChunkIds": [
+        "oim-registration-13",
+        "oim-registration-7",
+        "regulation-en-m22",
+        "regulation-en-m14"
+      ],
+      "expect_facts": [
+        [
+          "20"
+        ],
+        [
+          "50"
+        ]
+      ],
+      "expect_sources": [
+        "oim-registration-7",
+        "oim-registration-13"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q25",
+      "lang": "en",
+      "type": "answer",
+      "question": "What is the ECTS limit for minor programmes?",
+      "notes": "Minor: max 2 courses / 12 ECTS; total max 42.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "For minor programmes (yandal), the course load is capped at **12 AKTS** and **2 courses** per semester [Öğrenci İşleri – Ders Kayıtları, Çap ve Yandal Ders Kaydı]. Together with your main programme, your total for the semester can be at most **42 AKTS** [Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (4/4)].\n\nPlease confirm these limits with your academic advisor before you register, since they affect your registration.",
+      "sources": [
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Çap ve Yandal Ders Kaydı",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736469055-7d439fe8-b037"
+        },
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Ders Kayıt Kuralları (4/4)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1652249650175-34a39788-3492"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 3923,
+      "mappedChunkIds": [
+        "oim-registration-13",
+        "oim-registration-7"
+      ],
+      "expect_facts": [
+        [
+          "12"
+        ],
+        [
+          "42"
+        ]
+      ],
+      "expect_sources": [
+        "oim-registration-7",
+        "oim-registration-13"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q26",
+      "lang": "en",
+      "type": "answer",
+      "question": "When do spring semester classes start?",
+      "notes": "1 February 2027.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Spring semester classes for the 2026-2027 academic year begin on **1 February 2027** [Akademik Takvim 2026-2027].\n\nPlease confirm with your academic advisor, since this date affects your registration.",
+      "sources": [
+        {
+          "title": "Akademik Takvim 2026-2027",
+          "article": null,
+          "url": "https://oim.yasar.edu.tr/wp-content/uploads/2026/04/2026-2027-Akademik-Takvim.pdf"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 2579,
+      "mappedChunkIds": [
+        "calendar",
+        "academic-calendar-1",
+        "academic-calendar-2",
+        "academic-calendar-3",
+        "academic-calendar-4"
+      ],
+      "expect_facts": [
+        [
+          "1 February",
+          "February 1",
+          "1 Feb",
+          "Feb 1",
+          "2027-02-01",
+          "01.02.2027",
+          "1 Şubat",
+          "February 1st",
+          "1st February"
+        ]
+      ],
+      "expect_sources": [
+        "calendar",
+        "academic-calendar-2"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q27",
+      "lang": "en",
+      "type": "answer",
+      "question": "Can a student on probation take courses from a higher year?",
+      "notes": "No: probation students cannot take new courses from upper years.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "Under the Student Affairs Office FAQ, a probationary student cannot take courses from a higher year under any circumstances. They must first take failed lower-year courses, then courses from their current year, up to 32 credits (internship excluded) [Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (1/3)].\n\n- Probation applies when the cumulative GPA is 1.99 or lower at the end of any semester [Regulation, Article 24].\n- The regulation caps probationary students at 32 credits and allows new courses only when there are not enough courses to repeat [Regulation, Article 24]. It does not mention year level, so it doesn't clearly settle the higher-year question. The stricter FAQ rule is the one stated explicitly, but please confirm with the Student Affairs Office (+90 232 570 7070, oimdestek.yasar.edu.tr).\n\nPlease confirm with your academic advisor before registering, since this affects your course selection.",
+      "sources": [
+        {
+          "title": "Öğrenci İşleri – Ders Kayıtları",
+          "article": "Sıkça Sorulan Sorular (1/3)",
+          "url": "https://oim.yasar.edu.tr/ders-kayitlari/#1651736468439-a357881c-c12c"
+        },
+        {
+          "title": "Regulation",
+          "article": "Article 24",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/en/11960708961476643.pdf"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 6591,
+      "mappedChunkIds": [
+        "oim-registration-25",
+        "regulation-en-m24"
+      ],
+      "expect_facts": [
+        [
+          "cannot",
+          "can't",
+          "not allowed",
+          "may not",
+          "not permitted",
+          "not able",
+          "no new",
+          "not take",
+          "can not"
+        ]
+      ],
+      "expect_sources": [
+        "oim-registration-25",
+        "oim-registration-26",
+        "regulation-en-m24",
+        "regulation-tr-m24"
+      ],
+      "pass": true,
+      "factsOk": true,
+      "sourceOk": true,
+      "missingFactGroups": [],
+      "reason": "all checks passed"
+    },
+    {
+      "id": "q28",
+      "lang": "en",
+      "type": "refusal",
+      "question": "Which professor gives the easiest grades in COMP 1202?",
+      "notes": "Not in the documents (and not something RegiBot should judge).",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "I don't have information about individual instructors' grading in COMP 1202, so I can't say which professor is easiest. The passages I have cover the course in the curriculum chart and the university's general grading rules, but not instructor-level grade distributions. For that, contact the Student Affairs Office (Öğrenci İşleri, oimdestek.yasar.edu.tr, +90 232 570 7070) or your academic advisor. Choosing a section is a registration decision, so please confirm with your academic advisor before you register.",
+      "sources": [],
+      "lowConfidence": false,
+      "elapsedMs": 2930,
+      "mappedChunkIds": [],
+      "expect_facts": [],
+      "expect_sources": [],
+      "pass": true,
+      "refused": true,
+      "pointed": true,
+      "reason": "refusal and support direction found"
+    },
+    {
+      "id": "q29",
+      "lang": "en",
+      "type": "refusal",
+      "question": "How much will the merit scholarship be next year?",
+      "notes": "Scholarship amounts are not in the knowledge base.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "I don't have information about merit scholarships or their amounts for next year. The documents I have only say that the annual tuition fee is set by the Board of Trustees for the next school year [Regulation, Article 16], and they don't give that amount. Please contact the Student Affairs Office (Öğrenci İşleri, oimdestek.yasar.edu.tr, +90 232 570 7070) for scholarship details.",
+      "sources": [
+        {
+          "title": "Regulation",
+          "article": "Article 16",
+          "url": "https://www.yasar.edu.tr/yu-files/yonetmelik-yonerge/en/11960708961476643.pdf"
+        }
+      ],
+      "lowConfidence": false,
+      "elapsedMs": 2527,
+      "mappedChunkIds": [
+        "regulation-en-m16"
+      ],
+      "expect_facts": [],
+      "expect_sources": [],
+      "pass": true,
+      "refused": true,
+      "pointed": true,
+      "reason": "refusal and support direction found"
+    },
+    {
+      "id": "q30",
+      "lang": "en",
+      "type": "refusal",
+      "question": "How do I get a parking permit for my car on campus?",
+      "notes": "Parking is not covered by the sources.",
+      "httpStatus": 200,
+      "httpOk": true,
+      "answer": "I don't have information about campus parking permits. The passages I have cover exam, course, and semester permissions, not parking. Please contact the Student Affairs Office (Öğrenci İşleri) at oimdestek.yasar.edu.tr or +90 232 570 7070 for parking permit details.",
+      "sources": [],
+      "lowConfidence": true,
+      "elapsedMs": 18047,
+      "mappedChunkIds": [],
+      "expect_facts": [],
+      "expect_sources": [],
+      "pass": true,
+      "refused": true,
+      "pointed": true,
+      "reason": "refusal and support direction found"
+    }
+  ]
+}

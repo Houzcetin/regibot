@@ -174,7 +174,7 @@ app.post('/api/chat', async (req, res) => {
   try {
     if (!client) client = new Anthropic({ apiKey: API_KEY, timeout: 30000, maxRetries: 1 });
     const messages = [...history, { role: 'user', content: passageText(message, lang, hits, dateHits, today) }];
-    const response = await client.messages.create({ model: MODEL, max_tokens: 1500, output_config: { effort: EFFORT }, system: SYSTEM, messages });
+    const response = await client.messages.create({ model: MODEL, max_tokens: 4000, output_config: { effort: EFFORT }, system: SYSTEM, messages });
     console.log(`[chat] input_tokens=${response.usage?.input_tokens ?? 'n/a'} output_tokens=${response.usage?.output_tokens ?? 'n/a'}`);
     if (response.stop_reason === 'refusal') return res.json({ answer: MSG.refusal[lang], sources: [], lowConfidence: !hits.length || hits[0].score < LOW_SCORE });
     const raw = (response.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n');

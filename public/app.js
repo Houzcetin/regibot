@@ -2,11 +2,10 @@
   const TEXT = {
     tr: {
       sidebar: 'Ana menü', themeToDark: 'Koyu temaya geç', themeToLight: 'Açık temaya geç', hamburger: 'Menüyü aç', assistantLabel: 'Öğrenci Asistanı', menuSearch: 'Menüde Ara...', general: 'Genel', assistantNav: 'Asistan', calendarNav: 'Akademik Takvim', guideNav: 'Ders Kayıt Rehberi', registrationNav: 'Ders Kayıt', addDropNav: 'Ekle/Bırak', withdrawalNav: 'Dersten Çekilme', loadNav: 'Ders Yükü / AKTS', regulationNav: 'Yönetmelik', handbookNav: 'Öğrenci El Kitabı', sourcesNav: 'Kaynaklar', contactNav: 'İletişim', demoMode: 'Demo Modu', footer: "Bu Yaşar Üniversitesi'nin resmi sistemi değildir; resmi kaynaklara dayanan bir öğrenci projesidir.",
-      home: 'Ana sayfa', announcement: 'Akademik takvim', localDemo: 'Yerel demo', loading: 'Yükleniyor…', homeEyebrow: 'Ders kayıt asistanı', homeTitle: 'Merhaba, nasıl yardımcı olabiliriz?', homeDescription: 'Ders kaydı, akademik takvim ve üniversitenin resmi kaynakları hakkında bilgilere buradan ulaşabilirsiniz.',
+      home: 'Ana sayfa', announcement: 'Akademik takvim', localDemo: 'Yerel demo', loading: 'Yükleniyor…', heroBadge: 'AI destekli', heroTitle: 'Yaşar Öğrenci Asistanı', heroDescription: 'Ders kaydı, ekle/bırak, yönetmelik ve akademik takvim hakkında sorularını sor.', heroPlaceholder: 'Bir soru sor… örn. Ekle/bırak ne zaman bitiyor?', heroNote: 'Yanıtlar resmi kaynaklara dayanır; kararlarını danışmanınla doğrula.', askRegistration: 'Ders kaydı nasıl yapılır?', askLoad: 'Bir dönemde kaç AKTS alabilirim?', askAddDrop: 'Ekle/bırak ne zaman bitiyor?', askWithdrawal: 'Dersten nasıl çekilirim?', askCalendar: 'Akademik takvimde önemli tarihler neler?', askRepeat: 'Ders tekrarı kuralları nelerdir?', newChat: 'Yeni sohbet', deadlinePrefix: 'Sıradaki tarih', typing: 'yazıyor…', questionLabel: 'Mesajınız', send: 'Gönder', charCount: n => `${n} / 500`,
       information: 'Bilgilendirme', close: 'Bildirimi kapat', upcoming: 'Yaklaşan tarih', datesTitle: 'Akademik takvimden önemli tarihler', knowledge: 'Bilgi tabanı', courseRegistration: 'Ders Kayıt', addDrop: 'Ekle-Bırak', withdrawal: 'Dersten Çekilme', lastClass: 'Son Ders Günü', finals: 'Final Sınavları', sourcesCount: 'belge', chunksCount: 'parça', apiReady: 'hazır', apiMissing: 'eksik', noUpcoming: 'Yaklaşan tarih bulunamadı.',
-      quickAccess: 'Hızlı Erişim', quickDescription: 'Sık sorulan konulardan birini seçerek sohbete başlayın.', askWithdrawal: 'Dersten nasıl çekilirim?', askLoad: 'Bir dönemde kaç AKTS alabilirim?', askAddDrop: 'Ekle-bırak ne zaman?', askAdvisor: 'Danışman onayı nasıl alınır?', askRepeat: 'Ders tekrarı kuralları nelerdir?', askContact: 'Öğrenci İşleri iletişim bilgileri nedir?',
       calendarTitle: 'Akademik Takvim', calendarDescription: '2026–2027 ön lisans ve lisans akademik takvimindeki tarihler.', fall: 'Güz', spring: 'Bahar', summer: 'Yaz', holidays: 'Resmi tatiller', past: 'Tamamlandı', ongoing: 'Devam ediyor', next: 'Sıradaki', calendarPdf: 'Resmi akademik takvim PDF dosyasını aç', date: 'Tarih', event: 'Etkinlik', status: 'Durum',
-      chatTitle: 'Ders kayıt asistanı', chatDescription: 'Sorularınızı resmi üniversite kaynaklarına dayanarak yanıtlarım.', welcome: 'Merhaba! Ders kayıt kuralları, AKTS yükü, danışman onayı ve akademik takvim hakkında resmi kaynaklardan yanıt arayabilirim. Kişisel durumunuza bağlı konuları danışmanınızla doğrulayın.', questionLabel: 'Mesajınız', placeholder: 'Ders kaydıyla ilgili sorunuzu yazın…', send: 'Gönder', typing: 'Yanıt hazırlanıyor…', quickQuestions: 'Örnek sorular', charCount: n => `${n} / 500`, lowConfidence: 'Bu yanıt için kaynak eşleşmesi sınırlı olabilir. Resmi kaynakları ve danışmanınızı kontrol edin.', errorFallback: 'Bir sorun oluştu. Lütfen tekrar deneyin.',
+      chatTitle: 'Ders kayıt asistanı', chatDescription: 'Sorularınızı resmi üniversite kaynaklarına dayanarak yanıtlarım.', welcome: 'Merhaba! Ders kayıt kuralları, AKTS yükü, danışman onayı ve akademik takvim hakkında resmi kaynaklardan yanıt arayabilirim. Kişisel durumunuza bağlı konuları danışmanınızla doğrulayın.', questionLabel: 'Mesajınız', placeholder: 'Ders kaydıyla ilgili sorunuzu yazın…', send: 'Gönder', typing: 'yazıyor…', quickQuestions: 'Örnek sorular', charCount: n => `${n} / 500`, lowConfidence: 'Bu yanıt için kaynak eşleşmesi sınırlı olabilir. Resmi kaynakları ve danışmanınızı kontrol edin.', errorFallback: 'Bir sorun oluştu. Lütfen tekrar deneyin.',
       guidesTitle: 'Ders Kayıt Rehberi', guides: {
         '/rehber/ders-kayit': { title: 'Ders Kayıt', intro: 'Ders seçimi, kayıt yenileme ve kayıt sırasında karşılaşabileceğiniz konular için üniversitenin yayımladığı kaynaklara göz atın.', questions: ['Ders kaydımı nasıl tamamlarım?', 'Ders kaydımı geç yapabilir miyim?', 'Seçmek istediğim dersi bulamıyorum, ne yapmalıyım?', 'Ders kaydında danışmanımın rolü nedir?'] },
         '/rehber/ekle-birak': { title: 'Ekle/Bırak', intro: 'Ekleme-bırakma dönemi ve ders değişiklikleriyle ilgili sorularınızı resmi kaynaklar üzerinden inceleyin.', questions: ['Ekle-bırak ne zaman?', 'Ekle-bırak döneminde dersimi değiştirebilir miyim?', 'Ekle-bırak işlemi için danışman onayı gerekir mi?', 'Ders kaydımı ekle-bırak döneminde tamamlayabilir miyim?'] },
@@ -19,11 +18,10 @@
     },
     en: {
       sidebar: 'Main menu', themeToDark: 'Switch to dark theme', themeToLight: 'Switch to light theme', hamburger: 'Open menu', assistantLabel: 'Student Assistant', menuSearch: 'Search menu…', general: 'General', assistantNav: 'Assistant', calendarNav: 'Academic Calendar', guideNav: 'Course Registration Guide', registrationNav: 'Course Registration', addDropNav: 'Add/Drop', withdrawalNav: 'Course Withdrawal', loadNav: 'Course Load / ECTS', regulationNav: 'Regulation', handbookNav: 'Student Handbook', sourcesNav: 'Sources', contactNav: 'Contact', demoMode: 'Demo Mode', footer: 'This is not an official Yaşar University system; it is a student project based on official sources.',
-      home: 'Home', announcement: 'Academic calendar', localDemo: 'Local demo', loading: 'Loading…', homeEyebrow: 'Course registration assistant', homeTitle: 'Hello, how can we help?', homeDescription: 'Find information about registration, the academic calendar, and official university sources.',
+      home: 'Home', announcement: 'Academic calendar', localDemo: 'Local demo', loading: 'Loading…', heroBadge: 'AI-powered', heroTitle: 'Yaşar Student Assistant', heroDescription: 'Ask about course registration, add/drop, regulations and the academic calendar.', heroPlaceholder: 'Ask a question… e.g. When does add/drop end?', heroNote: 'Answers are based on official sources; confirm decisions with your advisor.', askRegistration: 'How do I register for courses?', askLoad: 'How many ECTS can I take in a semester?', askAddDrop: 'When does add/drop end?', askWithdrawal: 'How do I withdraw from a course?', askCalendar: 'What are the key dates in the academic calendar?', askRepeat: 'What are the course repeat rules?', newChat: 'New chat', deadlinePrefix: 'Next deadline', typing: 'typing…', questionLabel: 'Your message', send: 'Send', charCount: n => `${n} / 500`,
       information: 'Notice', close: 'Dismiss notice', upcoming: 'Upcoming date', datesTitle: 'Key dates from the academic calendar', knowledge: 'Knowledge base', courseRegistration: 'Course Registration', addDrop: 'Add/Drop', withdrawal: 'Course Withdrawal', lastClass: 'Last Day of Classes', finals: 'Final Exams', sourcesCount: 'sources', chunksCount: 'chunks', apiReady: 'ready', apiMissing: 'not set', noUpcoming: 'No upcoming date found.',
-      quickAccess: 'Quick Access', quickDescription: 'Choose a common topic to start a chat.', askWithdrawal: 'How do I withdraw from a course?', askLoad: 'How many ECTS can I take in a semester?', askAddDrop: 'When is add/drop?', askAdvisor: 'How do I get advisor approval?', askRepeat: 'What are the course repeat rules?', askContact: 'How can I contact Student Affairs?',
       calendarTitle: 'Academic Calendar', calendarDescription: 'Dates from the 2026–2027 associate and undergraduate academic calendar.', fall: 'Fall', spring: 'Spring', summer: 'Summer', holidays: 'Public holidays', past: 'Past', ongoing: 'Ongoing', next: 'Next', calendarPdf: 'Open the official academic calendar PDF', date: 'Date', event: 'Event', status: 'Status',
-      chatTitle: 'Course registration assistant', chatDescription: 'Answers are based on official university sources.', welcome: 'Hello! I can look up official sources for course registration rules, ECTS load, advisor approval, and the academic calendar. Please confirm questions that depend on your circumstances with your advisor.', questionLabel: 'Your message', placeholder: 'Ask a course registration question…', send: 'Send', typing: 'Preparing an answer…', quickQuestions: 'Example questions', charCount: n => `${n} / 500`, lowConfidence: 'The source match for this answer may be limited. Check official sources and your advisor.', errorFallback: 'Something went wrong. Please try again.',
+      chatTitle: 'Course registration assistant', chatDescription: 'Answers are based on official university sources.', welcome: 'Hello! I can look up official sources for course registration rules, ECTS load, advisor approval, and the academic calendar. Please confirm questions that depend on your circumstances with your advisor.', questionLabel: 'Your message', placeholder: 'Ask a course registration question…', send: 'Send', typing: 'typing…', quickQuestions: 'Example questions', charCount: n => `${n} / 500`, lowConfidence: 'The source match for this answer may be limited. Check official sources and your advisor.', errorFallback: 'Something went wrong. Please try again.',
       guidesTitle: 'Course Registration Guide', guides: {
         '/rehber/ders-kayit': { title: 'Course Registration', intro: 'Review university sources for course selection, registration renewal, and common registration questions.', questions: ['How do I complete course registration?', 'Can I register late?', 'I cannot find the course I want to select. What should I do?', 'What is my advisor’s role in course registration?'] },
         '/rehber/ekle-birak': { title: 'Add/Drop', intro: 'Use official sources to check add/drop dates and information about changing course selections.', questions: ['When is add/drop?', 'Can I change a course during add/drop?', 'Do I need advisor approval during add/drop?', 'Can I complete registration during add/drop?'] },
@@ -72,7 +70,7 @@
   let conversationHistory = [];
   let pendingQuestion = '';
   let waiting = false;
-  let alertDismissed = false;
+  let chatSession = 0; // bumped by "New chat" so a reply still in flight is dropped
   let guideExpanded = true;
   let route = '/';
   const t = key => TEXT[lang][key];
@@ -102,26 +100,10 @@
     if (end === 0) return t('endsToday');
     return lang === 'tr' ? 'Tamamlandı' : 'Past';
   }
-  function eventSemester(event) {
-    if (/Güz|Fall/i.test(event.event+' '+event.event_en)) return t('fall');
-    if (/Bahar|Spring/i.test(event.event+' '+event.event_en)) return t('spring');
-    if (/Yaz|Summer/i.test(event.event+' '+event.event_en)) return t('summer');
-    return '2026–2027';
-  }
   function upcoming(events) {
     const active = events.filter(e => e.start <= calendarData.today && e.end >= calendarData.today).sort((a,b)=>a.end.localeCompare(b.end));
     if (active.length) return active[0];
     return events.filter(e=>e.start>calendarData.today).sort((a,b)=>a.start.localeCompare(b.start))[0] || null;
-  }
-  function matchingEvent(regex) { return upcoming(calendarData.events.filter(e=>regex.test(e.event))); }
-  function getDeadlineCards() {
-    return [
-      {key:'courseRegistration',icon:'register',gradient:'gradient-pink',event:matchingEvent(/Ders Kayıtları/i)},
-      {key:'addDrop',icon:'drop',gradient:'gradient-green',event:matchingEvent(/Ders Ekleme-Çıkarma/i)},
-      {key:'withdrawal',icon:'arrow',gradient:'gradient-blue',event:matchingEvent(/Dersten Çekilme Son Tarih/i)},
-      {key:'lastClass',icon:'calendar',gradient:'gradient-yellow',event:matchingEvent(/Derslerin Sona Ermesi/i)},
-      {key:'finals',icon:'finals',gradient:'gradient-purple',event:matchingEvent(/Dönem Sonu Sınavları/i)}
-    ];
   }
   function nearestAlertEvent() {
     const important = calendarData.events.filter(e=>/Ders Kayıtları|Ders Ekleme-Çıkarma|Dersten Çekilme Son Tarih/i.test(e.event));
@@ -168,39 +150,16 @@
     const button=$('theme-button'),label=isDark()?t('themeToLight'):t('themeToDark');
     button.setAttribute('aria-pressed',String(isDark()));button.setAttribute('aria-label',label);button.title=label;
   }
-  function renderAlert() {
-    if(alertDismissed) return '';
+  const HERO_QUESTIONS=['askRegistration','askLoad','askAddDrop','askWithdrawal','askCalendar','askRepeat'];
+  function renderDeadlineLine() {
     const event=nearestAlertEvent();
-    if(!event) return `<section class="alert-banner"><span class="alert-icon">${icon('warning')}</span><div class="alert-copy"><strong>${esc(t('information'))}</strong> ${esc(t('noUpcoming'))}</div><button class="alert-close" type="button" aria-label="${esc(t('close'))}" data-dismiss-alert>×</button></section>`;
-    const endText=dateShort(event.end);
-    const title=lang==='tr' ? event.event : event.event_en;
-    const copy=lang==='tr' ? `${title} ${countdown(event).toLocaleLowerCase('tr-TR')} (${endText}).` : `${title} ${countdown(event).toLowerCase()} (${endText}).`;
-    return `<section class="alert-banner"><span class="alert-icon">${icon('warning')}</span><div class="alert-copy"><strong>${esc(t('information'))}</strong> ${esc(copy)}</div><button class="alert-close" type="button" aria-label="${esc(t('close'))}" data-dismiss-alert>×</button></section>`;
+    return event?`<a class="assistant-deadline" href="#/takvim"><span>${esc(t('deadlinePrefix'))}</span><strong>${esc(lang==='tr'?event.event:event.event_en)}</strong><span>${esc(dateShort(event.start))} · ${esc(countdown(event))}</span></a>`:'';
   }
-  const QUICK = [
-    {key:'askWithdrawal',icon:'arrow',tone:'icon-pink'}, {key:'askLoad',icon:'stack',tone:'icon-green'}, {key:'askAddDrop',icon:'drop',tone:'icon-blue'},
-    {key:'askAdvisor',icon:'advisor',tone:'icon-yellow'}, {key:'askRepeat',icon:'repeat',tone:'icon-purple'}, {key:'askContact',icon:'phone',tone:'icon-green'}
-  ];
-  function quickLink(item) {
-    const title=t(item.key);
-    return `<a class="quick-link" href="#/asistan" data-ask="${esc(title)}"><span class="quick-icon ${item.tone}">${icon(item.icon)}</span><span class="quick-text"><strong>${esc(title)}</strong><small>${esc(lang==='tr'?'Resmi kaynaklara dayalı yanıt':'Answer from official sources')}</small></span><span class="quick-chevron">›</span></a>`;
+  function renderAssistant() {
+    if(chatEntries.length)return `<section class="assistant-conversation"><header class="conversation-header"><button class="new-chat-button" type="button" id="new-chat">${icon('chat')}<span>${esc(t('newChat'))}</span></button></header><div class="chat-log" id="chat-log" aria-live="polite" aria-relevant="additions text"></div><div class="composer-dock"><div class="composer-shell"><form id="chat-form"><label class="sr-only" for="chat-input">${esc(t('questionLabel'))}</label><textarea id="chat-input" maxlength="500" rows="1" placeholder="${esc(t('heroPlaceholder'))}"></textarea><button class="send-button" id="chat-send" type="submit" aria-label="${esc(t('send'))}" ${waiting?'disabled':''}><span class="sr-only">${esc(t('send'))}</span>${icon('arrow')}</button><span class="char-counter" id="char-counter"></span></form></div></div></section>`;
+    return `<div class="assistant-landing"><section class="assistant-hero"><img class="hero-logo" src="/assets/logo.svg" alt=""><span class="ai-badge"><span aria-hidden="true">✦</span> ${esc(t('heroBadge'))}</span><h1 class="assistant-title">${esc(t('heroTitle'))}</h1><p class="assistant-description">${esc(t('heroDescription'))}</p><div class="composer-shell"><form id="chat-form"><label class="sr-only" for="chat-input">${esc(t('questionLabel'))}</label><textarea id="chat-input" maxlength="500" rows="1" placeholder="${esc(t('heroPlaceholder'))}"></textarea><button class="send-button" id="chat-send" type="submit" aria-label="${esc(t('send'))}"><span class="sr-only">${esc(t('send'))}</span>${icon('arrow')}</button><span class="char-counter" id="char-counter"></span></form></div><div class="suggestion-chips">${HERO_QUESTIONS.map(key=>`<button class="suggestion-chip" type="button" data-ask="${esc(t(key))}">${esc(t(key))}</button>`).join('')}</div><p class="assistant-note">${esc(t('heroNote'))}</p><div id="assistant-deadline">${renderDeadlineLine()}</div></section></div>`;
   }
-  function deadlineCard(item) {
-    const ev=item.event;
-    return `<article class="info-card ${item.gradient}"><div class="info-card-top"><span class="card-icon">${icon(item.icon)}</span><div><p class="card-label">${esc(t('upcoming'))}</p><h3>${esc(t(item.key))}</h3></div></div>${ev?`<p class="info-detail">${esc(rangeLong(ev))}</p><p class="info-meta">${esc(countdown(ev))} · ${esc(eventSemester(ev))}</p>`:`<p class="info-detail">${esc(t('noUpcoming'))}</p>`}</article>`;
-  }
-  function knowledgeCard() {
-    const count=sourcesData.sources.length, chunks=sourcesData.totalChunks || healthData.chunks || 0;
-    return `<article class="info-card gradient-blue"><div class="info-card-top"><span class="card-icon">${icon('source')}</span><div><p class="card-label">${esc(t('knowledge'))}</p><h3>${esc(t('sourcesNav'))}</h3></div></div><div class="knowledge-lines"><p class="info-detail">${count} ${esc(t('sourcesCount'))} · ${chunks} ${esc(t('chunksCount'))}</p><p class="info-meta">${esc(healthData.model||'—')} · ${esc(lang==='tr'?'API anahtarı':'API key')}: ${esc(healthData.hasKey?t('apiReady'):t('apiMissing'))}</p></div></article>`;
-  }
-  function renderHome() {
-    const deadlines=getDeadlineCards();
-    return `<div class="main-content"><div class="page-head"><div><p class="eyebrow">${esc(t('homeEyebrow'))}</p><h1 class="page-title">${esc(t('homeTitle'))}</h1><p class="page-description">${esc(t('homeDescription'))}</p></div></div>${renderAlert()}<h2 class="section-title">${esc(t('datesTitle'))}</h2><div class="info-grid">${deadlines.map(deadlineCard).join('')}${knowledgeCard()}</div><h2 class="section-title">${esc(t('quickAccess'))}</h2><p class="section-subtitle">${esc(t('quickDescription'))}</p><div class="quick-grid">${QUICK.map(quickLink).join('')}</div></div>`;
-  }
-
-  const CHAT_QUICK=[
-    ['askLoad','stack','icon-green'],['askAddDrop','drop','icon-blue'],['askWithdrawal','arrow','icon-pink'],['askAdvisor','advisor','icon-yellow']
-  ];
+  function growInput(input) { input.style.height='auto';input.style.height=`${Math.min(input.scrollHeight,144)}px`; }
   function safeMarkdown(value) {
     const safe=esc(value);
     const inline=line=>line.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\[([^\]]+)\]/g,'<span class="citation">[$1]</span>');
@@ -215,7 +174,7 @@
   }
   function sourceCards(cards) {
     if(!cards?.length)return '';
-    return `<div class="source-cards">${cards.map((source,i)=>`<article class="chat-source-card"><strong>${esc(source.title||'')}</strong>${source.article?`<span>${esc(source.article)}</span>`:''}${source.url?`<a href="${safeUrl(source.url)}" target="_blank" rel="noopener noreferrer">${esc(t('openOfficial'))}</a>`:''}</article>`).join('')}</div>`;
+    return `<div class="source-cards">${cards.map(source=>{const title=source.title||'',tag=/Yönetmelik|Regulation/i.test(title)?(lang==='tr'?'Yönetmelik':'Regulation'):/El Kitab|Handbook/i.test(title)?(lang==='tr'?'El Kitabı':'Handbook'):/Takvim|Calendar/i.test(title)?(lang==='tr'?'Takvim':'Calendar'):(lang==='tr'?'Kaynak':'Source');return `<a class="chat-source-card" href="${safeUrl(source.url)}" target="_blank" rel="noopener noreferrer"><span class="source-card-icon">${icon('file')}</span><span class="source-card-copy"><small>${esc(tag)}</small><strong>${esc(title)}</strong>${source.article?`<span>${esc(source.article)}</span>`:''}</span></a>`;}).join('')}</div>`;
   }
   function renderChatEntries() {
     const log=$('chat-log');if(!log)return;
@@ -225,31 +184,32 @@
       const text=entry.welcome?t('welcome'):entry.content;
       const body=role==='user'?`<div class="bubble"></div>`:`<div class="bubble">${safeMarkdown(text)}</div>${sourceCards(entry.sources)}`;
       const warning=entry.lowConfidence?`<p class="chat-warning">${esc(t('lowConfidence'))}</p>`:'';
-      return `<div class="message-row ${role}"><div class="chat-avatar" aria-hidden="true">${role==='user'?(lang==='tr'?'S':'Y'):'A'}</div><div class="message-body">${body}${warning}</div></div>`;
+      return `<div class="message-row ${role}">${role==='assistant'?'<div class="chat-avatar" aria-hidden="true"><img src="/assets/logo.svg" alt=""></div>':''}<div class="message-body">${body}${warning}</div></div>`;
     }).join('');
     for(const [i,entry] of entries.entries())if(entry.role==='user')log.children[i].querySelector('.bubble').textContent=entry.content;
-    if(waiting){const row=document.createElement('div');row.className='message-row assistant';row.id='typing-row';row.innerHTML=`<div class="chat-avatar" aria-hidden="true">A</div><div class="bubble typing-bubble" aria-label="${esc(t('typing'))}"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>`;log.appendChild(row);}
+    if(waiting){const row=document.createElement('div');row.className='message-row assistant typing-row';row.id='typing-row';row.innerHTML=`<div class="chat-avatar" aria-hidden="true"><img src="/assets/logo.svg" alt=""></div><div class="typing-content"><span class="typing-label">${esc(t('typing'))}</span><div class="bubble typing-bubble" aria-label="${esc(t('typing'))}"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div></div>`;log.appendChild(row);}
     log.scrollTop=log.scrollHeight;
-  }
-  function renderChat() {
-    return `<div class="main-content"><div class="page-head"><div><p class="eyebrow">${esc(t('assistantNav'))}</p><h1 class="page-title">${esc(t('chatTitle'))}</h1><p class="page-description">${esc(t('chatDescription'))}</p></div></div><section class="surface-card chat-card"><div class="chat-card-head"><div><h2>${esc(t('chatTitle'))}</h2><p>${esc(t('chatDescription'))}</p></div><span class="card-icon">${icon('chat')}</span></div><div class="chat-log" id="chat-log" aria-live="polite" aria-relevant="additions text"></div><div class="chat-composer"><div class="quick-grid chat-quick-grid">${CHAT_QUICK.map(([key,ico,tone])=>`<a class="quick-link" href="#/asistan" data-ask="${esc(t(key))}"><span class="quick-icon ${tone}">${icon(ico)}</span><span class="quick-text"><strong>${esc(t(key))}</strong></span></a>`).join('')}</div><form id="chat-form"><label class="sr-only" for="chat-input">${esc(t('questionLabel'))}</label><textarea id="chat-input" maxlength="500" rows="2" placeholder="${esc(t('placeholder'))}" ${waiting?'disabled':''}></textarea><div class="composer-bottom"><span id="char-counter" class="char-counter">${esc(t('charCount')(0))}</span><button class="send-button" id="chat-send" type="submit" ${waiting?'disabled':''}><span>${esc(t('send'))}</span>${icon('arrow')}</button></div></form></div></section></div>`;
   }
   async function sendMessage(value) {
     const message=String(value||'').trim();if(!message||waiting)return;
-    chatEntries.push({role:'user',content:message});waiting=true;renderChatEntries();
-    const input=$('chat-input');if(input){input.value='';input.disabled=true;}const counter=$('char-counter');if(counter){counter.textContent=t('charCount')(0);counter.classList.remove('over');}
+    chatEntries.push({role:'user',content:message});waiting=true;
+    if(!$('chat-log')){renderRoute();$('chat-input')?.focus();}
+    renderChatEntries();
+    const input=$('chat-input');if(input)input.value='';const counter=$('char-counter');if(counter){counter.textContent='';counter.classList.remove('over');}
     const send=$('chat-send');if(send)send.disabled=true;
+    const session=chatSession;
     try{
       const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message,history:conversationHistory.slice(-6),lang})});
       let data;try{data=await response.json();}catch{data=null;}
+      if(session!==chatSession)return;
       if(!response.ok||data?.error){chatEntries.push({role:'assistant',content:data?.answer||t('errorFallback'),error:true});}
       else{
         const answer=typeof data?.answer==='string'?data.answer:t('errorFallback');
         chatEntries.push({role:'assistant',content:answer,sources:Array.isArray(data?.sources)?data.sources:[],lowConfidence:Boolean(data?.lowConfidence)});
         conversationHistory.push({role:'user',content:message},{role:'assistant',content:answer});conversationHistory=conversationHistory.slice(-6);
       }
-    }catch{chatEntries.push({role:'assistant',content:t('errorFallback'),error:true});}
-    finally{waiting=false;renderChatEntries();const next=$('chat-input');if(next){next.disabled=false;next.focus();}const button=$('chat-send');if(button)button.disabled=false;}
+    }catch{if(session===chatSession)chatEntries.push({role:'assistant',content:t('errorFallback'),error:true});}
+    finally{if(session!==chatSession)return;waiting=false;renderChatEntries();const next=$('chat-input');if(next){next.disabled=false;next.focus();}const button=$('chat-send');if(button)button.disabled=false;}
   }
 
   function groupForEvent(event) {
@@ -275,7 +235,7 @@
     return `<div class="main-content"><div class="page-head"><div><p class="eyebrow">${esc(t('calendarNav'))}</p><h1 class="page-title">${esc(t('calendarTitle'))}</h1><p class="page-description">${esc(t('calendarDescription'))}</p></div></div><section class="surface-card"><div class="calendar-groups">${entries||`<p class="empty-note">${esc(t('noUpcoming'))}</p>`}</div>${source?`<a class="calendar-link" href="${safeUrl(source.url)}" target="_blank" rel="noopener noreferrer">${icon('file')}${esc(t('calendarPdf'))}</a>`:''}</section></div>`;
   }
   function renderGuide(path) {
-    const data=TEXT[lang].guides[path];if(!data)return renderHome();
+    const data=TEXT[lang].guides[path];if(!data)return renderAssistant();
     const quicks=data.questions.map(q=>`<button class="guide-question" type="button" data-ask="${esc(q)}"><span>${esc(q)}</span><span>›</span></button>`).join('');
     return `<div class="main-content"><div class="page-head"><div><p class="eyebrow">${esc(t('guidesTitle'))}</p><h1 class="page-title">${esc(data.title)}</h1></div></div><div class="guide-layout"><section class="surface-card"><p>${esc(data.intro)}</p><div class="question-list">${quicks}</div></section><aside class="guide-callout">${esc(lang==='tr'?'Yanıtlar resmi kaynaklarla sınırlıdır. Kayıt kararlarınızı akademik danışmanınızla doğrulayın.':'Answers are limited to official sources. Confirm registration decisions with your academic advisor.')}</aside></div></div>`;
   }
@@ -299,49 +259,50 @@
     return `<div class="main-content"><div class="page-head"><div><p class="eyebrow">${esc(t('contactTitle'))}</p><h1 class="page-title">${esc(t('contactTitle'))}</h1><p class="page-description">${esc(t('contactDescription'))}</p></div></div><div class="contact-grid">${a}${b}</div></div>`;
   }
   function setActiveNavigation(path) {
-    document.querySelectorAll('[data-route]').forEach(link=>link.classList.toggle('active',link.dataset.route===path));
+    const activePath=path==='/'||path==='/asistan'?'/asistan':path;
+    document.querySelectorAll('[data-route]').forEach(link=>link.classList.toggle('active',link.dataset.route===activePath));
     const isGuide=path.startsWith('/rehber/');
     if(isGuide)guideExpanded=true;
     $('guide-toggle').setAttribute('aria-expanded',String(guideExpanded));
     $('guide-submenu').hidden=!guideExpanded;
     document.querySelectorAll('.nav-link,.nav-group-toggle,.nav-submenu a').forEach(link=>link.removeAttribute('aria-current'));
-    const current=document.querySelector(`[data-route="${CSS.escape(path)}"]`);if(current)current.setAttribute('aria-current','page');
+    const current=document.querySelector(`[data-route="${CSS.escape(activePath)}"]`);if(current)current.setAttribute('aria-current','page');
     if(isGuide)$('guide-toggle').classList.add('active');else $('guide-toggle').classList.remove('active');
   }
   function closeSidebar() { $('sidebar').classList.remove('open');$('sidebar-scrim').classList.remove('open');$('sidebar-toggle').setAttribute('aria-expanded','false'); }
   function currentRoute() { const raw=location.hash.replace(/^#/, '')||'/';return raw.startsWith('/')?raw:`/${raw}`; }
   function renderRoute() {
     route=currentRoute();
+    const assistantRoute=route==='/'||route==='/asistan';
+    document.body.classList.toggle('route-assistant',assistantRoute);
     setActiveNavigation(route);
     const main=$('main-area');
     let html;
-    if(route==='/')html=renderHome();
-    else if(route==='/asistan')html=renderChat();
+    if(assistantRoute)html=renderAssistant();
     else if(route==='/takvim')html=renderCalendar();
     else if(TEXT[lang].guides[route])html=renderGuide(route);
     else if(route==='/yonetmelik')html=renderSourcesPage('regulation');
     else if(route==='/el-kitabi')html=renderSourcesPage('handbook');
     else if(route==='/kaynaklar')html=renderSourcesPage('all');
     else if(route==='/iletisim')html=renderContacts();
-    else html=renderHome();
+    else html=renderAssistant();
     main.innerHTML=html;
     main.scrollTop=0;
     closeSidebar();
-    if(route==='/'){
-      main.querySelector('[data-dismiss-alert]')?.addEventListener('click',()=>{alertDismissed=true;main.querySelector('.alert-banner')?.remove();});
-    }
-    if(route==='/asistan'){
+    if(assistantRoute){
       renderChatEntries();
       const form=$('chat-form'),input=$('chat-input');
-      if(input){input.addEventListener('input',()=>{$('char-counter').textContent=t('charCount')(input.value.length);$('char-counter').classList.toggle('over',input.value.length>=500);});input.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();form.requestSubmit();}});}
+      if(input){input.addEventListener('input',()=>{growInput(input);const counter=$('char-counter');counter.textContent=input.value.length>=400?t('charCount')(input.value.length):'';counter.classList.toggle('over',input.value.length>=500);});input.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();form.requestSubmit();}});growInput(input);}
       if(form)form.addEventListener('submit',event=>{event.preventDefault();sendMessage(input.value);});
+      $('new-chat')?.addEventListener('click',()=>{chatSession++;chatEntries=[];conversationHistory=[];waiting=false;renderRoute();$('chat-input')?.focus();});
+      if(!chatEntries.length&&window.matchMedia('(pointer:fine)').matches)setTimeout(()=>{if($('chat-input')&&!document.activeElement?.matches('textarea'))$('chat-input').focus();},0);
       if(pendingQuestion){const question=pendingQuestion;pendingQuestion='';setTimeout(()=>sendMessage(question),0);}
     }
     main.querySelectorAll('[data-ask]').forEach(node=>node.addEventListener(node.tagName==='A'?'click':'click',event=>{event.preventDefault();askFromAnywhere(node.dataset.ask);}));
   }
   function askFromAnywhere(question) {
-    pendingQuestion=question;
-    if(currentRoute()==='/asistan')renderRoute();else location.hash='#/asistan';
+    if(currentRoute()==='/'||currentRoute()==='/asistan'){sendMessage(question);return;}
+    pendingQuestion=question;location.hash='#/asistan';
   }
   function applyMenuSearch() {
     const q=norm($('menu-search').value.trim());
@@ -361,7 +322,8 @@
     if(sourcesResult.status==='fulfilled')sourcesData=sourcesResult.value;
     if(healthResult.status==='fulfilled')healthData=healthResult.value;
     updateHeader();
-    if(['/','/takvim','/yonetmelik','/el-kitabi','/kaynaklar'].includes(currentRoute()))renderRoute();
+    if(['/','/asistan'].includes(currentRoute())){const deadline=$('assistant-deadline');if(deadline)deadline.innerHTML=renderDeadlineLine();}
+    else if(['/takvim','/yonetmelik','/el-kitabi','/kaynaklar'].includes(currentRoute()))renderRoute();
   }
 
   document.querySelectorAll('.language-switch button').forEach(button=>button.addEventListener('click',()=>{

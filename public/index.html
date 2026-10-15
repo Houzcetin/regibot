@@ -6,6 +6,9 @@
   <meta name="theme-color" content="#1e2a3a">
   <title>Yaşar Asistan</title>
   <script>try{if(localStorage.getItem('regibot-theme')==='dark')document.documentElement.dataset.theme='dark';}catch(e){}</script>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="stylesheet" href="/style.css">
   <script src="/app.js" defer></script>
 </head>
@@ -16,7 +19,7 @@
         <button class="icon-button hamburger" id="sidebar-toggle" type="button" aria-label="Menüyü aç" aria-expanded="false" aria-controls="sidebar">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
-        <a class="top-brand" href="#/" aria-label="Ana sayfa"><span class="top-brand-title">Yaşar Asistan</span><span class="semester-badge" id="semester-badge">2026-2027 Güz</span></a>
+        <a class="top-brand" href="#/" aria-label="Ana sayfa"><span class="brand-logo" aria-hidden="true"></span><span class="top-brand-title">Yaşar Asistan</span><span class="semester-badge" id="semester-badge">2026-2027 Güz</span></a>
       </div>
       <div class="topbar-actions">
         <div class="language-switch" role="group" aria-label="Language"><button type="button" data-language="tr" aria-pressed="true">TR</button><span>|</span><button type="button" data-language="en" aria-pressed="false">EN</button></div>
@@ -30,7 +33,7 @@
       <div class="sidebar-scrim" id="sidebar-scrim"></div>
       <aside class="sidebar" id="sidebar" aria-label="Ana menü">
         <div class="sidebar-identity">
-          <div class="emblem" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="m4 17 20-10 20 10-20 10L4 17Zm8 5v9c7 6 17 6 24 0v-9M44 18v14"/><circle cx="44" cy="35" r="2"/></svg></div>
+          <div class="emblem" aria-hidden="true"></div>
           <div class="assistant-label" id="assistant-label">Öğrenci Asistanı</div>
         </div>
         <label class="menu-search-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="menu-search" type="search" placeholder="Menüde Ara..." autocomplete="off"></label>
@@ -56,7 +59,7 @@
         </nav>
         <div class="sidebar-bottom"><span class="sidebar-dot"></span><span id="sidebar-status">Yerel demo</span></div>
       </aside>
-      <main class="main-area" id="main-area" tabindex="-1"><div class="loading-state" id="loading-state">Yükleniyor…</div></main>
+      <main class="main-area" id="main-area" tabindex="-1"><div class="assistant-landing"><div class="assistant-hero"><img class="hero-logo" src="/assets/logo.svg" alt=""><span class="ai-badge"><span aria-hidden="true">✦</span> AI destekli</span><h1 class="assistant-title">Yaşar Öğrenci Asistanı</h1><p class="assistant-description">Ders kaydı, ekle/bırak, yönetmelik ve akademik takvim hakkında sorularını sor.</p><div class="composer-shell"><form id="chat-form"><label class="sr-only" for="chat-input">Mesajınız</label><textarea id="chat-input" maxlength="500" rows="1" placeholder="Bir soru sor… örn. Ekle/bırak ne zaman bitiyor?"></textarea><button class="send-button" id="chat-send" type="submit" aria-label="Gönder"><span class="sr-only">Gönder</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><span class="char-counter" id="char-counter"></span></form></div><div class="suggestion-chips" aria-label="Örnek sorular"></div><p class="assistant-note">Yanıtlar resmi kaynaklara dayanır; kararlarını danışmanınla doğrula.</p><div id="assistant-deadline"></div></div></div></main>
     </div>
     <footer class="page-footer" id="page-footer">Bu Yaşar Üniversitesi'nin resmi sistemi değildir; resmi kaynaklara dayanan bir öğrenci projesidir.</footer>
     <div class="session-pill" id="session-pill">Demo tarihi: 15.09.2026</div>

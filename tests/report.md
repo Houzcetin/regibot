@@ -1,6 +1,6 @@
 # RegiBot — Accuracy report
 
-Date: 2026-10-15T10:04:44.310Z
+Date: 2026-10-15T13:42:32.856Z
 Model: claude-haiku-5-5
 Number of questions: 30
 
@@ -10,34 +10,34 @@ TR answers: 13/13; TR refusals: 2/2; EN answers: 12/12; EN refusals: 3/3
 
 | # | Lang | Type | Question | Result | Cited sources | Notes (reason) |
 |---|---|---|---|---|---|---|
-| q01 | TR | answer | Bir dönemde en fazla kaç AKTS ders alabilirim? | PASS | Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (1/3); Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (2/3); Yönetmelik, Madde 24 | all checks passed |
+| q01 | TR | answer | Bir dönemde en fazla kaç AKTS ders alabilirim? | PASS | Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (1/3); Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (3/3); Yönetmelik, Madde 22; Yönetmelik, Madde 24 | all checks passed |
 | q02 | TR | answer | Genel not ortalamam 1,80. Bu dönem en fazla kaç AKTS alabilirim? | PASS | Yönetmelik, Madde 24; Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (1/3); Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (2/3) | all checks passed |
-| q03 | TR | answer | Üst sınıftan ders alabilir miyim? | PASS | Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (1/3) | all checks passed |
-| q04 | TR | answer | Başarısız olduğum zorunlu dersi tekrar almak zorunda mıyım? | PASS | Yönetmelik, Madde 26; Öğrenci İşleri – Ders Kayıtları, Ders İşlemleri Nelerdir ? (4/4); Yönetmelik, Madde 24 | all checks passed |
-| q05 | TR | answer | Güz dönemi ders ekleme-bırakma haftası ne zaman? | PASS | Akademik Takvim 2026-2027; Akademik Takvim 2026-2027; Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4) | all checks passed |
-| q06 | TR | answer | Dersten çekilme için son gün ne zaman? | PASS | Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme; Yönetmelik, Madde 30; Akademik Takvim 2026-2027 | all checks passed |
+| q03 | TR | answer | Üst sınıftan ders alabilir miyim? | PASS | Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (1/3); Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (2/3) | all checks passed |
+| q04 | TR | answer | Başarısız olduğum zorunlu dersi tekrar almak zorunda mıyım? | PASS | Yönetmelik, Madde 26; Yönetmelik, Madde 24 | all checks passed |
+| q05 | TR | answer | Güz dönemi ders ekleme-bırakma haftası ne zaman? | PASS | Akademik Takvim 2026-2027; Akademik Takvim 2026-2027; Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (2/4) | all checks passed |
+| q06 | TR | answer | Dersten çekilme için son gün ne zaman? | PASS | Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme; Akademik Takvim 2026-2027; Akademik Takvim 2026-2027 | all checks passed |
 | q07 | TR | answer | Lisans eğitimim boyunca en fazla kaç dersten çekilebilirim? | PASS | Yönetmelik, Madde 30; Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme | all checks passed |
-| q08 | TR | answer | Danışmanım ders kaydımı onayladıktan sonra kendim ders ekleyip bırakabilir miyim? | PASS | Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (2/4); Yönetmelik, Madde 19 | all checks passed |
+| q08 | TR | answer | Danışmanım ders kaydımı onayladıktan sonra kendim ders ekleyip bırakabilir miyim? | PASS | Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (2/4); Yönetmelik, Madde 25 | all checks passed |
 | q09 | TR | answer | Staj dersinin AKTS'si dönemlik AKTS limitime dahil mi? | PASS | Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4); Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (3/3) | all checks passed |
-| q10 | TR | answer | Dönem sonu sınavına girebilmek için derslere yüzde kaç devam etmem gerekiyor? | PASS | Yönetmelik, Madde 29 | all checks passed |
-| q11 | TR | answer | Ders programı çakışan iki derse kayıt olabilir miyim? | PASS | Yönetmelik, Madde 29; Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4); OBS Ders Kaydı Kılavuzu | all checks passed |
-| q12 | TR | answer | Ders kaydımı kayıt haftasında yapamadım. Ekle-bırak haftasında tamamlayabilir miyim? | PASS | Yönetmelik, Madde 25; Akademik Takvim 2026-2027 | all checks passed |
+| q10 | TR | answer | Dönem sonu sınavına girebilmek için derslere yüzde kaç devam etmem gerekiyor? | PASS | Yönetmelik, Madde 29; Öğrenci El Kitabı 2025, Eğitim-Öğretim Süreci › Derslere Devam Zorunluluğu; Öğrenci El Kitabı 2025, Öğrenci Bilgi Sistemi | all checks passed |
+| q11 | TR | answer | Ders programı çakışan iki derse kayıt olabilir miyim? | PASS | Yönetmelik, Madde 29; OBS Ders Kaydı Kılavuzu; Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4); Öğrenci İşleri – Ders Kayıtları, Çap ve Yandal Ders Kaydı | all checks passed |
+| q12 | TR | answer | Ders kaydımı kayıt haftasında yapamadım. Ekle-bırak haftasında tamamlayabilir miyim? | PASS | Yönetmelik, Madde 25; Akademik Takvim 2026-2027; Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (2/4) | all checks passed |
 | q13 | TR | answer | Öğrenci İşleri'ne nasıl ulaşabilirim? | PASS | Öğrenci İşleri – İletişim, Öğrenci İşleri Müdürlüğü İletişim (Student Affairs Office Contact) | all checks passed |
-| q14 | TR | refusal | COMP 2215 dersinin final sınavı hangi salonda yapılacak? | PASS | Akademik Takvim 2026-2027; Yönetmelik, Madde 29 | refusal and support direction found |
+| q14 | TR | refusal | COMP 2215 dersinin final sınavı hangi salonda yapılacak? | PASS | Akademik Takvim 2026-2027 | refusal and support direction found |
 | q15 | TR | refusal | Önümüzdeki bahar döneminde COMP 3304 dersini hangi hoca verecek? | PASS | Bilgisayar Müh. – Müfredat, Bilgisayar Mühendisliği Müfredatı — Dönemlere Göre Dersler (Computer Engineering Curriculum by Semester, 2025-2026 chart) | refusal and support direction found |
 | q16 | EN | answer | My GPA is 2.40. What is the maximum ECTS I can take in a semester? | PASS | Yönetmelik, Madde 23; Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (2/3) | all checks passed |
-| q17 | EN | answer | How many ECTS can I take in my first two semesters at the university? | PASS | Regulation, Article 22; Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4); Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (3/3) | all checks passed |
-| q18 | EN | answer | I am a lateral transfer student registering for the first time. How many ECTS can I take? | PASS | Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4); Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (3/3); Regulation, Provisional Article 1 | all checks passed |
-| q19 | EN | answer | Can I retake a course in which I got a D+ to improve my grade? | PASS | Regulation, Article 26; Yönetmelik, Madde 24; Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme | all checks passed |
-| q20 | EN | answer | When is course registration for the fall semester? | PASS | Akademik Takvim 2026-2027 | all checks passed |
-| q21 | EN | answer | Does a W grade affect my GPA? | PASS | Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme; Yönetmelik, Madde 24 | all checks passed |
-| q22 | EN | answer | How does advisor approval work during course registration? | PASS | Öğrenci İşleri – Ders Kayıtları, Ders Kaydı Nasıl Yapılır?; Regulation, Article 19; Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Takvimi (1/2); Öğrenci İşleri – Ders Kayıtları, Çap ve Yandal Ders Kaydı | all checks passed |
+| q17 | EN | answer | How many ECTS can I take in my first two semesters at the university? | PASS | Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4); Regulation, Article 22 | all checks passed |
+| q18 | EN | answer | I am a lateral transfer student registering for the first time. How many ECTS can I take? | PASS | Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (3/3); Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (3/4) | all checks passed |
+| q19 | EN | answer | Can I retake a course in which I got a D+ to improve my grade? | PASS | Regulation, Article 26; Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme | all checks passed |
+| q20 | EN | answer | When is course registration for the fall semester? | PASS | Akademik Takvim 2026-2027; Regulation, Article 16; Akademik Takvim 2026-2027 | all checks passed |
+| q21 | EN | answer | Does a W grade affect my GPA? | PASS | Öğrenci İşleri – Ders Kayıtları, Dersten Çekilme; Yönetmelik, Madde 21 | all checks passed |
+| q22 | EN | answer | How does advisor approval work during course registration? | PASS | Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Takvimi (1/2); Öğrenci İşleri – Ders Kayıtları, Ders Kaydı Nasıl Yapılır?; Regulation, Article 19; Öğrenci İşleri – Ders Kayıtları, Çap ve Yandal Ders Kaydı | all checks passed |
 | q23 | EN | answer | What attendance is required to take the final exam? | PASS | Regulation, Article 29 | all checks passed |
-| q24 | EN | answer | I am in a double major programme. How many ECTS can I take per semester? | PASS | Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (4/4); Öğrenci İşleri – Ders Kayıtları, Çap ve Yandal Ders Kaydı; Regulation, Article 14 | all checks passed |
-| q25 | EN | answer | What is the ECTS limit for minor programmes? | PASS | Öğrenci İşleri – Ders Kayıtları, Çap ve Yandal Ders Kaydı; Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (4/4); Yönetmelik, Madde 13 | all checks passed |
-| q26 | EN | answer | When do spring semester classes start? | PASS | Akademik Takvim 2026-2027; Akademik Takvim 2026-2027 | all checks passed |
-| q27 | EN | answer | Can a student on probation take courses from a higher year? | PASS | Regulation, Article 24; Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (1/3) | all checks passed |
-| q28 | EN | refusal | Which professor gives the easiest grades in COMP 1202? | PASS | Bilgisayar Müh. – Müfredat, Bilgisayar Mühendisliği Müfredatı — Dönemlere Göre Dersler (Computer Engineering Curriculum by Semester, 2025-2026 chart); Regulation, Article 30 | refusal and support direction found |
+| q24 | EN | answer | I am in a double major programme. How many ECTS can I take per semester? | PASS | Öğrenci İşleri – Ders Kayıtları, Çap ve Yandal Ders Kaydı; Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (4/4); Regulation, Article 22; Regulation, Article 14 | all checks passed |
+| q25 | EN | answer | What is the ECTS limit for minor programmes? | PASS | Öğrenci İşleri – Ders Kayıtları, Çap ve Yandal Ders Kaydı; Öğrenci İşleri – Ders Kayıtları, Ders Kayıt Kuralları (4/4) | all checks passed |
+| q26 | EN | answer | When do spring semester classes start? | PASS | Akademik Takvim 2026-2027 | all checks passed |
+| q27 | EN | answer | Can a student on probation take courses from a higher year? | PASS | Öğrenci İşleri – Ders Kayıtları, Sıkça Sorulan Sorular (1/3); Regulation, Article 24 | all checks passed |
+| q28 | EN | refusal | Which professor gives the easiest grades in COMP 1202? | PASS | — | refusal and support direction found |
 | q29 | EN | refusal | How much will the merit scholarship be next year? | PASS | Regulation, Article 16 | refusal and support direction found |
 | q30 | EN | refusal | How do I get a parking permit for my car on campus? | PASS | — | refusal and support direction found |
 
@@ -54,6 +54,7 @@ None.
 | 2026-10-15T09:56:26.344Z | claude-haiku-5-5 | 25/25 | 4/5 | 29/30 |
 | 2026-10-15T09:59:58.225Z | claude-haiku-5-5 | 25/25 | 5/5 | 30/30 |
 | 2026-10-15T10:04:44.310Z | claude-haiku-5-5 | 25/25 | 5/5 | 30/30 |
+| 2026-10-15T13:42:32.856Z | claude-haiku-5-5 | 25/25 | 5/5 | 30/30 |
 
 <!-- notes:start -->
 ## Before → after
