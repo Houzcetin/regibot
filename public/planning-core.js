@@ -26,14 +26,25 @@
     const co=course.corequisites?evaluate(course.corequisites,completed):{met:true,missing:[]};
     return {status:pre.met&&co.met?'met':'missing',missing:pre.missing,corequisites:co.missing};
   }
+  function officialCourseUrl(value){
+    try { const u=new URL(value);return u.protocol==='https:'&&!u.port&&!u.username&&!u.password&&(u.hostname==='ce.yasar.edu.tr'||u.hostname==='ects.yasar.edu.tr'||u.hostname==='obs.yasar.edu.tr'&&u.pathname.startsWith('/oibs/bologna/')); } catch { return false; }
+  }
+  function pendingFirst(items,completed,key){
+    return items.filter(x=>!completed.has(key(x))).concat(items.filter(x=>completed.has(key(x))));
+  }
+  function courseCodes(d){return new Set([...(d?.courses||[]),...(d?.priorCourses||[])].map(c=>c?.code));}
   function validDataset(d){
     if(!d||typeof d.id!=='string'||!d.program||typeof d.program.tr!=='string'||typeof d.program.en!=='string'||typeof d.version!=='string'||!Array.isArray(d.courses)||!d.courses.length)return false;
-    const codes=new Set(d.courses.map(c=>c?.code));
-    return codes.size===d.courses.length&&d.courses.every(c=>typeof c.code==='string'&&/^[A-Z]+ \d{4}$/.test(c.code)&&typeof c.source==='string'&&/^https:\/\/(ce|ects)\.yasar\.edu\.tr\//.test(c.source)&&(c.ects===null||Number.isFinite(c.ects)&&c.ects>0)&&(c.title===null||c.title&&typeof c.title.tr==='string'&&typeof c.title.en==='string')&&['verified','unverified'].includes(c.verification)&&(c.verification!=='verified'||['prerequisites','corequisites'].every(k=>c[k]===null||ruleValid(c[k],codes))));
+    const currentCodes=new Set(d.courses.map(c=>c?.code));
+    if(d.priorCourses!==undefined&&(!Array.isArray(d.priorCourses)||d.priorCourses.length>100||!d.priorCourses.every(c=>c&&typeof c.code==='string'&&/^[A-Z]+ \d{3,4}$/.test(c.code)&&!currentCodes.has(c.code)&&officialCourseUrl(c.source))))return false;
+    const priorCodes=new Set((d.priorCourses||[]).map(c=>c.code));
+    if(priorCodes.size!==(d.priorCourses||[]).length)return false;
+    const codes=courseCodes(d);
+    return currentCodes.size===d.courses.length&&d.courses.every(c=>c&&typeof c==='object'&&typeof c.code==='string'&&/^[A-Z]+ \d{4}$/.test(c.code)&&typeof c.source==='string'&&officialCourseUrl(c.source)&&(c.ects===null||Number.isFinite(c.ects)&&c.ects>0)&&(c.title===null||c.title&&typeof c.title.tr==='string'&&typeof c.title.en==='string')&&(c.semester===undefined||Number.isInteger(c.semester)&&c.semester>=1&&c.semester<=8)&&['requirementsText','requirementsTextTr'].every(k=>c[k]===undefined||c[k]===null||typeof c[k]==='string'&&c[k].length<=1200)&&['verified','unverified'].includes(c.verification)&&(c.verification!=='verified'||['prerequisites','corequisites'].every(k=>c[k]===null||ruleValid(c[k],codes))));
   }
   function cleanState(value,datasets){
     const d=datasets.find(d=>d.id===value?.dataset)||datasets[0];
-    const codes=new Set(d?.courses.map(c=>c.code)||[]);
+    const codes=courseCodes(d);
     return {version:1,dataset:d?.id||'',completed:Array.isArray(value?.completed)?[...new Set(value.completed.filter(c=>codes.has(c)))]:[],steps:Array.isArray(value?.steps)?[...new Set(value.steps.filter(x=>steps.includes(x)))]:[]};
   }
   const storageKey='regibot-planning-v1';
@@ -56,5 +67,5 @@
     // RFC 5545 line folding at 75 UTF-8 octets, including continuation spaces.
     return lines.map(line=>{let result='',part='',bytes=0;for(const ch of line){const n=new TextEncoder().encode(ch).length;if(bytes+n>75){result+=part+'\r\n';part=' ';bytes=1;}part+=ch;bytes+=n;}return result+part;}).join('\r\n')+'\r\n';
   }
-  return {destinations,steps,date,validEvent,eventId,eventState,ruleValid,evaluate,check,validDataset,cleanState,read,save,reset,actionValid,ics};
+  return {courseCodes,officialCourseUrl,pendingFirst,destinations,steps,date,validEvent,eventId,eventState,ruleValid,evaluate,check,validDataset,cleanState,read,save,reset,actionValid,ics};
 });

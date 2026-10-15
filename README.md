@@ -63,7 +63,7 @@ To switch to Sonnet, set `CLAUDE_MODEL=claude-sonnet-5-5` in `.env` and restart 
 - The server limits request rates and question length (500 characters). Do not submit personal or sensitive data.
 - RegiBot does not access OBS accounts or require an OBS login.
 - Retrieval uses keyword BM25 with light token folding/stemming. Turkish morphology and unusual paraphrases can reduce retrieval quality.
-- Computer Engineering prerequisites are represented as a chart link; the chatbot may not resolve every course-specific prerequisite from the chart.
+- The eligibility checker uses a reviewed Bologna snapshot; legacy alternatives are accepted only when their exact published course code is marked completed. Chat retrieval still has a limited chart text extract and may not resolve every course-specific question.
 - There are no English Student Affairs pages in the source set.
 
 ## Tests
@@ -100,24 +100,51 @@ allows in-memory planning; failed writes/resets display a notice.
 
 ### Supported curriculum and remaining official data
 
-`data/curricula.json` currently contains Computer Engineering **2025–2026** course
-codes from `data/raw/ce-curriculum.txt`, which references the department's
-[curriculum page](https://ce.yasar.edu.tr/mufredat-ve-on-kosul-iliskileri/) and
-[official prerequisite chart](https://ce.yasar.edu.tr/wp-content/uploads/2025/09/prequistes2526.png).
-The chart could not be retrieved for reliable verification during this implementation.
-The text extract has course codes and semester groupings, but **no titles, ECTS,
-prerequisite arrows or corequisite annotations**. Therefore all those fields remain
-unverified. Uncompleted courses display **Cannot verify**, even if other courses
-have been checked off. Elective slots without actual course codes are omitted;
-this is not a complete elective catalogue. No sample rules are served to students.
-Synthetic rules exist only in unit tests.
+`data/curricula.json` supports the 41 course codes already included for Computer
+Engineering **2025–2026**, now checked using the links on the
+[English department homepage](https://ce.yasar.edu.tr/en/):
 
-Before enabling verified decisions, obtain an accessible official chart or an
-official department-approved structured export and review every arrow, legend,
-course title, ECTS value, alternative condition, and corequisite designation.
-Confirm which admission cohorts use that curriculum. Never derive rules from course
-names, semester order or model output. Meeting checked requirements still does not
-confirm availability, quota, timetable compatibility or advisor approval.
+- [Public Bologna course catalogue](https://obs.yasar.edu.tr/oibs/bologna/progCourses.aspx?curSunit=71&lang=en),
+  default selected curriculum **2025 (2025 COMPUTER ENGINEERING)**, value `402794`.
+  The catalogue exposes two similarly named 2025 versions; only the default selected
+  version was checked. Confirm your assigned version in OBS.
+- Individual Bologna course records in Turkish and English, linked per course.
+  All 41 supported codes now have official bilingual titles, ECTS values and semesters.
+- [English prerequisite page](https://ce.yasar.edu.tr/en/program-prerequisite-relationships/).
+  This page links a different image (`2025/08/prequistes2025-1024x369.png`) from the
+  older Turkish chart reference. Direct image downloads returned HTTP 403, so no
+  rules were inferred from that image.
+- [2026–2027 fall course schedule announcement](https://ce.yasar.edu.tr/en/2026/09/2026-2027-fall-semester-course-schedule/),
+  now linked from the planning pages for manual timetable checks. The schedule
+  spreadsheet is not imported or used to claim availability.
+
+The review snapshot is `data/raw/ce-bologna-2025.json` (15 October 2026). It records
+course metadata, exact requirement text, course IDs and source URLs. The English
+records use the combined label “Prerequisites and co-requisities”; the corresponding
+Turkish records explicitly label non-empty conditions “Ön Koşulları”, allowing those
+conditions to be classified as prerequisites. No separate corequisites are specified
+in the reviewed records; the interface says this explicitly rather than presenting
+an invented corequisite rule.
+
+**All 41 supported courses have verified prerequisite expressions**: 26 explicitly
+list no prerequisite (`None` or `Yok`), and fifteen have prerequisite expressions
+verified against the Turkish record. For example, COMP 2215 requires SE 1105;
+COMP 4910 requires EEE 2110 **AND** ISG 9110 **AND** SE 2228.
+
+Six OR expressions also name seven prior-curriculum codes. These are preserved as
+literal alternatives in `priorCourses`, with direct source links. Students may mark
+an exact prior course as completed in the optional **Completed courses from an older
+curriculum?** section. For example, the published MATH 1132 rule accepts MATH 1131
+**OR** MATH 131 **OR** MATH 111. This is not an inferred alias table: checking one
+code never marks another code completed. Prior courses do not increase the current
+curriculum's completion count. Their titles, ECTS and full old curricula were not
+imported. Unavailable or malformed rules still return **Cannot verify**.
+
+Elective slots and other curriculum versions are not imported; this is not a
+complete elective catalogue. Semester is presentation/filter metadata, never a rule.
+No sample rules are served to students. Synthetic rules exist only in unit tests.
+Meeting checked requirements does not confirm availability, quota, timetable
+compatibility or advisor approval.
 
 To update rules:
 
@@ -125,15 +152,21 @@ To update rules:
    `courses`; keep old versions for students assigned to them.
 2. Each course needs `code`, bilingual `title` (or `null` when unknown), `ects`
    (or `null`), `source`, `verification`, `prerequisites`, and `corequisites`.
+   Exact prior-curriculum alternatives can be declared in `priorCourses` as
+   `{ "code": "MATH 131", "source": "<official Bologna record>" }`.
 3. Rule leaves are `{ "op": "course", "code": "SE 1105" }`. Combine them with
    `{ "op": "and", "items": [...] }` or `{ "op": "or", "items": [...] }`.
-   Nest groups as needed. Referenced course codes must exist in the dataset.
+   Nest groups as needed. Referenced course codes must exist in the current course list or the
+   explicitly sourced `priorCourses` list.
 4. `null` means **verified absence of requirements only when verification is
    `verified`**. Otherwise it means unknown. Mark `verified` only after both the
    prerequisite and corequisite rules have been officially checked. Attach the
-   exact official source URL; current validation allows CE/ECTS university hosts.
+   exact official source URL; current validation allows CE/ECTS university hosts and the official OBS Bologna path.
    Keep a source review record when updating the dataset.
-5. Run `npm run test:planning`. The shared validator rejects unsupported operators,
+5. Retain the original `requirementsText` / `requirementsTextTr`, `semester`,
+   source URL and verification reason in the review snapshot. Never invent an alias
+   mapping: prior codes must be explicitly named in the cited rule.
+6. Run `npm run test:planning`. The shared validator rejects unsupported operators,
    empty groups, unknown codes and malformed datasets. Corequisites are evaluated
    separately; this UI collects completed courses only, so an uncompleted
    corequisite must be confirmed as a concurrent enrolment by the student/advisor.
@@ -174,3 +207,17 @@ approval). Opening the user's mail application never sends mail automatically.
 Run `npm run test:planning` for deterministic rule, unknown-data, storage, action,
 and calendar boundary tests without a model key. `npm test` remains the existing
 30-question live-model regression suite and requires a running configured server.
+
+### Planning page interactions
+
+The planning pages match the Assistant's centered logo/title, quiet rounded cards,
+gold accents, responsive spacing and dark theme. Course search, semester filters,
+status filters and expandable requirement details stay in memory only. Progress
+summaries count user-marked completions, independently of eligibility status.
+
+On both pages, checked items move to the **Completed** section below pending items.
+The browser animates the existing-to-new positions for 440 ms, preserves scroll,
+expanded course details and keyboard focus, and announces the update. Unchecking
+returns an item to its original position among pending items. Reduced-motion users
+get the same ordering immediately, without animations. No timers defer persistence.
+The deadline sidebar emphasizes upcoming dates and keeps past dates expandable.
