@@ -227,21 +227,38 @@ The deadline sidebar emphasizes upcoming dates and keeps past dates expandable.
 ## What if? Planner / Ya şöyle olursa?
 
 Open **`#/what-if`** in the sidebar or choose **Explore what if / Olasılıkları
-incele** on a course eligibility card. The selected curriculum and actual completed
-course selections remain the baseline. Plan A and Plan B add *explicit hypothetical
-successful passes* to independent sets. An optional searchable target selects the
-requirements and paths to inspect. No account, OBS login, transcript or model key
-is needed; no model is called for any dependency or readiness calculation.
+incele** on a course eligibility card. The page starts with “What happens if I pass
+or postpone a course?”: search by course code or full localized title, choose one
+course, and see the result immediately. **If I pass it** is the default; **If I
+postpone it** explains the opportunities that remain unavailable compared with
+passing that same course. Both modes compare the unchanged actual completion set
+with that set plus the explicit hypothetical pass. Neither mode removes actual
+completions, and completed courses are marked and disabled in the picker.
 
-Each plan distinguishes assumed passes, newly ready courses, unchanged baseline-ready
-options, still-blocked courses and unknown rules. Comparison cards show baseline,
-A and B statuses, ECTS, localized titles, grouped requirements and official records.
-Explanations are generated from rule evaluations and satisfied proofs; an OR group
-is a choice, not a list of mandatory courses. The proof prefers an already satisfied
-baseline alternative over a redundant hypothetical pass. Exact legacy alternatives
-are accepted from existing baseline selections without inventing aliases. Hypothetical
-selectors contain the current supported course list; they do not offer unverified
-old curricula or extra elective courses.
+A compact summary counts current-curriculum completions separately from exact
+legacy selections. With no saved completions, the page explains the assumption
+and links to course eligibility to set them. **Try an example** selects a verified,
+uncompleted course dynamically using the current data and completions; it never
+uses a hardcoded outcome. No account, OBS login, transcript or model key is needed.
+
+The main result counts only additional courses whose published requirements
+actually become satisfied, excluding the assumed passes themselves. Related but
+still-blocked courses appear in a collapsed section; they are never counted as
+unlocked. Each result has a short explanation and an expandable **Why? / Neden?**
+with explicit AND/OR expressions, ECTS, and official sources. An OR group is a
+choice, not a list of mandatory courses. Satisfied actual alternatives preserve
+readiness when a hypothetical pass is postponed. Exact legacy alternatives are
+accepted without inventing aliases.
+
+**Optional controls:** **Add another course** expands to multiple explicit assumed
+passes. Warnings beside each course explain unmet conditions and sequencing.
+**Compare another scenario** opens Plan B with the same controls; the comparison
+uses each plan's active pass/postpone choice. Existing saved multiple selections
+or a nonempty Plan B automatically open the necessary controls. **Show prerequisite
+paths** reveals the graph, text equivalent, target selector, coloring/direction
+controls and detailed filters. These tools are not required for the single-course
+flow. Hypothetical selectors contain only the supported current course list, not
+unverified old curricula or extra electives.
 
 **No automatic completion propagation:** if passing SE 1105 makes COMP 2215 ready,
 COMP 2215 is still not passed. COMP 3304 therefore does not become ready through
@@ -252,14 +269,14 @@ registration plan. An iterative ordering check adds only explicitly assumed cour
 whose requirements can be satisfied, flags sequencing between them, and reports
 unmet/unknown assumptions or unresolved circular orders. It does not assign semesters.
 
-**Postponement:** remove an assumed pass using its postpone shortcut. The planner
-reevaluates the before/after completion sets and lists actual losses of readiness,
-plus cases preserved by a satisfied OR alternative. It does not label all descendants
-as blocked. Postponing an actually completed course shows an explanation and leaves
-the baseline intact. A course assumed passed is not itself counted as a newly ready
-option. Plan A/B option differences also exclude a course already assumed passed
-in the other plan, since that is a completed hypothetical choice rather than a lost
-prerequisite opportunity.
+**Postponement:** in the single-course view, compare actual completions alone
+with actual completions plus the selected assumed pass. A zero difference is stated
+explicitly. In multi-course mode, each **Postpone** shortcut removes just that
+assumption and reevaluates the remaining choices; the page explains any resulting
+loss of readiness. It does not label all descendants as blocked. Actual completed
+courses remain protected. Plan A/B option differences also exclude a course already
+assumed passed in the other plan, since that is a hypothetical completion rather
+than a lost prerequisite opportunity.
 
 **Dependency view:** an SVG focuses on a selected target's prerequisite ancestors
 or published dependents, with a twelve-node compact limit and a full relevant text
@@ -280,7 +297,9 @@ represented. Sequencing checks follow those same conservative semantics; confirm
 any concurrent-enrollment arrangement with an advisor.
 
 **Storage and isolation:** `regibot-what-if-v1` contains only version, selected
-curriculum ID, Plan A/B course codes and optional target. It is separate from
+curriculum ID, Plan A/B course codes, optional target and validated presentation
+preferences (pass/postpone mode and which advanced choices are open). Old records
+without these preferences remain supported. It is separate from
 `regibot-planning-v1`. Searches, display filters, graph view and the last postponement
 comparison are in memory only. Values are checked against the selected curriculum;
 a mismatching curriculum or storage version resets the effective scenario rather
@@ -300,6 +319,9 @@ course list, not all electives or curriculum versions.
 OR-preserved descendants, absence of automatic completion, sequencing, unknown and
 malformed rules, cycles (including avoidable OR cycles), corequisites, A/B and baseline
 isolation, storage validation/reset and curriculum changes. DOM tests exercise TR/EN,
-light/dark settings and narrow/wide configurations, including search, target selection,
-postponement, protected actual completions and cross-tab baseline updates. These DOM
-and CSS checks complement visual browser QA; they are not screenshot-based layout tests.
+light/dark settings and narrow/wide configurations, including keyboard search,
+single-course pass/postpone counts, conditional warnings, optional multi-course and
+Plan B controls, old saved records, graph disclosure, protected actual completions
+and cross-tab updates. These stub-DOM and static CSS checks verify behavior and
+markup, not visual layout. Browser visual QA is still required; no browser was
+available in the redesign session.

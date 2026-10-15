@@ -7,7 +7,11 @@
     const codes=new Set((d?.courses||[]).map(c=>c.code));
     const same=value?.version===1&&value.dataset===d?.id;
     const list=k=>same&&Array.isArray(value[k])?unique(value[k].filter(code=>codes.has(code))):[];
-    return {version:1,dataset:d?.id||'',a:list('a'),b:list('b'),target:same&&codes.has(value.target)?value.target:''};
+    const a=list('a'),b=list('b'),ui=same?value.presentation:null;
+    return {version:1,dataset:d?.id||'',a,b,target:same&&codes.has(value.target)?value.target:'',presentation:{
+      a:ui?.a==='postpone'?'postpone':'pass',b:ui?.b==='postpone'?'postpone':'pass',
+      multiA:a.length>1||ui?.multiA===true,multiB:b.length>1||ui?.multiB===true,compare:b.length>0||ui?.compare===true
+    }};
   }
   function read(storage,d){try{return {state:clean(JSON.parse(storage.getItem(storageKey)),d),unavailable:false};}catch{return {state:clean(null,d),unavailable:true};}}
   function save(storage,state,d){try{storage.setItem(storageKey,JSON.stringify(clean(state,d)));return true;}catch{return false;}}
@@ -116,5 +120,22 @@
     const witnesses=valid?unique([...(proof(c.prerequisites,plan.completed,plan.baseline)||[]),...(proof(c.corequisites,plan.completed,plan.baseline)||[]) ]):[];
     return {kind:plan.baseline.has(c.code)?'completed':plan.assumed.includes(c.code)?'assumed':result.status==='unknown'?'unknown':result.status==='missing'?'blocked':base.status==='met'?'unchanged':'new',support:witnesses.filter(x=>!plan.baseline.has(x)),prerequisites:valid?tree(c.prerequisites,plan.completed):null,corequisites:valid?tree(c.corequisites,plan.completed):null};
   }
-  return {storageKey,clean,read,save,reset,ruleRefs,graph,relationships,subgraph,tree,proof,scenario,compare,postpone,explanation};
+  // Presentation only: pass and postpone compare identical states; no actual completion is removed.
+  function preview(d,baseline,passes,{mode='pass',multi=false,selected=''}={}){
+    const g=graph(d),withPass=scenario(d,baseline,passes,g),withoutPass=scenario(d,baseline,[],g);
+    const excluded=new Set(withPass.assumed),protectedSelection=withPass.baseline.has(selected);
+    const changed=d.courses.filter(c=>!excluded.has(c.code)&&withPass.results[c.code].status==='met'&&withoutPass.results[c.code].status!=='met').map(c=>c.code);
+    const related=new Set();for(const code of withPass.assumed){const r=relationships(g,code);for(const c of [...r.direct,...r.indirect])related.add(c);}
+    const otherBlocked=d.courses.filter(c=>related.has(c.code)&&!excluded.has(c.code)&&!withPass.baseline.has(c.code)&&withPass.results[c.code].status==='missing').map(c=>c.code);
+    const alternatives=d.courses.filter(c=>related.has(c.code)&&withoutPass.results[c.code].status==='met'&&['prerequisites','corequisites'].some(k=>c[k]&&P.ruleValid(c[k],g.codes)&&withPass.assumed.some(code=>alternativeSatisfied(c[k],code,withoutPass.completed)))).map(c=>c.code);
+    return {graph:g,withPass,withoutPass,active:mode==='postpone'&&!multi?withoutPass:withPass,changed,count:changed.length,otherBlocked,alternatives,protectedSelection,conditional:!protectedSelection&&withPass.issues.some(x=>x.code===selected),multi,mode};
+  }
+  function chooseExample(d,baseline){
+    const g=graph(d),done=new Set(baseline);
+    return d.courses.filter(c=>!done.has(c.code)&&!g.unknown.includes(c.code)).map((c,index)=>{
+      const view=preview(d,baseline,[c.code],{selected:c.code}),r=relationships(g,c.code);
+      return {code:c.code,count:view.count,ready:view.withoutPass.results[c.code].status==='met',related:r.direct.length,index};
+    }).sort((a,b)=>Number(b.count>0)-Number(a.count>0)||Number(b.ready)-Number(a.ready)||b.count-a.count||b.related-a.related||a.index-b.index)[0]?.code||'';
+  }
+  return {preview,chooseExample,storageKey,clean,read,save,reset,ruleRefs,graph,relationships,subgraph,tree,proof,scenario,compare,postpone,explanation};
 });
