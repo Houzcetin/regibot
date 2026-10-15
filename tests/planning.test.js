@@ -99,17 +99,21 @@ test('calendar action recognizes verified Turkish and English inclusive date ran
 });
 test('frontend boots planning routes with validated data in both languages',async()=>{
  const vm=require('node:vm'),fs=require('node:fs');
- for(const lang of ['en','tr'])for(const route of ['/uygunluk','/kontrol-listesi','/','/asistan']){
+ for(const lang of ['en','tr'])for(const route of ['/uygunluk','/kontrol-listesi','/what-if','/','/asistan']){
    const nodes=new Map(),listeners={},animations=[];let reducedMotion=false;
    const node=id=>{if(!nodes.has(id))nodes.set(id,{innerHTML:'',textContent:'',dataset:{},style:{},focus(){},classList:{toggle(){},add(){},remove(){},contains(){return false;}},setAttribute(){},removeAttribute(){},addEventListener(){},querySelector(){return null;},querySelectorAll(selector){
      if(id==='main-area'&&selector==='[data-planning-item]')return [...this.innerHTML.matchAll(/data-planning-item="([^"]+)"/g)].map((m,index)=>({dataset:{planningItem:m[1]},getBoundingClientRect(){return {top:index*100,left:0};},querySelector(){return null;},animate(frames,options){animations.push({frames,options});}}));
      return [];
    }});return nodes.get(id);};
-   const context={window:{Planning:P,addEventListener(){},matchMedia(query){return {matches:query.includes('prefers-reduced-motion')&&reducedMotion};}},document:{body:{classList:{toggle(){}}},documentElement:{dataset:{}},getElementById:node,querySelectorAll(){return [];},querySelector(){return null;},addEventListener(k,fn){listeners[k]=fn;}},location:{hash:'#'+route},CSS:{escape:s=>s},requestAnimationFrame:fn=>fn(),localStorage:{getItem:k=>k==='regibot-language'?lang:null},fetch:async url=>({ok:true,json:async()=>url==='/api/curricula'?{datasets}:url==='/api/calendar'?{events:calendar,today:'2026-09-15',realToday:'2026-10-15',isDemoDate:true}:url==='/api/sources'?{sources:[],totalChunks:0}:{ok:true}}),setTimeout,Intl,Date,console};
-   vm.runInNewContext(fs.readFileSync(require.resolve('../public/app.js'),'utf8'),context);
+   const context={window:{Planning:P,WhatIf:require('../public/what-if-core'),addEventListener(){},matchMedia(query){return {matches:query.includes('prefers-reduced-motion')&&reducedMotion};}},document:{body:{classList:{toggle(){}}},documentElement:{dataset:{}},getElementById:node,querySelectorAll(){return [];},querySelector(){return null;},addEventListener(k,fn){const old=listeners[k];listeners[k]=old?e=>{old(e);fn(e);}:fn;}},location:{hash:'#'+route},CSS:{escape:s=>s},requestAnimationFrame:fn=>fn(),localStorage:{getItem:k=>k==='regibot-language'?lang:null},fetch:async url=>({ok:true,json:async()=>url==='/api/curricula'?{datasets}:url==='/api/calendar'?{events:calendar,today:'2026-09-15',realToday:'2026-10-15',isDemoDate:true}:url==='/api/sources'?{sources:[],totalChunks:0}:{ok:true}}),setTimeout,Intl,Date,console};
+   context.Planning=P;context.WhatIf=context.window.WhatIf;
+   vm.createContext(context);
+   vm.runInContext(fs.readFileSync(require.resolve('../public/what-if-ui.js'),'utf8'),context);
+   context.window.WhatIfUI=context.WhatIfUI;
+   vm.runInContext(fs.readFileSync(require.resolve('../public/app.js'),'utf8'),context);
    await new Promise(resolve=>setImmediate(resolve));
    const html=node('main-area').innerHTML;assert.ok(!html.includes('undefined'));
-   assert.ok(html.includes(route==='/uygunluk'?'data-course="SE 1105"':route==='/kontrol-listesi'?'data-step="approval"':'assistant-landing'));
+   assert.ok(html.includes(route==='/uygunluk'?'data-course="SE 1105"':route==='/kontrol-listesi'?'data-step="approval"':route==='/what-if'?'wf-page':'assistant-landing'));
    if(route==='/'||route==='/asistan'){assert.ok(html.includes('suggestion-chips'));assert.ok(html.includes('/assets/logo.svg'));assert.ok(!html.includes('data-course='));}
    if(route==='/kontrol-listesi'){
      assert.ok(html.includes('2026-09-15'));assert.ok(html.includes('2026-10-15'));
