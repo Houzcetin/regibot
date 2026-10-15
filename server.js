@@ -8,6 +8,9 @@ const CONFLICTS = new Map(JSON.parse(fs.readFileSync(path.join(__dirname, 'data/
 const { search, isDateQuestion, matchCalendar, LOW_SCORE, chunks, calendar, sources, tokens } = require('./lib/retrieval');
 
 const app = express();
+// Hosted behind one reverse proxy (e.g. Render): take the client IP from X-Forwarded-For so the per-IP rate
+// limit applies per visitor instead of to the proxy. Trusting exactly one hop keeps the header unspoofable.
+app.set('trust proxy', 1);
 app.use(express.json({ limit: '10kb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 const PORT = Number(process.env.PORT) || 3000;
