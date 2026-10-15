@@ -68,7 +68,13 @@ To switch to Sonnet, set `CLAUDE_MODEL=claude-sonnet-5-5` in `.env` and restart 
 
 ## Tests
 
-`npm test` is reserved for the Phase 3 test suite.
+`tests/questions.json` holds 30 student questions (15 Turkish, 15 English): 25 with expected facts and sources, and 5 the documents cannot answer, where RegiBot must say it doesn't know and point to Student Affairs. With the server running (`npm start`), run:
+
+```
+npm test
+```
+
+It sends every question to `/api/chat`, grades the answers, prints a table and writes `tests/report.md` (results, failures, run history, and the before → after notes). Each run is also saved in `tests/results/`. Use `BASE_URL=http://localhost:3001` to test another server, and set `RATE_LIMIT_PER_MIN=60` on the test server so 30 questions are not rate-limited. Current result: **30/30** (25/25 answers, 5/5 refusals) on `claude-haiku-5-5`. A run costs a few cents.
 
 ## Disclaimer
 

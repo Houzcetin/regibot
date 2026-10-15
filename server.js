@@ -2,6 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const Anthropic = require('@anthropic-ai/sdk');
 const path = require('node:path');
+const fs = require('node:fs');
+// Handbook passages that contradict the regulation (data/conflicts.md); each gets a note when sent to Claude.
+const CONFLICTS = new Map(JSON.parse(fs.readFileSync(path.join(__dirname, 'data/conflicts.json'), 'utf8')).map(c => [c.chunk_id, c]));
 const { search, isDateQuestion, matchCalendar, LOW_SCORE, chunks, calendar, sources, tokens } = require('./lib/retrieval');
 
 const app = express();
@@ -83,7 +86,8 @@ function passageText(question, lang, hits, dateHits, today) {
     const citeAs = `${source?.short_title || chunk.title}, ${chunk.article || chunk.heading || ''}`.replace(/, $/, '');
     const authority = source?.authority === 1 ? '1 (regulation, highest)' : source?.authority === 2 ? '2 (official university page)' : '3 (student handbook, lowest)';
     const attrs = `id="${esc(chunk.id)}" source="${esc(source?.short_title || chunk.title)}" cite_as="${esc(citeAs)}" heading="${esc(chunk.heading || '')}" authority="${esc(authority)}" url="${esc(chunk.url)}"`;
-    out.push(`<passage ${attrs}>${escText(chunk.text)}</passage>`);
+    const conflict = CONFLICTS.get(chunk.id);
+    out.push(`<passage ${attrs}>${escText(chunk.text)}${conflict ? `\n[Conflict note: ${escText(conflict.note)} Cite as [${escText(conflict.regulation)}].]` : ''}</passage>`);
   }
   out.push('</passages>');
   if (dateHits) {
@@ -97,6 +101,9 @@ function passageText(question, lang, hits, dateHits, today) {
     out.push('</calendar>');
   }
   if (!hits.length || hits[0].score < LOW_SCORE) out.push('Note: retrieval confidence is low; the passages may not contain the answer.');
+  // Stated explicitly: with mostly English passages the model sometimes answered Turkish questions in English.
+  // Based on what the student typed, not the UI toggle.
+  out.push(`Answer language: ${langGuess(question) === 'tr' ? 'Turkish' : 'English'}`);
   out.push(`Question: ${escText(question)}`);
   return out.join('\n');
 }
@@ -108,15 +115,18 @@ function sourceCards(answer, hits, hasCalendar) {
   for (let i = lines.length - 1; i >= 0; i--) if ((match = lines[i].match(sourceLine))) { ids = match[1].split(',').map(x => x.replace(/[`[\]\s]/g, '')).filter(Boolean); lines.splice(i, 1); break; }
   const cleanAnswer = lines.join('\n').trim();
   const available = new Map(hits.map(({ chunk }) => [chunk.id, chunk]));
-  if (!ids) {
-    ids = [];
-    for (const { chunk } of hits) {
-      const src = sources.find(s => s.id === chunk.source_id);
-      const citeAs = `${src?.short_title || chunk.title}, ${chunk.article || chunk.heading || ''}`.replace(/, $/, '');
-      if (cleanAnswer.includes(`[${citeAs}]`)) ids.push(chunk.id);
-    }
-    if (hasCalendar && cleanAnswer.includes('[Akademik Takvim 2026-2027]')) ids.push('calendar');
+  // The SOURCES line can name a split chunk by its base id (regulation-tr-m29 for regulation-tr-m29-1), so map
+  // ids by prefix; and every [cite_as] that appears in the answer also gets its card, so a visible citation
+  // never ends up without a source card even when the SOURCES line is missing or malformed.
+  // Citations as written in the answer; one bracket may hold several: [Yönetmelik, Madde 25; Yönetmelik, Madde 19].
+  const cited = new Set([...cleanAnswer.matchAll(/\[([^\]]+)\]/g)].flatMap(m => m[1].split(';').map(s => s.trim())));
+  ids = (ids || []).flatMap(id => available.has(id) || id === 'calendar' ? [id] : [...available.keys()].filter(k => k.startsWith(`${id}-`)));
+  for (const { chunk } of hits) {
+    const src = sources.find(s => s.id === chunk.source_id);
+    const citeAs = `${src?.short_title || chunk.title}, ${chunk.article || chunk.heading || ''}`.replace(/, $/, '');
+    if (cited.has(citeAs)) ids.push(chunk.id);
   }
+  if (hasCalendar && cited.has('Akademik Takvim 2026-2027')) ids.push('calendar');
   const cards = [], seen = new Set();
   for (const id of new Set(ids)) {
     if (id === 'calendar' && hasCalendar) {
@@ -125,9 +135,19 @@ function sourceCards(answer, hits, hasCalendar) {
       const key = `${card.url}|`; if (!seen.has(key)) { cards.push(card); seen.add(key); }
     } else if (available.has(id)) {
       const chunk = available.get(id), src = sources.find(s => s.id === chunk.source_id);
-      const card = { title: src?.short_title || chunk.title, article: chunk.article || chunk.heading || null, url: chunk.url };
+      // Calendar chunks and the calendar list are the same PDF: one card without a section label.
+      const article = chunk.source_id === 'academic-calendar' ? null : chunk.article || chunk.heading || null;
+      const card = { title: src?.short_title || chunk.title, article, url: chunk.url };
       const key = `${card.url}|${card.article}`; if (!seen.has(key)) { cards.push(card); seen.add(key); }
     }
+  }
+  // A regulation article cited from a conflict note may not be among the retrieved passages; give it a card too.
+  for (const { chunk } of hits) {
+    const conflict = CONFLICTS.get(chunk.id);
+    if (!conflict || !cited.has(conflict.regulation)) continue;
+    const [title, article] = conflict.regulation.split(', ');
+    const card = { title, article, url: sources.find(s => s.id === 'regulation-tr')?.url };
+    const key = `${card.url}|${card.article}`; if (!seen.has(key)) { cards.push(card); seen.add(key); }
   }
   return { answer: cleanAnswer, sources: cards };
 }
