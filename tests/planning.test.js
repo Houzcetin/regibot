@@ -108,6 +108,7 @@ test('frontend boots planning routes with validated data in both languages',asyn
    const context={window:{Planning:P,WhatIf:require('../public/what-if-core'),addEventListener(){},matchMedia(query){return {matches:query.includes('prefers-reduced-motion')&&reducedMotion};}},document:{body:{classList:{toggle(){}}},documentElement:{dataset:{}},getElementById:node,querySelectorAll(){return [];},querySelector(){return null;},addEventListener(k,fn){const old=listeners[k];listeners[k]=old?e=>{old(e);fn(e);}:fn;}},location:{hash:'#'+route},CSS:{escape:s=>s},requestAnimationFrame:fn=>fn(),localStorage:{getItem:k=>k==='regibot-language'?lang:null},fetch:async url=>({ok:true,json:async()=>url==='/api/curricula'?{datasets}:url==='/api/calendar'?{events:calendar,today:'2026-09-15',realToday:'2026-10-15',isDemoDate:true}:url==='/api/sources'?{sources:[],totalChunks:0}:{ok:true}}),setTimeout,Intl,Date,console};
    context.Planning=P;context.WhatIf=context.window.WhatIf;
    vm.createContext(context);
+   for(const [file,name] of [['course-analysis','CourseAnalysis'],['course-map','CourseMap'],['course-impact-ui','CourseImpactUI']]){vm.runInContext(fs.readFileSync(require.resolve('../public/'+file+'.js'),'utf8'),context);context.window[name]=context[name];}
    vm.runInContext(fs.readFileSync(require.resolve('../public/what-if-ui.js'),'utf8'),context);
    context.window.WhatIfUI=context.WhatIfUI;
    vm.runInContext(fs.readFileSync(require.resolve('../public/app.js'),'utf8'),context);

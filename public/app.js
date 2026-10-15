@@ -76,7 +76,7 @@
     const renderCourse=c=>{
       const result=P.check(c,done,codes),verified=c.verification==='verified',complete=done.has(c.code);
       const explanation=result.status==='unknown'?(c.verificationReason==='legacy-alternatives'?t('legacyExplanation'):c.requirementsText?t('combinedExplanation'):t('unknownExplanation')):result.status==='completed'?t('completedExplanation'):result.status==='met'?t(c.prerequisites?'metExplanation':'noPrerequisitesExplanation'):(result.missing.length?t('missingLabel')+result.missing.join(', ')+'. ':'')+(result.corequisites.length?t('coLabel')+result.corequisites.join(', '):'');
-      return `<article class="planning-item course-item ${complete?'is-done':''}" data-planning-item="course:${esc(c.code)}"><div class="planning-item-top"><label class="planning-check"><input type="checkbox" aria-label="${esc(t('completed')+': '+c.code)}" data-course="${esc(c.code)}" ${complete?'checked':''}><span aria-hidden="true">✓</span></label><div class="course-heading"><div class="course-meta"><span class="course-code">${esc(c.code)}</span><span>${esc(t('semesterLabel'))} ${c.semester||'—'}</span><span>${esc(c.ects??'—')} ${esc(t('ects'))}</span></div><h3>${esc(courseName(c))}</h3></div><span class="planning-status status-${result.status}">${esc(t(result.status))}</span></div><details class="course-requirements"><summary>${esc(t('courseDetails'))}<span aria-hidden="true">⌄</span></summary><div class="course-requirements-body">${c.requirementsText&&c.requirementsText!=='None'?`<p><strong>${esc(t('combinedLabel'))}</strong><br><span lang="${lang==='tr'&&c.requirementsTextTr?'tr':'en'}">${esc(lang==='tr'&&c.requirementsTextTr?c.requirementsTextTr:c.requirementsText)}</span></p>`:''}<dl><div><dt>${esc(t('requirements'))}</dt><dd>${esc(verified?ruleText(c.prerequisites):t('unknownField'))}</dd></div><div><dt>${esc(t('corequisites'))}</dt><dd>${esc(verified?(c.corequisites?ruleText(c.corequisites):t('corequisiteNone')):t('unknownField'))}</dd></div></dl><p>${esc(explanation)}</p><a href="${safeUrl(c.source)}" target="_blank" rel="noopener noreferrer">${esc(t('source'))} ↗</a></div></details><div class="wf-course-launch"><a href="#/what-if" data-what-if-code="${esc(c.code)}">${esc(t('exploreWhatIf'))} →</a></div></article>`;
+      return `<article class="planning-item course-item ${complete?'is-done':''}" data-planning-item="course:${esc(c.code)}"><div class="planning-item-top"><label class="planning-check"><input type="checkbox" aria-label="${esc(t('completed')+': '+c.code)}" data-course="${esc(c.code)}" ${complete?'checked':''}><span aria-hidden="true">✓</span></label><div class="course-heading"><div class="course-meta"><span class="course-code">${esc(c.code)}</span><span>${esc(t('semesterLabel'))} ${c.semester||'—'}</span><span>${esc(c.ects??'—')} ${esc(t('ects'))}</span></div><h3>${esc(courseName(c))}</h3></div><span class="planning-status status-${result.status}">${esc(t(result.status))}</span></div><details class="course-requirements"><summary>${esc(t('courseDetails'))}<span aria-hidden="true">⌄</span></summary><div class="course-requirements-body">${c.requirementsText&&c.requirementsText!=='None'?`<p><strong>${esc(t('combinedLabel'))}</strong><br><span lang="${lang==='tr'&&c.requirementsTextTr?'tr':'en'}">${esc(lang==='tr'&&c.requirementsTextTr?c.requirementsTextTr:c.requirementsText)}</span></p>`:''}<dl><div><dt>${esc(t('requirements'))}</dt><dd>${esc(verified?ruleText(c.prerequisites):t('unknownField'))}</dd></div><div><dt>${esc(t('corequisites'))}</dt><dd>${esc(verified?(c.corequisites?ruleText(c.corequisites):t('corequisiteNone')):t('unknownField'))}</dd></div></dl><p>${esc(explanation)}</p><a href="${safeUrl(c.source)}" target="_blank" rel="noopener noreferrer">${esc(t('source'))} ↗</a></div></details><div class="wf-course-launch"><a href="#/what-if" data-what-if-code="${esc(c.code)}">${esc(t('exploreWhatIf'))} →</a> · <a href="#/asistan" data-ask-course="${esc(c.code)}">${esc(window.CourseImpactUI.TEXT[lang].ask)}</a></div></article>`;
     };
     return `<div class="planning-page">${planningHeader(t('eligibilityNav'),t('eligibilityIntro'))}<div class="planning-workspace"><div class="planning-primary">${d?`${planningProgress(all.filter(c=>done.has(c.code)).length,all.length,t('courseProgress'))}<section class="planning-panel planning-course-controls"><div class="planning-selects"><label>${esc(t('program'))}<select id="planning-program">${[...new Set(datasets.map(x=>x.program[lang]))].map(p=>`<option ${p===d.program[lang]?'selected':''}>${esc(p)}</option>`).join('')}</select></label><label>${esc(t('curriculum'))}<select id="planning-dataset">${datasets.filter(x=>x.program[lang]===d.program[lang]).map(x=>`<option value="${esc(x.id)}" ${x.id===d.id?'selected':''}>${esc(x.version)} · Bologna ${esc(x.catalogueVersion||'')}</option>`).join('')}</select></label></div><label class="planning-search">${icon('source')}<span class="sr-only">${esc(t('courseSearch'))}</span><input id="course-search" type="search" value="${esc(courseQuery)}" placeholder="${esc(t('courseSearch'))}"></label><div class="planning-filter-row"><div class="planning-tabs" role="group" aria-label="${esc(t('status'))}">${[['all','allCourses'],['remaining','remainingCourses'],['completed','completedGroup']].map(([v,k])=>`<button type="button" data-course-view="${v}" aria-pressed="${courseView===v}">${esc(t(k))}</button>`).join('')}</div><label class="sr-only" for="course-semester">${esc(t('semesterLabel'))}</label><select id="course-semester"><option value="all">${esc(t('allSemesters'))}</option>${[1,2,3,4,5,6,7,8].map(n=>`<option value="${n}" ${courseSemester===String(n)?'selected':''}>${esc(t('semesterLabel'))} ${n}</option>`).join('')}</select></div><p class="planning-selection-hint">${esc(t('selectionHint'))}</p><div class="planning-counts"><span><i class="status-dot status-met"></i>${count('met')} ${esc(t('readyCount'))}</span><span><i class="status-dot status-unknown"></i>${count('unknown')} ${esc(t('unknownCount'))}</span></div></section>${d.priorCourses?.length?`<details class="planning-panel planning-legacy" id="legacy-courses"><summary>${esc(t('priorTitle'))}</summary><p>${esc(t('priorHint'))}</p><div class="planning-legacy-list">${P.pendingFirst(d.priorCourses,done,c=>c.code).map(c=>`<div class="planning-legacy-item ${done.has(c.code)?'is-done':''}" data-planning-item="prior:${esc(c.code)}"><label class="planning-check"><input type="checkbox" aria-label="${esc(t('completed')+': '+c.code)}" data-course="${esc(c.code)}" ${done.has(c.code)?'checked':''}><span aria-hidden="true">✓</span></label><strong>${esc(c.code)}</strong><a href="${safeUrl(c.source)}" target="_blank" rel="noopener noreferrer">${esc(t('source'))} ↗</a></div>`).join('')}</div></details>`:''}<p class="planning-source-note">${esc(t('sourceNote'))}</p><div id="planning-items">${filtered.length?planningGroups(filtered,done,c=>c.code,renderCourse):`<div class="planning-empty"><p>${esc(t('noMatches'))}</p><button type="button" class="suggestion-chip" data-clear-course-filters>${esc(t('clearFilters'))}</button></div>`}</div>`:`<section class="planning-panel"><p role="status">${esc(planningLoaded?t('dataUnavailable'):t('loading'))}</p></section>`}</div>${officialPlanningLinks(d)}</div>${planningFooter()}<p class="sr-only" id="planning-feedback" role="status"></p></div>`;
   }
@@ -138,7 +138,7 @@
     const course=e.target.dataset.course,step=e.target.dataset.step;
     if((course||step)&&planningLoaded){const key=course?'completed':'steps',value=course||step;planningState[key]=planningState[key].filter(x=>x!==value);if(e.target.checked)planningState[key].push(value);planningState=P.cleanState(planningState,datasets);planningSave();refreshPlanning({animate:true,focusKey:value});}
   });
-  async function loadPlanning(){try{const r=await fetch('/api/curricula');if(!r.ok)throw Error();const data=await r.json();datasets=Array.isArray(data.datasets)?data.datasets.filter(P.validDataset):[];try{planningState=P.read(localStorage,datasets);}catch{planningState=P.cleanState(null,datasets);storageFailed=true;}}catch{datasets=[];}planningLoaded=true;if(['/uygunluk','/kontrol-listesi','/what-if'].includes(currentRoute()))renderRoute();}
+  async function loadPlanning(){try{const r=await fetch('/api/curricula');if(!r.ok)throw Error();const data=await r.json();datasets=Array.isArray(data.datasets)?data.datasets.filter(P.validDataset):[];try{planningState=P.read(localStorage,datasets);}catch{planningState=P.cleanState(null,datasets);storageFailed=true;}}catch{datasets=[];}planningLoaded=true;if(['/uygunluk','/kontrol-listesi','/what-if'].includes(currentRoute())||pendingImpact&&['/','/asistan'].includes(currentRoute()))renderRoute();}
 
   const ICONS = {
     menu: '<svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>',
@@ -183,6 +183,16 @@
   const esc = value => String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
   const safeUrl = value => /^(https?:\/\/|mailto:)/i.test(String(value || '')) ? esc(value) : '#';
   const icon = name => ICONS[name] || ICONS.file;
+  const CA=window.CourseAnalysis,CI=window.CourseImpactUI;
+  let pendingImpact=null,impactSequence=0;
+  const selectedDataset=()=>datasets.find(d=>d.id===planningState.dataset);
+  const impactText=key=>CI.TEXT[lang][key];
+  function requestImpact(message,course='',required=false){
+    const d=selectedDataset(),resolved=d?CA.resolve(message,d,conversationHistory):{kind:'missing'};
+    const choice=course||(resolved.kind==='resolved'?resolved.course:'');
+    pendingImpact={message,course:choice,required:required||!choice&&['missing','ambiguous','unknown'].includes(resolved.kind),candidates:resolved.kind==='ambiguous'?resolved.candidates:[],notice:['missing','ambiguous','unknown'].includes(resolved.kind)?CA.clarification(resolved.kind,lang):''};
+    if(!['/','/asistan'].includes(currentRoute()))location.hash='#/asistan';else renderRoute();$('impact-course-choice')?.focus();
+  }
   const whatIfUI=window.WhatIfUI.create({
     getDataset:()=>datasets.find(d=>d.id===planningState.dataset),getBaseline:()=>[...planningState.completed],getLang:()=>lang,
     escape:esc,url:safeUrl,header:planningHeader,isLoaded:()=>planningLoaded,isOpen:()=>currentRoute()==='/what-if',
@@ -270,7 +280,7 @@
   let showMoreQuestions=false;
   function renderSuggestionChips() {
     const keys=showMoreQuestions?[...HERO_QUESTIONS,...MORE_QUESTIONS]:HERO_QUESTIONS;
-    return `${keys.map(key=>`<button class="suggestion-chip" type="button" data-ask="${esc(t(key))}">${esc(t(key))}</button>`).join('')}<button class="suggestion-chip more-chip" type="button" id="more-questions" aria-expanded="${showMoreQuestions}">${esc(t(showMoreQuestions?'fewerQuestions':'moreQuestions'))}<span class="more-chip-arrow" aria-hidden="true">${showMoreQuestions?'−':'+'}</span></button>`;
+    return `<button class="suggestion-chip" type="button" data-impact-start>${esc(impactText('chip'))}</button>${keys.map(key=>`<button class="suggestion-chip" type="button" data-ask="${esc(t(key))}">${esc(t(key))}</button>`).join('')}<button class="suggestion-chip more-chip" type="button" id="more-questions" aria-expanded="${showMoreQuestions}">${esc(t(showMoreQuestions?'fewerQuestions':'moreQuestions'))}<span class="more-chip-arrow" aria-hidden="true">${showMoreQuestions?'−':'+'}</span></button>`;
   }
   function bindSuggestionChips(container) {
     container.querySelectorAll('[data-ask]').forEach(node=>node.addEventListener('click',event=>{event.preventDefault();askFromAnywhere(node.dataset.ask);}));
@@ -281,8 +291,8 @@
     return event?`<a class="assistant-deadline" href="#/takvim"><span>${esc(t('deadlinePrefix'))}</span><strong>${esc(lang==='tr'?event.event:event.event_en)}</strong><span>${esc(dateShort(event.start))} · ${esc(countdown(event))}</span></a>`:'';
   }
   function renderAssistant() {
-    if(chatEntries.length)return `<section class="assistant-conversation"><header class="conversation-header"><button class="new-chat-button" type="button" id="new-chat">${icon('chat')}<span>${esc(t('newChat'))}</span></button></header><div class="chat-log" id="chat-log" aria-live="polite" aria-relevant="additions text"></div><div class="composer-dock"><div class="composer-shell"><form id="chat-form"><label class="sr-only" for="chat-input">${esc(t('questionLabel'))}</label><textarea id="chat-input" maxlength="500" rows="1" placeholder="${esc(t('heroPlaceholder'))}"></textarea><button class="send-button" id="chat-send" type="submit" aria-label="${esc(t('send'))}" ${waiting?'disabled':''}><span class="sr-only">${esc(t('send'))}</span>${icon('arrow')}</button><span class="char-counter" id="char-counter"></span></form></div></div></section>`;
-    return `<div class="assistant-landing"><section class="assistant-hero"><img class="hero-logo" src="/assets/logo.svg" alt=""><span class="ai-badge"><span aria-hidden="true">✦</span> ${esc(t('heroBadge'))}</span><h1 class="assistant-title">${esc(t('heroTitle'))}</h1><p class="assistant-description">${esc(t('heroDescription'))}</p><div class="composer-shell"><form id="chat-form"><label class="sr-only" for="chat-input">${esc(t('questionLabel'))}</label><textarea id="chat-input" maxlength="500" rows="1" placeholder="${esc(t('heroPlaceholder'))}"></textarea><button class="send-button" id="chat-send" type="submit" aria-label="${esc(t('send'))}"><span class="sr-only">${esc(t('send'))}</span>${icon('arrow')}</button><span class="char-counter" id="char-counter"></span></form></div><div class="suggestion-chips" id="suggestion-chips">${renderSuggestionChips()}</div><p class="assistant-note">${esc(t('heroNote'))}</p><div id="assistant-deadline">${renderDeadlineLine()}</div></section></div>`;
+    if(chatEntries.length)return `<section class="assistant-conversation"><header class="conversation-header"><button class="new-chat-button" type="button" id="new-chat">${icon('chat')}<span>${esc(t('newChat'))}</span></button></header><div class="chat-log" id="chat-log" aria-live="polite" aria-relevant="additions text"></div><div class="composer-dock"><div class="composer-shell"><form id="chat-form"><label class="sr-only" for="chat-input">${esc(t('questionLabel'))}</label><textarea id="chat-input" maxlength="500" rows="1" placeholder="${esc(t('heroPlaceholder'))}"></textarea><button class="send-button" id="chat-send" type="submit" aria-label="${esc(t('send'))}" ${waiting?'disabled':''}><span class="sr-only">${esc(t('send'))}</span>${icon('arrow')}</button><span class="char-counter" id="char-counter"></span></form><div id="chat-analysis-prompt">${pendingImpact?CI.prompt(selectedDataset(),lang,pendingImpact.course,pendingImpact.required,{...pendingImpact,question:pendingImpact.message}):''}</div></div></div></section>`;
+    return `<div class="assistant-landing"><section class="assistant-hero"><img class="hero-logo" src="/assets/logo.svg" alt=""><span class="ai-badge"><span aria-hidden="true">✦</span> ${esc(t('heroBadge'))}</span><h1 class="assistant-title">${esc(t('heroTitle'))}</h1><p class="assistant-description">${esc(t('heroDescription'))}</p><div class="composer-shell"><form id="chat-form"><label class="sr-only" for="chat-input">${esc(t('questionLabel'))}</label><textarea id="chat-input" maxlength="500" rows="1" placeholder="${esc(t('heroPlaceholder'))}"></textarea><button class="send-button" id="chat-send" type="submit" aria-label="${esc(t('send'))}"><span class="sr-only">${esc(t('send'))}</span>${icon('arrow')}</button><span class="char-counter" id="char-counter"></span></form><div id="chat-analysis-prompt">${pendingImpact?CI.prompt(selectedDataset(),lang,pendingImpact.course,pendingImpact.required,{...pendingImpact,question:pendingImpact.message}):''}</div></div><div class="suggestion-chips" id="suggestion-chips">${renderSuggestionChips()}</div><p class="assistant-note">${esc(t('heroNote'))}</p><div id="assistant-deadline">${renderDeadlineLine()}</div></section></div>`;
   }
   function growInput(input) { input.style.height='auto';input.style.height=`${Math.min(input.scrollHeight,144)}px`; }
   function safeMarkdown(value) {
@@ -323,25 +333,37 @@
     if(/^Madde (\d+)/.test(article))return article.replace(/^Madde (\d+)/,'Article $1');
     return ARTICLE_TITLES[article]||article;
   }
-  function renderChatEntries() {
+  function renderChatEntries(stickToBottom=true) {
     const log=$('chat-log');if(!log)return;
     const entries=chatEntries.length?chatEntries:[{role:'assistant',content:t('welcome'),welcome:true}];
+    const oldScroll=log.scrollTop,openDetails=new Set([...log.querySelectorAll('details[id],details[data-wf-details]')].filter(el=>el.open).map(el=>el.id||el.dataset.wfDetails));
     log.innerHTML=entries.map(entry=>{
       const role=entry.role==='user'?'user':'assistant';
       const text=entry.welcome?t('welcome'):entry.content;
-      const body=role==='user'?`<div class="bubble"></div>`:`<div class="bubble">${safeMarkdown(text)}</div>${sourceCards(entry.sources)}${renderActions(entry.actions)}`;
+      const body=role==='user'?`<div class="bubble"></div>`:`<div class="bubble">${safeMarkdown(text)}</div>${sourceCards(entry.sources)}${renderActions(entry.actions)}${entry.analysis?CI.card(entry.analysis,entry.impactId,{lang,open:entry.impactOpen,mode:entry.impactView||'passed',stale:(entry.analysis.context.sharing==='saved'?CI.signature(entry.analysis.dataset.id,entry.analysis.context.supplied):entry.localPlanning)!==CI.signature(planningState.dataset,planningState.completed)}):''}${renderCoursePrompt(entry)}`;
       const warning=entry.lowConfidence?`<p class="chat-warning">${esc(t('lowConfidence'))}</p>`:'';
       return `<div class="message-row ${role}">${role==='assistant'?'<div class="chat-avatar" aria-hidden="true"><img src="/assets/logo.svg" alt=""></div>':''}<div class="message-body">${body}${warning}</div></div>`;
     }).join('');
     for(const [i,entry] of entries.entries())if(entry.role==='user')log.children[i].querySelector('.bubble').textContent=entry.content;
     if(waiting){const row=document.createElement('div');row.className='message-row assistant typing-row';row.id='typing-row';row.innerHTML=`<div class="chat-avatar" aria-hidden="true"><img src="/assets/logo.svg" alt=""></div><div class="typing-content"><span class="typing-label">${esc(t('typing'))}</span><div class="bubble typing-bubble" aria-label="${esc(t('typing'))}"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div></div>`;log.appendChild(row);}
-    const scrollToBottom=()=>{log.scrollTop=log.scrollHeight;};
+    for(const el of log.querySelectorAll('details[id],details[data-wf-details]'))if(openDetails.has(el.id||el.dataset.wfDetails))el.open=true;
+    const scrollToBottom=()=>{if(stickToBottom)log.scrollTop=log.scrollHeight;else log.scrollTop=oldScroll;};
     scrollToBottom();
     requestAnimationFrame(scrollToBottom);
     log.querySelectorAll('.chat-avatar img').forEach(image=>image.addEventListener('load',scrollToBottom,{once:true}));
   }
-  async function sendMessage(value) {
+  function renderCoursePrompt(entry){
+    const prompt=entry.coursePrompt;if(!prompt)return '';
+    if(prompt.kind==='completed')return `<div class="impact-clarification"><button type="button" data-impact-override="${entry.impactId}">${esc(impactText('override'))}</button><button type="button" data-impact-retake="${entry.impactId}">${esc(impactText('retake'))}</button></div>`;
+    const d=selectedDataset(),choices=Array.isArray(prompt.candidates)&&prompt.candidates.length?prompt.candidates:d?.courses||[];
+    return `<div class="impact-clarification"><label for="impact-resolve-${entry.impactId}">${esc(impactText('which'))}</label><select id="impact-resolve-${entry.impactId}"><option value="">${esc(impactText('which'))}</option>${choices.filter(c=>d?.courses.some(x=>x.code===c.code)).map(c=>{const known=d.courses.find(x=>x.code===c.code);return `<option value="${esc(known.code)}">${esc(known.code+' · '+known.title?.[lang])}</option>`;}).join('')}</select><button type="button" data-impact-resolve="${entry.impactId}">${esc(t('send'))}</button></div>`;
+  }
+  async function sendMessage(value,analysisOptions=null) {
     const message=String(value||'').trim();if(!message||waiting)return;
+    if(CA.isRequest(message,selectedDataset())&&!analysisOptions){const previous=chatEntries.at(-1),course=!CA.codes(message).length&&/this|bu ders|bunu/i.test(message)&&previous?.analysis?previous.analysis.course:'';requestImpact(message,course);return;}
+    pendingImpact=null;const consentPanel=$('chat-analysis-prompt');if(consentPanel)consentPanel.innerHTML='';
+    const request={message,history:conversationHistory.slice(-6),lang,...(analysisOptions?{planning:analysisOptions.planning,...(analysisOptions.courseChoice?{courseChoice:analysisOptions.courseChoice}:{})}:{})};
+    const localPlanning=CI.signature(planningState.dataset,planningState.completed);
     chatEntries.push({role:'user',content:message});waiting=true;
     if(!$('chat-log')){renderRoute();$('chat-input')?.focus();}
     renderChatEntries();
@@ -349,13 +371,13 @@
     const send=$('chat-send');if(send)send.disabled=true;
     const session=chatSession;
     try{
-      const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message,history:conversationHistory.slice(-6),lang})});
+      const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(request)});
       let data;try{data=await response.json();}catch{data=null;}
       if(session!==chatSession)return;
       if(!response.ok||data?.error){chatEntries.push({role:'assistant',content:data?.answer||t('errorFallback'),error:true});}
       else{
         const answer=typeof data?.answer==='string'?data.answer:t('errorFallback');
-        chatEntries.push({role:'assistant',content:answer,sources:Array.isArray(data?.sources)?data.sources:[],actions:Array.isArray(data?.actions)?data.actions:[],lowConfidence:Boolean(data?.lowConfidence)});
+        chatEntries.push({role:'assistant',content:answer,sources:Array.isArray(data?.sources)?data.sources:[],actions:Array.isArray(data?.actions)?data.actions:[],lowConfidence:Boolean(data?.lowConfidence),analysis:CA.valid(data?.analysis)?data.analysis:null,coursePrompt:data?.coursePrompt&&['missing','ambiguous','unknown','completed'].includes(data.coursePrompt.kind)?data.coursePrompt:null,impactId:String(++impactSequence),originalRequest:request,localPlanning});
         conversationHistory.push({role:'user',content:message},{role:'assistant',content:answer});conversationHistory=conversationHistory.slice(-6);
       }
     }catch{if(session===chatSession)chatEntries.push({role:'assistant',content:t('errorFallback'),error:true});}
@@ -447,7 +469,7 @@
       const form=$('chat-form'),input=$('chat-input');
       if(input){input.addEventListener('input',()=>{growInput(input);const counter=$('char-counter');counter.textContent=input.value.length>=400?t('charCount')(input.value.length):'';counter.classList.toggle('over',input.value.length>=500);});input.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();form.requestSubmit();}});growInput(input);}
       if(form)form.addEventListener('submit',event=>{event.preventDefault();sendMessage(input.value);});
-      $('new-chat')?.addEventListener('click',()=>{chatSession++;chatEntries=[];conversationHistory=[];waiting=false;renderRoute();$('chat-input')?.focus();});
+      $('new-chat')?.addEventListener('click',()=>{chatSession++;chatEntries=[];conversationHistory=[];pendingImpact=null;waiting=false;renderRoute();$('chat-input')?.focus();});
       if(!chatEntries.length&&window.matchMedia('(pointer:fine)').matches)setTimeout(()=>{if($('chat-input')&&!document.activeElement?.matches('textarea'))$('chat-input').focus();},0);
       if(pendingQuestion){const question=pendingQuestion;pendingQuestion='';setTimeout(()=>sendMessage(question),0);}
     }
@@ -459,6 +481,29 @@
     if(currentRoute()==='/'||currentRoute()==='/asistan'){sendMessage(question);return;}
     pendingQuestion=question;location.hash='#/asistan';
   }
+  document.addEventListener('click',event=>{
+    const el=event.target;
+    const ask=el.closest('[data-ask-course]');if(ask){event.preventDefault();const code=ask.dataset.askCourse;if(selectedDataset()?.courses.some(c=>c.code===code))requestImpact(impactText('question').replace('{code}',code),code);return;}
+    if(el.closest('[data-impact-start]')){event.preventDefault();requestImpact(impactText('chip'),'',true);return;}
+    if(el.closest('[data-impact-cancel]')){const draft=pendingImpact?.message||'';pendingImpact=null;renderRoute();const input=$('chat-input');if(input){input.value=draft;growInput(input);input.focus();}return;}
+    const consent=el.closest('[data-impact-consent]');
+    if(consent&&pendingImpact&&!waiting){
+      const choice=$('impact-course-choice')?.value||'',d=selectedDataset();if(pendingImpact.required&&!d?.courses.some(c=>c.code===choice)){$('impact-course-choice')?.focus();return;}
+      if(!['saved','none'].includes(consent.dataset.impactConsent))return;
+      const planning=CI.planning(d,planningState.completed,consent.dataset.impactConsent==='saved');if(!planning)return;
+      const message=pendingImpact.message;sendMessage(message,{planning,...(choice?{courseChoice:choice}:{})});return;
+    }
+    const find=id=>chatEntries.find(e=>e.impactId===id);
+    const resolve=el.closest('[data-impact-resolve]');if(resolve){const entry=find(resolve.dataset.impactResolve),code=$('impact-resolve-'+resolve.dataset.impactResolve)?.value;if(entry&&selectedDataset()?.courses.some(c=>c.code===code))sendMessage(entry.originalRequest.message,{...entry.originalRequest,courseChoice:code});return;}
+    const override=el.closest('[data-impact-override]');if(override){const entry=find(override.dataset.impactOverride);if(entry?.coursePrompt?.kind==='completed')sendMessage(entry.originalRequest.message,{...entry.originalRequest,planning:{...entry.originalRequest.planning,hypotheticalIncomplete:entry.coursePrompt.course}});return;}
+    const retake=el.closest('[data-impact-retake]');if(retake){const entry=find(retake.dataset.impactRetake);if(entry)askFromAnywhere(lang==='tr'?'Ders tekrarı kuralları nelerdir?':'What are the course retake rules?');return;}
+    const recalculate=el.closest('[data-impact-recalculate]');if(recalculate){const entry=find(recalculate.dataset.impactRecalculate);if(entry)requestImpact(entry.originalRequest.message,entry.analysis?.course||'');return;}
+    const switcher=el.closest('[data-impact-view]');if(switcher){const entry=find(switcher.dataset.impactId);if(!entry?.analysis||!['passed','incomplete'].includes(switcher.dataset.impactView))return;entry.impactView=switcher.dataset.impactView;const body=$('impact-map-body-'+entry.impactId);if(body)body.innerHTML=CI.map(entry.analysis,entry.impactId,entry.impactView,lang);const parent=switcher.closest('details');parent?.querySelectorAll('[data-impact-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.impactView===entry.impactView)));}
+  });
+  document.addEventListener('toggle',event=>{
+    const id=event.target.dataset?.impactMap;if(!id)return;const entry=chatEntries.find(e=>e.impactId===id);if(!entry?.analysis)return;entry.impactOpen=event.target.open;
+    const body=$('impact-map-body-'+id);if(body&&entry.impactOpen)body.innerHTML=CI.map(entry.analysis,id,entry.impactView||'passed',lang);
+  },true);
   function applyMenuSearch() {
     const q=norm($('menu-search').value.trim());
     const group=$('guide-group');let guideMatch=false;
@@ -506,6 +551,7 @@
     if(event.key===null||event.key==='regibot-planning-v1'){
       try{planningState=P.read(localStorage,datasets);}catch{}
       if(['/what-if','/uygunluk','/kontrol-listesi'].includes(currentRoute()))renderRoute();
+      else if(['/','/asistan'].includes(currentRoute())&&chatEntries.length)renderChatEntries(false);
     }
     if(event.key===null||event.key===window.WhatIf.storageKey||event.key===window.WhatIf.explorerKey)whatIfUI.reload();
   });

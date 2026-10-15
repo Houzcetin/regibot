@@ -313,3 +313,115 @@ narrow/wide configurations, keyboard interaction, clearing, map expansion, advan
 comparison, storage failure and cross-tab updates. Static CSS checks cover responsive
 and reduced-motion rules. These are not visual browser tests; no browser was
 available for desktop/mobile visual verification in this session.
+
+## Course impacts inside the assistant
+
+Ask **“What happens if I fail SE 1105?”**, **“SE 1105’ten kalırsam ne olur?”**,
+**“Which courses would passing this unlock?”**, or **“Can I take COMP 4910 if I fail
+EEE 2110?”**. The localized failure suggestion opens a compact course picker without
+submitting an incomplete question. **Ask about this course / Bu ders hakkında sor**
+on eligibility cards opens chat with that course selected. Course Explorer remains
+available at `#/what-if`, with saved explorer choices and advanced plans unchanged.
+
+Course codes, pass/fail/postpone intent, and name matching are resolved in ordinary
+code on the server. Full localized titles and uniquely matching whole-word fragments
+are supported; ambiguous names return matching choices. Pronouns use an unambiguous
+recent subject (or the previously analyzed course shown in the picker). Unsupported
+codes and missing context ask for clarification rather than inventing a dependency.
+Unrelated failures such as login, payment or registration failures retain normal chat.
+There is no model-based extraction or trusted model-supplied intent/code/graph.
+
+**Privacy:** before submitting a course question, the browser offers an explicit,
+per-answer choice to use saved completions or analyze without them. The prompt says
+that the curriculum identifier and course codes will go to the assistant server.
+Without opt-in, no browser-local completion list is included. General results assume
+no supplied completions and say so; supplied selections are identified separately.
+The usual question and recent chat history are still sent as part of chat. When
+configured, the explanation provider receives the server-calculated result, relevant
+course records and supplied course codes to explain that answer. No name, student
+number, OBS credentials or transcript is requested. Chat, consent, snapshots and map
+state remain in session memory; no new browser storage records are written. The
+server does not persist completion records or modify actual progress/checklist state.
+
+**Deterministic consequences:** the server uses `WhatIf.explorer` and the existing
+prerequisite engine to compare the supplied completion set with that set plus one
+explicit assumed pass. Not passing means leaving that course incomplete, never
+removing an actual completion. Counts exclude the assumed course itself, completed
+or unchanged courses, and merely indirect descendants. Remaining AND/OR conditions,
+exact legacy alternatives, direct references, indirect chains, unknown rules and
+the selected course's own requirements come from the same verified dataset as
+eligibility. Newly ready courses are not automatically passed. A target course can
+remain blocked even if the selected pass satisfies one of its conditions.
+
+If the analyzed course is already marked completed, chat first asks whether the
+student means a retake or a separate hypothetical comparison. The explicit override
+removes the selected code **only from the answer's temporary completion set**, while
+retaining the original supplied list and labeling the assumption. It never changes
+actual completion data. Historical/legacy codes are accepted exactly as baseline
+alternatives; hypothetical passes are restricted to the supported current courses.
+
+**Cards and maps:** a compact card below the answer shows the analyzed course,
+passed/incomplete comparison, immediate-change count and a short affected list.
+Requirements, grouped AND/OR expressions and official record links are expandable.
+Longer-term chains are labeled separately and require intermediate passes. The map
+starts collapsed and uses the shared `public/course-map.js` renderer also used by
+Course Explorer. Each message has its own SVG/DOM IDs, disclosure state and
+passed/incomplete switch. Graph scrolling stays inside the map on narrow screens;
+a readable list provides the full conditions and official links. Rendered labels
+are escaped, sources pass the official course URL allowlist, and the model cannot
+supply HTML, SVG, source URLs or graph definitions for these components.
+
+Each answer captures a validated curriculum snapshot, original/effective completion
+sets and calculation results. Later planning changes mark old cards as based on
+changed selections and offer **Recalculate**, which opens a fresh consent choice.
+They do not silently rewrite old facts or maps. Recalculation produces a new answer.
+
+**API:** `POST /api/chat` retains its normal text, citations, actions, error handling
+and rate limits. Course questions additionally accept:
+
+```json
+{
+  "message": "What happens if I fail SE 1105?",
+  "lang": "en",
+  "planning": {
+    "dataset": "ce-2025-2026",
+    "sharing": "saved",
+    "completed": ["MATH 131"]
+  }
+}
+```
+
+Use `sharing: "none"` and omit `completed` for a general comparison. Context validates
+against the selected supported curriculum, allows at most 100 exact course codes
+(including supported legacy alternatives), and rejects unknown codes, extra context
+fields, and completion lists with `sharing: "none"`. Optional `courseChoice` must be
+a supported choice for the question/clarification. Optional
+`planning.hypotheticalIncomplete` must identify the analyzed course and occur in
+the supplied list; it is accepted only as the separate hypothetical override.
+
+A successful course response adds optional `analysis` with `version: 1`,
+`type: "course-impact"`, a sanitized verified `dataset` snapshot, canonical `course`,
+validated `intent`/`target`, `context` metadata, deterministic `result` and `createdAt`.
+The frontend validates the snapshot and checks results against the shared engine
+before rendering. Unresolved questions return `coursePrompt` instead of unsupported
+analysis. The model receives structured calculated consequences and source records,
+with instructions to explain rather than calculate. If the provider is absent,
+fails, returns no text or truncates its answer, a deterministic explanation and the
+valid impact card remain available. A model refusal still returns the existing
+refusal response without an impact card.
+
+**Checks:** `npm run test:planning` now includes focused course-impact and stub-DOM
+chat tests: EN/TR resolution, ambiguous/missing context, AND/OR and legacy rules,
+engine consistency, non-propagation, direct versus indirect effects, consent before
+network submission, general/supplied context, completed-course conflicts/overrides,
+stale snapshots, independent maps, escaping/validation, and provider failure/refusal.
+Both language/theme settings and narrow/wide configurations are exercised by
+stub-DOM/static CSS checks. `npm run test:chat-api` starts a temporary local server
+with model calls disabled and tests the real HTTP validation, clarification,
+fallback, normal errors, served components and rate limits. No browser was available
+for real desktop/mobile visual verification; these checks are not visual QA. The
+live explanation provider was not called during verification.
+
+The existing curriculum coverage and completion-based corequisite limitations
+remain. These comparisons do not establish offerings, quota, timetable compatibility,
+advisor approval, GPA/scholarship consequences, or graduation delays.

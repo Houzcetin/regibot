@@ -2,13 +2,14 @@
   "name": "regibot",
   "version": "1.0.0",
   "private": true,
-  "description": "Course registration assistant chatbot for Yaşar University students (RAG over official public documents).",
+  "description": "Course registration assistant chatbot for Ya\u015far University students (RAG over official public documents).",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "node tests/run.js",
     "build:chunks": "node scripts/build-chunks.js",
-    "test:planning": "node --test tests/planning.test.js tests/what-if.test.js"
+    "test:planning": "node --test tests/planning.test.js tests/what-if.test.js tests/course-impact.test.js",
+    "test:chat-api": "node --test tests/chat-api.test.js"
   },
   "license": "MIT",
   "dependencies": {
