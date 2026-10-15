@@ -507,7 +507,7 @@
       try{planningState=P.read(localStorage,datasets);}catch{}
       if(['/what-if','/uygunluk','/kontrol-listesi'].includes(currentRoute()))renderRoute();
     }
-    if(event.key===null||event.key===window.WhatIf.storageKey)whatIfUI.reload();
+    if(event.key===null||event.key===window.WhatIf.storageKey||event.key===window.WhatIf.explorerKey)whatIfUI.reload();
   });
   window.addEventListener('keydown',event=>{if(event.key==='Escape')closeSidebar();});
   document.querySelectorAll('[data-icon]').forEach(node=>{node.innerHTML=icon(node.dataset.icon);});

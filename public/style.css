@@ -273,3 +273,12 @@
 :root[data-theme="dark"] .wf-completed{background:#25364e;color:#b6cce6}:root[data-theme="dark"] .wf-assumed{background:#3a3220;color:#e2c176;border-color:#655633}:root[data-theme="dark"] .wf-met{background:#203c30;color:#91d5b2}:root[data-theme="dark"] .wf-missing{background:#412c2a;color:#f0a99b}:root[data-theme="dark"] .wf-condition.is-met{color:#91d5b2;border-color:#365b47}:root[data-theme="dark"] .wf-condition.is-missing{color:#f0a99b}:root[data-theme="dark"] .wf-node.wf-met rect{fill:#203c30;stroke:#365b47}:root[data-theme="dark"] .wf-node.wf-missing rect{fill:#412c2a;stroke:#775348}:root[data-theme="dark"] .wf-node.wf-completed rect{fill:#25364e;stroke:#4a6381}:root[data-theme="dark"] .wf-node.wf-assumed rect{fill:#3a3220;stroke:#a8863f}
 @media(max-width:620px){.wf-simple{padding:0}.wf-simple .planning-hero h1{font-size:25px}.wfs-picker>input{font-size:16px}.wfs-picker-options button{grid-template-columns:80px 1fr;font-size:12px;padding:10px 8px}.wfs-selected{padding:13px}.wfs-selected-heading{gap:10px}.wfs-selected-heading>.wfs-text-button{font-size:10px;max-width:95px}.wfs-results>h2{font-size:18px;line-height:1.7}.wfs-modes{width:100%}.wfs-modes button{flex:1;padding:9px 8px}.wf-relations{grid-template-columns:1fr}.wf-graph-controls{flex-direction:column}.wf-graph-text ul{padding-left:14px}}
 @media(prefers-reduced-motion:reduce){.wf-simple *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Course Explorer: selection stays in the picker, results carry the hierarchy. */
+.wfs-clear{display:block;margin:5px 0 0 auto;font-size:11px;color:var(--muted)}
+.wfs-selected-why{font-size:11px;line-height:1.9;color:var(--muted);margin:8px 0}
+.wfs-selected-why summary{cursor:pointer;width:fit-content}.wfs-selected-why a{color:var(--text)}
+.wfs-advanced{border-top:1px solid var(--line);padding-top:15px;margin-top:28px}
+.wfs-saved-comparison{font-size:10px;color:var(--muted);margin:4px 0 0}
+#wf-advanced-content[hidden]{display:none}#wf-advanced-content>.planning-reset{margin-top:20px}
+.wfs-result-reason{margin:6px 0}.wfs-course-warning{margin-bottom:8px}
